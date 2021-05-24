@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use Auth;
 class ProductController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         $product = Product::statusproduct();
-        return $product;
+        return view('pages.tables.showProduct',compact('product'));
     }
 
     /**
@@ -26,7 +27,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.forms.addProduct');
     }
 
     /**
@@ -37,28 +38,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $proInsert = new Product();
-       
-        $proInsert->proName = $request->proName;
-        $proInsert->proBrnad = $request->proBrand;
-        $proInsert->status = 1;
-        $users = User::find($request->get('user_id')); 
-        $proInsert->user()->associate($users);
-    
-        $category = Category::find($request->get('cat_id'));
-        $proInsert->backcatproduct()->associate($category);
-      $proInsert->save();
-    //     $data =   $category->catproduct()->save($proInsert);
-    //   return $data;
-    //     $user = User::find($request->get('user_id'));
-       
-    //     $category = Category::find($request->get('cat_id'));
+        $validated = $request->validate([
+            'proName' => 'required',
+            'proBrnad' => 'required',
+            'cat_id' => 'required',
+        ]);
+         if(!$validated){
+            return Redirect::back()->withErrors($validated);
+
+         }else{
+        $user_id =   Auth::user()->id;
+       $cat_id = $request->cat_id;
      
-    //    $post->category()->save($proInsert);
-       
-       
-         return response()->json(['code'=>'200','message'=>'Successful'],200);
-       
+        $proInsert = new Product();
+        $proInsert->proName = $request->proName;
+        $proInsert->proBrnad = $request->proBrnad;
+        $proInsert->status = 1;
+        $users = User::find($user_id); 
+        $proInsert->user()->associate($users);
+        $category = Category::find($cat_id);
+        $proInsert->backcatproduct()->associate($category);
+        $proInsert->save();
+        return redirect()->back()->with('message', 'Data Updated Successfully!');
+         }
     }
 
     /**
@@ -81,7 +83,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $editProduct = Product::find($id);
+        return view('pages.forms.addProduct',compact('editProduct'));
     }
 
     /**
@@ -93,7 +96,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'proName' => 'required',
+            'proBrnad' => 'required',
+            'cat_id' => 'required',
+        ]);
+         if(!$validated){
+            return Redirect::back()->withErrors($validated);
+
+         }else{
+        $user_id =   Auth::user()->id;
+       $cat_id = $request->cat_id;
+     
+        $proInsert = Product::find($id);
+        $proInsert->proName = $request->proName;
+        $proInsert->proBrnad = $request->proBrnad;
+        $proInsert->status = 1;
+        $users = User::find($user_id); 
+        $proInsert->user()->associate($users);
+        $category = Category::find($cat_id);
+        $proInsert->backcatproduct()->associate($category);
+        $proInsert->save();
+        return redirect()->back()->with('message', 'Data Updated Successfully!');
+         
+    }
     }
 
     /**
@@ -102,10 +128,29 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($pro_id)
     {
-        $deletePro = Product::find($id);
+        $deletePro = Product::find($pro_id);
         $deletePro->delete();
         return response()->json(['success'=>'data deleted successsfully']);
     }
+
+    public function silent($pro_id){
+     
+        $silentPro = Product::where('id',$pro_id)->update(array('status'=>'0'));
+        return response()->json(['success'=>'Post Deleted successfully']);
+   }
+
+   public function proStatusOn($pro_id){
+     
+    $silentPro = Product::where('id',$pro_id)->update(array('status'=>'1'));
+    return response()->json(['success'=>'Post Deleted successfully']);
+}
+public function showProSubProducts($pro_id){
+    $proName = Product::find($pro_id);
+ 
+    $subProduct = Product::find($pro_id)->subproduct;
+    return view('pages.tables.showAllProducts',compact('subProduct','proName'));
+}
+
 }

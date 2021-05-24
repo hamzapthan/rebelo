@@ -28,11 +28,21 @@ class Product extends Model
    
     public function scopestatusproduct(){
     
-        return $this->where('status',1)->get();
+        return $this->orderBy('status', 'DESC')->get();
     }
     
+    public function scopeproducton(){
+    
+        return $this->where('status', '1')->get();
+    }
+    
+
     public function proproduct(){
         return $this->hasMany(SubProduct::class,'pro_id','id');
+    }
+
+    public function subproduct(){
+        return $this->hasMany(SubProduct::class,'pro_id','id')->orderBy('status','DESC');
     }
 
     

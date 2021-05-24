@@ -22,13 +22,30 @@ class Category extends Model
     }
     
    
+    
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
     public function catproduct()
     {
         return $this->hasMany(Product::class,'cat_id','id');
     }
-    public function comments()
+    public function catproducts()
     {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+        return $this->hasMany(Product::class,'cat_id','id')->orderBy('status', 'DESC');
+    }
+
+
+    // public function catproductstatus ()
+    // {
+    //     return $this->catproduct()->orderBy('status','desc')->get();
+    // }
+
+    public function scopestatus(){
+        return $this->orderBy('status','DESC')->get();
+
     }
 
 

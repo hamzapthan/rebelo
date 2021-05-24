@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubProduct extends Model
 {
     use HasFactory;
-    protected $fillale = [
+    protected $fillable = [
         
         'pro_id',
         'user_id',
@@ -37,4 +37,5 @@ class SubProduct extends Model
     public function subprooductstorage(){
         return $this->hasMany(Storage::class,'subpro_id','id');
     }
+   
 }

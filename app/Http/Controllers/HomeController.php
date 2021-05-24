@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -22,7 +22,15 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        return view('home');
+    {   //  echo  Auth::user()->id; 
+      
+       return view('dashboard');
+       // if(Auth::user()->role == 0){
+       //  return view('/dashboard'); 
+       // }else{
+       //  echo "role is not defined";
+       // }
+
+       
     }
 }

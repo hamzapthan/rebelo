@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -48,6 +49,7 @@ class User extends Authenticatable
     public function userproduct(){
         return $this->hasMany(Product::class,'user_id','id');
     }
+    
     public function usersubproduct(){
         return $this->hasMany(SubProduct::class,'user_id','id');
     }

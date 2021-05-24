@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\SubProduct;
 use App\Models\User;
 use App\Models\Product;
+use Auth;
 class SubProductController extends Controller
 {
     /**
@@ -16,7 +17,7 @@ class SubProductController extends Controller
     public function index()
     {
         $subPro = SubProduct::subProStatus();
-        return $subPro;
+        
     }
 
     /**
@@ -26,7 +27,8 @@ class SubProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.forms.addSubProduct');
+    
     }
 
     /**
@@ -37,44 +39,57 @@ class SubProductController extends Controller
      */
     public function store(Request $request)
     {
-        $imageName=$request->file('subImage')->getClientOriginalName();
-        $file_name = time().rand(100,999).$imageName;
+        $validated = $request->validate([
+            'subName' => 'required',
+            'subBrnad' => 'required',
+            'subColour' => 'required',
+            'subImage' => 'required',
+            'subDetail' => 'required',
+            
+            'subMetaTitle' => 'required',
+            'subMetaDesc' => 'required',
+            'subMetaKeyword' => 'required',
+            
+        ]);
+         if(!$validated){
+            return Redirect::back()->withErrors($validated);
+
+         }else{
+
+        foreach($request->file('subImage') as $image)
+        {
+            $imageName=$image->getClientOriginalName();
+            $file_name = time().rand(100,999).$imageName;
+            $image->move(public_path().'/project/', $file_name); 
+            $subproImage = url('project/'.$file_name);   
+              
+            $fileNames[] = $subproImage; 
+        }
+          $images = json_encode($fileNames);
+          $user_id =   Auth::user()->id;
+          $pro_id = $request->pro_id;
+          $addCategory = SubProduct::updateOrCreate(['id'=>$request->id],[
+           'subName' => $request->subName,
+            'subBrnad'  => $request->subBrnad,
+            'subColour'  => $request->subColour,
+            'subImage' => $images,
+            'subDetail'    => $request->subDetail,
+            'status'  => 1,
+            'subMetaTitle'  => $request->subMetaTitle,
+            'subMetaDesc'    => $request->subMetaDesc,
+            'subMetaKeyword'  => $request->subMetaKeyword,
+           ]);
+         
+           $users = User::find($user_id); 
+           $addCategory->user()->associate($users);
       
-        $request->file('subImage')->move(public_path().'/project/', $file_name);  
-        $subproImage = url('project/'.$file_name);   
-
-
-
- 
-        // foreach($request->file('subImage') as $image)
-        // {
-        //     return $image;
-        //     $imageName=$image->getClientOriginalName();
-        //     $file_name = time().rand(100,999).$imageName;
-        //     $image->move(public_path().'/project/', $file_name);  
-        //     $data = url('project/'.$file_name);   
-        //     $fileNames[] = $data; 
-        // }
-        
-        $insertSubPro = new SubProduct();
-        $user = User::find($request->get('user_id'));
-        $insertSubPro->user()->associate($user);
-       $product = Product::find($request->get('pro_id'));
-       $insertSubPro->backproproduct()->associate($product);
-     
-        $insertSubPro->subName = $request->subName;
-        $insertSubPro->subBrnad = $request->subBrnad;
-        $insertSubPro->subDetail = $request->subDetail;
-        $insertSubPro->subColour = $request->subColour;
-        $insertSubPro->subImage = $subproImage;
-        $insertSubPro->subMetaTitle = $request->subMetaTitle;
-        $insertSubPro->subMetaDesc = $request->subMetaDesc;
-        $insertSubPro->subMetaKeyword = $request->subMetaKeyword;
-        $insertSubPro->status = 1;
-      
-        $insertSubPro->save();
-        return response($insertSubPro->id);
-    }
+         $product = Product::find($pro_id);
+         $addCategory->backproproduct()->associate($product);
+         
+         $addCategory->save();
+         return redirect()->back()->with('message','Data inserted Successfully');
+          }
+ }
 
     /**
      * Display the specified resource.
