@@ -13,8 +13,8 @@
 </nav>
 
 <div class="row">
-     <a href="{{ route('create.cat')}}">
-      <button type="button" class="btn btn-primary">Add New Category</button></a>
+     <a href="{{ route('create.subPro')}}">
+      <button type="button" class="btn btn-primary">Add New Sub Products</button></a>
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -37,39 +37,45 @@
             </thead>
             <tbody>
             <?php $i=1; ?>
-             @foreach($category as $categories) 
+             @foreach($subProduct as $subProducts) 
             
-              <tr id="row_{{$categories->id}}">
+              <tr id="row_{{$subProducts->id}}">
               <td>{{ $i++ }}</td>
-                <td>{{ $categories->catName}}</td>
-                <td>{{ $categories->catDetail}}</td>
-                <td><img src="{{ asset($categories->image) }}" style="height:60px; width:80px;border-radius:0"> </td>
+                <td>{{ $subProducts->subName}}</td>
+                <td>{{ $subProducts->subBrnad}}</td>
+                <td>{{ $subProducts->subColour}}</td>
+               
+                <td><a href="{{ route('subpro.image.id',$subProducts->id)}}">
+                 @foreach(json_decode($subProducts->subImage,true) as $images)
+                  <img src="{{asset($images)}}" alt="image" style="border-radius: 0px; width: 75px; height: 70px;" >
+                  @break
+                 @endforeach 
+                 </a></td>
                <?php
-                        $cat_id = $categories->id;
-                        $catPro = App\Models\Category::find($cat_id)->catproduct;
+                        // $cat_id = $categories->id;
+                        // $catPro = App\Models\Category::find($cat_id)->catproduct;
                            ?>
-                <td><a href="{{route('show.catPro',$cat_id) }}">Products</a><?php  echo count($catPro) ?></td>
-                @if($categories->status ==1 )
+                @if($subProducts->status ==1 )
                 <td><span class="badge badge-success">On</span></td>
                 @else
                <td> <span class="badge badge-danger">Off</span> </td>
                 @endif
   
                 <td><div class="btn-group">
- <a href="{{ route('cat.edit',$categories->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
+ <a href="{{ route('subpro.edit',$subProducts->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   
   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="sr-only">Toggle Dropdown</span>
   </button>
   
   <div class="dropdown-menu">
-  @if($categories->status ==1 )
-     <a href="javascript:void(0)" data-id="{{ $categories->id }}" onclick="statusProOff(event.target)" class="dropdown-item">Mark as 'Off'</a>
+  @if($subProducts->status ==1 )
+     <a href="javascript:void(0)" data-id="{{ $subProducts->id }}" onclick="statusProOff(event.target)" class="dropdown-item">Mark as 'Off'</a>
      @else
-     <a href="javascript:void(0)" data-id="{{ $categories->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
+     <a href="javascript:void(0)" data-id="{{ $subProducts->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
      @endif
     
-<a class="dropdown-item" href="javascript:void(0)"  data-id="{{$categories->id}}" onclick="deletePost(event.target)">Delete</a>
+<a class="dropdown-item" href="javascript:void(0)"  data-id="{{$subProducts->id}}" onclick="deleteSubPro(event.target)">Delete</a>
     
 </div></td>
                
@@ -79,25 +85,25 @@
             </tbody>
   <script>
              function statusProOff(event) {
-        var cat_id  = $(event).data("id");
+        var subpro_id  = $(event).data("id");
         
-    let _url = `/catStatusSilent/${cat_id}`;
+    let _url = `/subproStatusSilent/${subpro_id}`;
      $.ajax({
        url: _url,
       type: "Get",
     success: function(response) {
         if(response) {
           alert("data is modifiertwetweed");
-          $("#row_"+cat_id).remove();
           window.location.reload();
+   
           }
        }
      });
   }
   function statusProOn(event) {
-        var cat_id  = $(event).data("id");
+        var subpro_id  = $(event).data("id");
         
-    let _url = `/catStatusOn/${cat_id}`;
+    let _url = `/subproStatusOn/${subpro_id}`;
      $.ajax({
        url: _url,
       type: "Get",
@@ -111,11 +117,11 @@
      });
   }
 
-  function deletePost(event) {
+  function deleteSubPro(event) {
 
-var cat_id = $(event).data("id");
+var subpro_id = $(event).data("id");
 
-let _url = `/deleteCat/${cat_id}`;
+let _url = `/deleteSubPro/${subpro_id}`;
 let _token   = $('meta[name="csrf-token"]').attr('content');
 $.ajax({
 
@@ -126,7 +132,7 @@ $.ajax({
   },
   success:function(response){
      alert('Data Is deleted');
-       $("#row_"+cat_id).remove();
+       $("#row_"+subpro_id).remove();
    }
 });
 

@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -158,12 +160,34 @@ Route::get('/showPro/{id}',[ProductController::class,'show'])->name('show.pro');
 //  Routes for SubProduct
 Route::get('/createSubPro',[SubProductController::class,'create'])->name('create.subPro');  // create page show
 Route::post('/insertSubPro',[SubProductController::class,'store'])->name('insert.subPro');  // Insert data
-
-
-Route::get('/showSubPro',[SubProductController::class,'index'])->name('show.subPro');  // show all pro
+Route::get('/showSubProall',[SubProductController::class,'index'])->name('show.subPro');  // show all pro
 Route::Delete('/deleteSubPro/{id}',[SubProductController::class,'destroy'])->name('delete.subPro');  // show all pro
-Route::get('/showSubPro/{id}',[SubProductController::class,'show'])->name('show.subPro');  // show ssingle pro
+Route::get('/subproStatusSilent/{id}',[SubProductController::class,'silent'])->name('subpro.silent');  // show ssingle product
+Route::get('/subproStatusOn/{id}',[SubProductController::class,'subproStatusOn'])->name('subpro.status');  // show ssingle product
+Route::get('/subproduct/{id}/edit',[SubProductController::class,'edit'])->name('subpro.edit');  // show ssingle product
+Route::get('/subproImage/{id}',[SubProductController::class,'image'])->name('subpro.image.id');  // show ssingle product
+Route::Delete('/deleteSubProImage/{subpro_id}/{image}',[SubProductController::class,'deleteimage'])->name('subpro.image');  // show ssingle product
+Route::get('/showSubPros/{id}',[SubProductController::class,'show'])->name('show.subPro');  // show ssingle pro
+
 Route::post('/updateSubPro/{id}',[SubProductController::class,'update'])->name('update.subPro');  // show ssingle pro
+
+//Route for Users
+Route::get('/createUser',[UserController::class,'create'])->name('create.user');  // show all pro
+Route::post('/insertUser',[UserController::class,'store'])->name('insert.user');  // Insert data
+Route::get('/showAllUser',[UserController::class,'index'])->name('show.user');  // show all pro
+Route::Delete('/deleteUser/{id}',[UserController::class,'destroy'])->name('user.destroy');  // show all pro
+Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user.edit');  // show ssingle product
+
+//routes for role
+Route::get('/createRole',[RoleController::class,'create'])->name('create.role');  // show all pro
+Route::post('/insertRole',[RoleController::class,'store'])->name('store.role');  // show all pro
+Route::get('/showAllRole',[RoleController::class,'index'])->name('show.role');  // show all pro
+Route::get('/showRolePer/{id}',[RoleController::class,'showRolePermission'])->name('show.role.per');  // show all pro
+Route::get('/role/{id}/edit',[RoleController::class,'edit'])->name('edit.role');  // show all pro
+Route::post('/roleUpdate/{id}',[RoleController::class,'update'])->name('update.role');  // show all pro
+Route::get('/deleteRole/{id}',[RoleController::class,'destroy'])->name('delete.role');  // show all pro
+
+
 
 //Routes for storage
 Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro

@@ -46,7 +46,9 @@
           <label>Select</label>
           <?php
                $cat_id = $editProduct->cat_id; 
+               echo $cat_id;
               $countries = App\Models\Category::status();
+              echo $countries;
                        ?>
          
           <select class="js-example-basic-single w-100" name="cat_id" >

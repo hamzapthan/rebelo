@@ -16,8 +16,8 @@ class SubProductController extends Controller
      */
     public function index()
     {
-        $subPro = SubProduct::subProStatus();
-        
+        $subProduct = SubProduct::subProStatus();
+        return view('pages.tables.showSubProduct',compact('subProduct'));
     }
 
     /**
@@ -39,6 +39,7 @@ class SubProductController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validated = $request->validate([
             'subName' => 'required',
             'subBrnad' => 'required',
@@ -99,7 +100,10 @@ class SubProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $subProSingle = Subproduct::find($id);
+         $product = SubProduct::find($id);
+         $proName = $product->backproproduct->proName;
+        return view('pages.tables.showAllProducts',compact('subProSingle','proName'));
     }
 
     /**
@@ -110,7 +114,8 @@ class SubProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subproUpdate = SubProduct::find($id);
+        return view('pages.forms.addSubProduct',compact('subproUpdate'));
     }
 
     /**
@@ -141,16 +146,46 @@ class SubProductController extends Controller
         return response($updateSubPro);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+     public function destroy($id)
+    { 
         $subProDelete = SubProduct::find($id);
         $subProDelete->delete();
         return response()->json(['success'=>'deletes']);
     }
+
+    public function silent($id){
+     
+        $silentPro = SubProduct::where('id',$id)->update(array('status'=>'0'));
+        return response()->json(['success'=>'Post Deleted successfully']);
+   }
+
+   public function subproStatusOn($id){
+    
+    $silentPro = SubProduct::where('id',$id)->update(array('status'=>'1'));
+    return response()->json(['success'=>'Post Deleted successfully']);
+}
+   public function image($id){
+       
+    $subProImage = SubProduct::find($id);
+    return view('pages.forms.subProImage',compact('subProImage'));
+     
+   }
+   public function deleteimage($subpro_id,$image){
+      
+       $post = SubProduct::find($subpro_id);
+      
+       $subproImage = url('project/'.$image);      
+    
+       File::delete($image);
+       $images=json_decode($post->subImage);
+       $_image=[];
+       $_image[]=$subproImage;
+       $post->subImage=json_encode(array_values(array_diff($images,$_image)));
+       $post->save();
+       return response()->json(['code'=>'200','message'=>'data is deleted']);
+
+     
+   }
+
+
 }

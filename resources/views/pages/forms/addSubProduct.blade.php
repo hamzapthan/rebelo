@@ -14,7 +14,113 @@
    
   </ol>
 </nav>
+@if(isset($subproUpdate))
+<div class="row">
+  <div class="col-lg-8 grid-margin stretch-card align center">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Add Sub Products</h4>
+        @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+        @endif
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.subPro')}}" enctype="multipart/form-data">
+        @csrf
+          <fieldset>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" class="form-control" name="subName" type="text" value="{{ $subproUpdate->subName }}">
+              @if($errors->has('subName'))
+              <div class="alert alert-danger">{{ $errors->first('subName') }}</div>
+              @endif
+            </div>
+            <div class="form-group">
+              <label for="name">Brand</label>
+              <input id="name" class="form-control" name="subBrnad" type="text" value="{{ $subproUpdate->subBrnad }}">
+              @if($errors->has('subBrnad'))
+              <div class="alert alert-danger">{{ $errors->first('subBrnad') }}</div>
+              @endif
+            </div>
+            <div class="form-group">
+              <label for="name">Detail</label>
+              <input id="name" class="form-control" name="subDetail" type="text" value="{{ $subproUpdate->subDetail }}">
+              @if($errors->has('subDetail'))
+              <div class="alert alert-danger">{{ $errors->first('subDetail') }}</div>
+              @endif
+            </div>
+            <div class="form-group">
+              <label for="email">Colour</label>
+              <input id="email" class="form-control" name="subColour" type="colour" value="{{ $subproUpdate->subColour }}">
+              @if($errors->has('subColour'))
+              <div class="alert alert-danger">{{ $errors->first('subColour') }}</div>
+              @endif
+            </div>
+            <div class="form-group">
+              <label for="name">MetaTitle</label>
+              <input id="name" class="form-control" name="subMetaTitle" type="text" value="{{ $subproUpdate->subMetaTitle }}">
+              @if($errors->has('subMetaTitle'))
+              <div class="alert alert-danger">{{ $errors->first('subMetaTitle') }}</div>
+              @endif
+            </div>
+            <div class="form-group">
+            <label for="exampleFormControlTextarea1">Meta Description </label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="subMetaDesc">{{ $subproUpdate->subMetaDesc }}</textarea>
+            @if($errors->has('subMetaDesc'))
+              <div class="alert alert-danger">{{ $errors->first('subMetaDesc') }}</div>
+              @endif
+          </div>
+            <div class="card">
+        <label>MetaKeyword</label>
+          <input name="subMetaKeyword" id="tags"  value="{{ $subproUpdate->subMetaKeyword }}"/>
+          @if($errors->has('subMetaKeyword'))
+              <div class="alert alert-danger">{{ $errors->first('subMetaKeyword') }}</div>
+              @endif
+        </div>
+            <div class="form-group">
+          <label>Select Product</label>
+          <select class="js-example-basic-single w-100" name="pro_id">
+            <?php $product = App\Models\Product::producton();     
+           
+           ?>
+           @if(count($product))
+            @foreach($product as $products)
+            <option value="{{ $products->id}}">{{$products->proName}}</option>
+            @endforeach
+            @else
+            <option >No data</option>
+            @endif
+          </select>
+        </div>
+        <div>
+        @foreach(json_decode($subproUpdate->subImage,true) as $images)
+        <img src="{{ asset($images)}}" alt="image" style="border-radius: 0px; width: 75px; height: 70px;" >
+       @endforeach
+        </div>
+        <div class="form-group">
+            <label>File upload</label>
+            <input type="file" name="subImage[]" class="file-upload-default" accept="image/*" multiple="multiple">
+            <div class="input-group col-xs-12">
+              <input type="text" class="form-control file-upload-info" disabled="" placeholder="Upload Image">
+              <span class="input-group-append">
+                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+              </span>
+            </div>
+            @if($errors->has('subImage'))
+              <div class="alert alert-danger">{{ $errors->first('subImage') }}</div>
+              @endif
+          </div>
+        
+         <input type="hidden" name="id" value="{{ $subproUpdate->id }}">
+            <input class="btn btn-primary" type="submit" value="Submit">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
+@else
 <div class="row">
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
@@ -114,6 +220,7 @@
     </div>
   </div>
 </div>
+@endif
 @endsection
 
 @push('plugin-scripts')

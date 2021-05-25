@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use Spatie\Permission\Traits\HasRoles;
+
+
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -53,5 +56,18 @@ class User extends Authenticatable
     public function usersubproduct(){
         return $this->hasMany(SubProduct::class,'user_id','id');
     }
+    public function scopeuseradmin(){
+        return $this->where('role',1)->get();
+    }
 
+
+     public function scopedatainsert($query,$id){
+        return $query->join('model_has_roles','model_has_roles.model_id','=','users.id')
+        ->join('roles','roles.id','=','model_has_roles.role_id')
+        ->where('model_has_roles.model_id',$id)
+        ->select('roles.*')
+        ->get();
+        
+     }
+    
 }

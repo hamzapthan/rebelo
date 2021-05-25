@@ -141,9 +141,7 @@ class CategoryController extends Controller
      */
     public function destroy($cat_id)
     { 
-        
-        
-        $delete_id = Category::find($cat_id);
+         $delete_id = Category::find($cat_id);
         $delete_id->delete();
         return response()->json(['success'=>'data deleted successsfully']);
     }

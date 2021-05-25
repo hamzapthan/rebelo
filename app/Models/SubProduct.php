@@ -26,11 +26,12 @@ class SubProduct extends Model
 
 
      public function scopesubProStatus(){
-         return $this->where('status',1)->get();
+         return $this->orderBy('status','DESC')->get();
 }
      public function user(){
           return $this->belongsTo(User::class,'user_id','id');
       }
+      
       public function backproproduct(){
           return $this->belongsTo(Product::class,'pro_id','id');
     }

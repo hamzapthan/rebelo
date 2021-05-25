@@ -46,7 +46,7 @@
                 <?php
                         $pro_id = $products->id;
                          $catPro = App\Models\Product::find($pro_id)->proproduct;
-                         ?>
+                          ?>
                 <td><a href="{{ route('pro.subpro',$products->id)}}">Sub Products</a>(<?php  echo count($catPro);  ?>)</td>
 
                  @if($products->status ==1 )

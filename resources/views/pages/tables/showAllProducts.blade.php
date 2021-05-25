@@ -66,6 +66,7 @@
       <div class="card-body">
      
        <div>
+      
         <h6 class="card-title">Product Against {{ $proName->proName  }} </h6>
         </div>
         <div class="table-responsive">
@@ -106,6 +107,92 @@
     </table>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+@elseif(isset($subProSingle,$proName))
+<div class="row">
+   
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+      <a href="{{ route('subpro.edit',$subProSingle->id)}}">
+      <button type="button" class="btn btn-primary">Edit</button></a>
+       <div>
+        <h6 class="card-title">Product Against {{$proName}} </h6>
+        </div>
+        <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr>
+                
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Details</th>
+                <th>Colour</th>
+                <th>Status</th>
+               
+              </tr>
+            </thead>
+          
+            <tbody>
+            
+              <tr >
+             
+                <td>{{ $subProSingle->subName }}</td>
+                <td>{{ $subProSingle->subBrnad }}</td>
+                <td>{{ $subProSingle->subDetail }}</td>
+                <td>{{ $subProSingle->subColour }}</td>
+               @if($subProSingle->status ==1 )
+                <td><span class="badge badge-success">On</span></td>
+                @else
+               <td> <span class="badge badge-danger">Off</span> </td>
+                @endif
+                
+              </tr>
+             
+            </tbody>
+           
+            </table>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+<div class="row">
+   
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+     
+      
+        <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr>
+                
+                <th>Meta Title</th>
+                <th>MetaDescription</th>
+                <th>Meta Keyword</th>
+               
+               
+              </tr>
+            </thead>
+          
+            <tbody>
+            
+            <tr >
+              <td>{{ $subProSingle->subMetaTitle}}</td>
+              <td>{{ $subProSingle->subMetaDesc}}</td>
+              <td>{{ $subProSingle->subMetaKeyword}}</td>
+            </tr>
+          </tbody>
+           
+            </table>
+        </div>
+      </div>
+     
     </div>
   </div>
 </div>
