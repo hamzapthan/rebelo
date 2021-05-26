@@ -69,5 +69,18 @@ class User extends Authenticatable
         ->get();
         
      }
+
+    public function scopeshowUser($query,$id){
+        return $query->whereNotIn('id',[$id])
+        ->where('role',1)  
+        ->get();
+    }
     
+
+
+    public function scopeshowFrontUser($query){
+        return $query->where('role',0)->get();
+    }
+
 }
+

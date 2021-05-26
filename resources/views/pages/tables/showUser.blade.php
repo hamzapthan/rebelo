@@ -11,6 +11,62 @@
     <li class="breadcrumb-item active" aria-current="page">Data Table</li>
   </ol>
 </nav>
+@if(isset($frontendUser))
+<div class="row">
+<a href="{{ route('create.user')}}">
+      <button type="button" class="btn btn-primary">Add New User</button></a>
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title">Users</h6>
+        <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>email</th>
+                <th>Position</th>
+               
+                <th>Options</th>
+                <th>Roles</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+              @foreach($frontendUser as $users)
+              <tr id="row_{{ $users->id}}">
+                <td>{{ $users->name}}</td>
+                <td>{{ $users->email}}</td>
+                <td>FrontEnd</td>
+                
+                 
+                <td><div class="btn-group">
+ <a href=""> <button type="button" class="btn btn-primary">Orders</button></a>
+  
+  <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  
+  <div class="dropdown-menu">
+   
+<a class="dropdown-item" href="javascript:void(0)"  data-id="{{$users->id}}" onclick="deletePost(event.target)">Delete</a>
+    
+</div></td>
+               
+               
+
+               
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@else
 
 <div class="row">
 <a href="{{ route('create.user')}}">
@@ -27,7 +83,7 @@
                 <th>email</th>
                 <th>Position</th>
                
-                <th>Start date</th>
+                <th>Options</th>
                 <th>Roles</th>
               </tr>
             </thead>
@@ -73,6 +129,7 @@
     </div>
   </div>
 </div>
+@endif
 @endsection
 
 @push('plugin-scripts')

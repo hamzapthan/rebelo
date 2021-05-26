@@ -186,6 +186,12 @@ class SubProductController extends Controller
 
      
    }
-
+   
+   public function subProStorage($id){
+       
+    $subStorage = SubProduct::find($id)->subprooductstorage;
+   return view('pages.tables.showSubStorage',compact('subStorage'));
+     
+   }
 
 }

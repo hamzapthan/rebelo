@@ -205,17 +205,12 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" class="nav-link">
+                <a href="{{ route('user.edit', Auth::user()->id ) }}" class="nav-link">
                   <i data-feather="edit"></i>
                   <span>Edit Profile</span>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="javascript:;" class="nav-link">
-                  <i data-feather="repeat"></i>
-                  <span>Switch User</span>
-                </a>
-              </li>
+            
               <li class="nav-item">
                 <a  class="nav-link"  href="{{ route('logout') }}"
                 onclick="event.preventDefault();

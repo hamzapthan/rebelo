@@ -146,6 +146,7 @@ class ProductController extends Controller
     $silentPro = Product::where('id',$pro_id)->update(array('status'=>'1'));
     return response()->json(['success'=>'Post Deleted successfully']);
 }
+
 public function showProSubProducts($pro_id){
     $proName = Product::find($pro_id);
  

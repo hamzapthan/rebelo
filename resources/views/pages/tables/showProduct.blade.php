@@ -67,7 +67,7 @@
      <a href="javascript:void(0)" data-id="{{ $products->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
      @endif
     
-<a class="dropdown-item" href="javascript:void(0)"  data-id="{{$products->id}}" onclick="deletePost(event.target)">Delete</a>
+<a  href="javascript:void(0)"  data-id="{{$products->id}}" onclick="deletePost(event.target)">Delete</a>
     
 </div></td>
                
@@ -125,7 +125,9 @@ $.ajax({
   },
   success:function(response){
      alert('Data Is deleted');
-       $("#row_"+pro_id).remove();
+     window.location.reload();
+   
+
    }
 });
 

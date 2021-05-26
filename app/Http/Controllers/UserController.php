@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use DB;
-
+use Auth;
 class UserController extends Controller
 {
     /**
@@ -16,9 +16,17 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $userAll = User::useradmin();
+    { 
+        $id = Auth::user()->id;
+       
+        $userAll = User::showUser($id);
         return view('pages.tables.showUser',compact('userAll'));   
+    }
+    public function frontUser()
+    { 
+        $frontendUser = User::showFrontUser();
+       
+        return view('pages.tables.showUser',compact('frontendUser'));   
     }
 
     /**

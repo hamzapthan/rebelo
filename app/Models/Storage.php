@@ -16,8 +16,14 @@ class Storage extends Model
     public function backsubprooductstorage(){
         return $this->belongsTo(SubProduct::class,'subpro_id','id');
      }
+
      public function storageproprice(){
          return $this->hasMany(Storage::class,'store_id','id');
      }
+
+     public function price(){
+        return $this->hasMany(ProPrice::class,'store_id','id');
+    }
+     
 }
 

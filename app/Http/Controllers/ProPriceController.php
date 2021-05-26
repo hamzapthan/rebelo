@@ -78,19 +78,33 @@ class ProPriceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $storagePrice = ProPrice::find($id);
+
+    return view('pages.forms.editPrice',compact('storagePrice')); 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
-        //
+        $updatePrice = ProPrice::find($id);
+        $updatePrice->new = $request->new;
+        $updatePrice->working = $request->working;
+        $updatePrice->dead = $request->dead;
+        $updatePrice->prob1 = $request->prob1;
+        $updatePrice->prob2 = $request->prob2;
+        $updatePrice->prob3 = $request->prob3;
+        $updatePrice->prob4 = $request->prob4;
+        $updatePrice->prob5 = $request->prob5;
+        $updatePrice->prob6 = $request->prob6;
+        $updatePrice->prob7 = $request->prob7;
+        $updatePrice->prob8 = $request->prob8;
+        $updatePrice->prob9 = $request->prob9;
+        $updatePrice->prob10 = $request->prob10;
+        $updatePrice->prob11 = $request->prob11;
+        $updatePrice->prob12 = $request->prob12;
+        $updatePrice->status = 1;
+        $updatePrice->save();
+        return redirect()->back()->with('message','Data Updated Successfuly');
     }
 
     /**

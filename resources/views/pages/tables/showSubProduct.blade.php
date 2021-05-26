@@ -20,7 +20,7 @@
       <div class="card-body">
      
        <div>
-        <h6 class="card-title">Category </h6>
+        <h6 class="card-title">SuProducts </h6>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
@@ -28,9 +28,10 @@
               <tr>
                 <th>No</th>
                 <th>Name</th>
-                <th>Detail</th>
-                <th>Image</th>
-                <th>Products</th>
+                <th>Brand</th>
+                <th>Storage</th>
+                <th>Colour</th>
+                <th>Images</th>
                 <th>Status</th>
                 <th>Options</th>
               </tr>
@@ -43,6 +44,8 @@
               <td>{{ $i++ }}</td>
                 <td>{{ $subProducts->subName}}</td>
                 <td>{{ $subProducts->subBrnad}}</td>
+                <td><a href="{{route('subpro.storage',$subProducts->id)}}">Storage</a></td>
+                
                 <td>{{ $subProducts->subColour}}</td>
                
                 <td><a href="{{ route('subpro.image.id',$subProducts->id)}}">

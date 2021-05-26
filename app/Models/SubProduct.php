@@ -38,5 +38,8 @@ class SubProduct extends Model
     public function subprooductstorage(){
         return $this->hasMany(Storage::class,'subpro_id','id');
     }
+    public function scopesubproductOn($query){
+        return $query->where('status',1)->get();
+    }
    
 }

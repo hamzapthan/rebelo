@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StorageController;
+use App\Http\Controllers\ProPriceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -130,6 +132,7 @@ Route::get('admin/table', function() {
 // Route::any('/{page?}',function(){
 //     return View::make('pages.error.404');
 // })->where('page','.*');
+Route::group(['middleware' => ['auth']], function () { 
 Route::get('/createCat',[CategoryController::class,'create'])->name('create.cat');  // create page show
 Route::post('/insertCat',[CategoryController::class,'store'])->name('insert.cat');  // Insert data
 Route::get('/showCat',[CategoryController::class,'index'])->name('show.cat');  // show all category
@@ -168,13 +171,15 @@ Route::get('/subproduct/{id}/edit',[SubProductController::class,'edit'])->name('
 Route::get('/subproImage/{id}',[SubProductController::class,'image'])->name('subpro.image.id');  // show ssingle product
 Route::Delete('/deleteSubProImage/{subpro_id}/{image}',[SubProductController::class,'deleteimage'])->name('subpro.image');  // show ssingle product
 Route::get('/showSubPros/{id}',[SubProductController::class,'show'])->name('show.subPro');  // show ssingle pro
+Route::get('/subProStorage/{id}',[SubProductController::class,'subProStorage'])->name('subpro.storage');  // show ssingle pro
 
 Route::post('/updateSubPro/{id}',[SubProductController::class,'update'])->name('update.subPro');  // show ssingle pro
 
 //Route for Users
 Route::get('/createUser',[UserController::class,'create'])->name('create.user');  // show all pro
 Route::post('/insertUser',[UserController::class,'store'])->name('insert.user');  // Insert data
-Route::get('/showAllUser',[UserController::class,'index'])->name('show.user');  // show all pro
+Route::get('/showAdminUser',[UserController::class,'index'])->name('show.user');  // show all pro
+Route::get('/showFrontUser',[UserController::class,'frontUser'])->name('show.front.user');  // show all pro
 Route::Delete('/deleteUser/{id}',[UserController::class,'destroy'])->name('user.destroy');  // show all pro
 Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user.edit');  // show ssingle product
 
@@ -190,17 +195,22 @@ Route::get('/deleteRole/{id}',[RoleController::class,'destroy'])->name('delete.r
 
 
 //Routes for storage
-Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
-Route::Delete('/deleteStorage/{id}',[StorageController::class,'destroy'])->name('delete.storage');  // show all pro
-Route::post('/insertStorage',[StorageController::class,'store'])->name('insert.storage');  // Insert data
 Route::get('/createStorage',[StorageController::class,'create'])->name('create.storage');  // create page show
-Route::get('/showStorage/{id}',[StorageController::class,'show'])->name('show.storage');  // show ssingle pro
+Route::post('/insertStorage',[StorageController::class,'store'])->name('insert.storage');  // Insert data
+Route::get('/storageSingle/{id}',[StorageController::class,'show'])->name('show.storage.single');  // show ssingle pro
+
+Route::get('/storage/{id}/edit',[StorageController::class,'edit'])->name('edit.storage');  // show all pro
+Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
+Route::DELETE('/deleteStorage/{id}',[StorageController::class,'destroy'])->name('delete.storage');  // show all pro
 Route::post('/updateStorage/{id}',[StorageController::class,'update'])->name('update.storage');  // show ssingle pro
 
 //Price against Products
 Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
+Route::post('/updateProPrice/{id}',[ProPriceController::class,'update'])->name('update.price');  // Insert data
 
+Route::get('/price/{id}/edit',[ProPriceController::class,'edit'])->name('price.edit');  // show all pro
 
+});
 
 Auth::routes();
 Route::get('admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard')->middleware('auth');
