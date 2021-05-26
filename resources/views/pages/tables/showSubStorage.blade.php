@@ -172,7 +172,6 @@ $.ajax({
      alert('Data Is deleted');
        $("#row_"+store_id).remove();
        window.location.reload();
-   
    }
 });
 

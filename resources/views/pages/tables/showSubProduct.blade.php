@@ -30,7 +30,7 @@
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Storage</th>
-                <th>Colour</th>
+                <th>FullView</th>
                 <th>Images</th>
                 <th>Status</th>
                 <th>Options</th>
@@ -46,7 +46,8 @@
                 <td>{{ $subProducts->subBrnad}}</td>
                 <td><a href="{{route('subpro.storage',$subProducts->id)}}">Storage</a></td>
                 
-                <td>{{ $subProducts->subColour}}</td>
+                <td><a href="{{ route('show.subPro',$subProducts->id)}}">View</a>
+                </td>
                
                 <td><a href="{{ route('subpro.image.id',$subProducts->id)}}">
                  @foreach(json_decode($subProducts->subImage,true) as $images)

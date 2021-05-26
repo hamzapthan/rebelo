@@ -135,7 +135,7 @@ Route::get('admin/table', function() {
 Route::group(['middleware' => ['auth']], function () { 
 Route::get('/createCat',[CategoryController::class,'create'])->name('create.cat');  // create page show
 Route::post('/insertCat',[CategoryController::class,'store'])->name('insert.cat');  // Insert data
-Route::get('/showCat',[CategoryController::class,'index'])->name('show.cat');  // show all category
+Route::get('/showCat',[CategoryController::class,'index'])->name('show.cat.all');  // show all category
 Route::get('/category/{id}/edit',[CategoryController::class,'edit'])->name('cat.edit');  // show ssingle product
 Route::post('/updateCat/{id}',[CategoryController::class,'update'])->name('update.cat');  // show ssingle product
 Route::get('/catStatusSilent/{cat_id}',[CategoryController::class,'silent'])->name('cat.silent');  // show ssingle product
@@ -149,7 +149,7 @@ Route::get('/showCat/{id}',[CategoryController::class,'show'])->name('show.cat')
 //  Routes for Product
 Route::get('/createPro',[ProductController::class,'create'])->name('create.pro');  // create page show
 Route::post('/insertPro',[ProductController::class,'store'])->name('insert.pro');  // Insert data
-Route::get('/showPro',[ProductController::class,'index'])->name('show.pro');  // show all pro
+Route::get('/showPro',[ProductController::class,'index'])->name('show.pro.all');  // show all pro
 Route::get('/product/{id}/edit',[ProductController::class,'edit'])->name('pro.edit');  // show all pro
 Route::post('/updatePro/{id}',[ProductController::class,'update'])->name('update.pro');  // show ssingle pro
 Route::get('/proStatusSilent/{pro_id}',[ProductController::class,'silent'])->name('pro.silent');  // show ssingle product
@@ -163,7 +163,7 @@ Route::get('/showPro/{id}',[ProductController::class,'show'])->name('show.pro');
 //  Routes for SubProduct
 Route::get('/createSubPro',[SubProductController::class,'create'])->name('create.subPro');  // create page show
 Route::post('/insertSubPro',[SubProductController::class,'store'])->name('insert.subPro');  // Insert data
-Route::get('/showSubProall',[SubProductController::class,'index'])->name('show.subPro');  // show all pro
+Route::get('/showSubProall',[SubProductController::class,'index'])->name('show.subPro.all');  // show all pro
 Route::Delete('/deleteSubPro/{id}',[SubProductController::class,'destroy'])->name('delete.subPro');  // show all pro
 Route::get('/subproStatusSilent/{id}',[SubProductController::class,'silent'])->name('subpro.silent');  // show ssingle product
 Route::get('/subproStatusOn/{id}',[SubProductController::class,'subproStatusOn'])->name('subpro.status');  // show ssingle product
@@ -198,17 +198,18 @@ Route::get('/deleteRole/{id}',[RoleController::class,'destroy'])->name('delete.r
 Route::get('/createStorage',[StorageController::class,'create'])->name('create.storage');  // create page show
 Route::post('/insertStorage',[StorageController::class,'store'])->name('insert.storage');  // Insert data
 Route::get('/storageSingle/{id}',[StorageController::class,'show'])->name('show.storage.single');  // show ssingle pro
-
 Route::get('/storage/{id}/edit',[StorageController::class,'edit'])->name('edit.storage');  // show all pro
-Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
 Route::DELETE('/deleteStorage/{id}',[StorageController::class,'destroy'])->name('delete.storage');  // show all pro
 Route::post('/updateStorage/{id}',[StorageController::class,'update'])->name('update.storage');  // show ssingle pro
 
+ Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
+
 //Price against Products
-Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
+Route::get('/price/{id}/edit',[ProPriceController::class,'edit'])->name('price.edit');  // show all pro
 Route::post('/updateProPrice/{id}',[ProPriceController::class,'update'])->name('update.price');  // Insert data
 
-Route::get('/price/{id}/edit',[ProPriceController::class,'edit'])->name('price.edit');  // show all pro
+//Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
+
 
 });
 
