@@ -14,7 +14,7 @@
 
 <div class="row">
      <a href="{{ route('create.pro')}}">
-      <button type="button" class="btn btn-primary">Add New Product</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Product</button></a>
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -32,7 +32,7 @@
                 <th>Category</th>
                 <th>Sub Products</th>
                 <th>Status</th>
-                <th>Options</th>
+                <th>Optionsdd</th>
               </tr>
             </thead>
             <tbody>

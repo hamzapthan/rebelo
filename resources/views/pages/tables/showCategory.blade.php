@@ -14,7 +14,7 @@
 
 <div class="row">
      <a href="{{ route('create.cat')}}">
-      <button type="button" class="btn btn-primary">Add New Category</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Category</button></a>
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">

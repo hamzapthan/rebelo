@@ -43,7 +43,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="name">working	</label>
+              <label for="name">Working	</label>
               <input id="name" class="form-control" name="working" type="number">
               @if($errors->has('working'))
               <div class="alert alert-danger">{{ $errors->first('working') }}</div>
@@ -57,51 +57,51 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="name">prob1</label>
+              <label for="name">Prob1</label>
               <input id="name" class="form-control" name="prob1" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob2</label>
+              <label for="name">Prob2</label>
               <input id="name" class="form-control" name="prob2" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob3</label>
+              <label for="name">Prob3</label>
               <input id="name" class="form-control" name="prob3" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob4</label>
+              <label for="name">Prob4</label>
               <input id="name" class="form-control" name="prob4" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob5</label>
+              <label for="name">Prob5</label>
               <input id="name" class="form-control" name="prob5" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob6</label>
+              <label for="name">Prob6</label>
               <input id="name" class="form-control" name="prob6" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob7</label>
+              <label for="name">Prob7</label>
               <input id="name" class="form-control" name="prob7" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob8</label>
+              <label for="name">Prob8</label>
               <input id="name" class="form-control" name="prob8" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob9</label>
+              <label for="name">Prob9</label>
               <input id="name" class="form-control" name="prob9" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob10</label>
+              <label for="name">Prob10</label>
               <input id="name" class="form-control" name="prob10" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob11</label>
+              <label for="name">Prob11</label>
               <input id="name" class="form-control" name="prob11" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob12</label>
+              <label for="name">Prob12</label>
               <input id="name" class="form-control" name="prob12" type="number">
             </div>
 
@@ -146,7 +146,7 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="name">working	</label>
+              <label for="name">Working	</label>
               <input id="name" class="form-control" name="working" type="number">
               @if($errors->has('working'))
               <div class="alert alert-danger">{{ $errors->first('working') }}</div>
@@ -160,51 +160,51 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="name">prob1</label>
+              <label for="name">Prob1</label>
               <input id="name" class="form-control" name="prob1" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob2</label>
+              <label for="name">Prob2</label>
               <input id="name" class="form-control" name="prob2" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob3</label>
+              <label for="name">Prob3</label>
               <input id="name" class="form-control" name="prob3" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob4</label>
+              <label for="name">Prob4</label>
               <input id="name" class="form-control" name="prob4" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob5</label>
+              <label for="name">Prob5</label>
               <input id="name" class="form-control" name="prob5" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob6</label>
+              <label for="name">Prob6</label>
               <input id="name" class="form-control" name="prob6" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob7</label>
+              <label for="name">Prob7</label>
               <input id="name" class="form-control" name="prob7" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob8</label>
+              <label for="name">Prob8</label>
               <input id="name" class="form-control" name="prob8" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob9</label>
+              <label for="name">Prob9</label>
               <input id="name" class="form-control" name="prob9" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob10</label>
+              <label for="name">Prob10</label>
               <input id="name" class="form-control" name="prob10" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob11</label>
+              <label for="name">Prob11</label>
               <input id="name" class="form-control" name="prob11" type="number">
             </div>
             <div class="form-group">
-              <label for="name">prob12</label>
+              <label for="name">Prob12</label>
               <input id="name" class="form-control" name="prob12" type="number">
             </div>
 

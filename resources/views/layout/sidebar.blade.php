@@ -64,12 +64,12 @@
           <ul class="nav sub-menu">
           @can('role-create')
             <li class="nav-item">
-            <a href="{{ route('create.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add Roles</a>
+            <a href="{{ route('create.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add</a>
             </li>
            @endcan
            @can('role-list')
             <li class="nav-item">
-            <a href="{{ route('show.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show Roles</a>
+            <a href="{{ route('show.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show</a>
             </li>
             @endcan
            </ul>
@@ -87,7 +87,7 @@
         <ul class="nav sub-menu">
         @can('category-create')
           <li class="nav-item">
-          <a href="{{ route('create.cat') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">ADD</a>
+          <a href="{{ route('create.cat') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add</a>
           </li>
           @endcan
           @can('category-list')

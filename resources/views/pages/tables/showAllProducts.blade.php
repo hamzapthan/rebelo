@@ -7,8 +7,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+    <!-- <li class="breadcrumb-item"><a href="#">Tables</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Data Table</li> -->
   </ol>
 </nav>
 @if(isset($catProduct,$catName))
@@ -122,7 +122,7 @@
     <div class="card">
       <div class="card-body">
       <a href="{{ route('subpro.edit',$subProSingle->id)}}">
-      <button type="button" class="btn btn-primary">Edit</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb3">Edit</button></a>
        <div>
         <h6 class="card-title">Product Against {{$proName}} </h6>
         </div>

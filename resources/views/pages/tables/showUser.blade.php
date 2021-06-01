@@ -7,14 +7,12 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
-  </ol>
+   </ol>
 </nav>
 @if(isset($frontendUser))
 <div class="row">
-<a href="{{ route('create.user')}}">
-      <button type="button" class="btn btn-primary">Add New User</button></a>
+        <a href="{{ route('create.user')}}">
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New User</button></a>
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -70,7 +68,7 @@
 
 <div class="row">
 <a href="{{ route('create.user')}}">
-      <button type="button" class="btn btn-primary">Add New User</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New User</button></a>
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -82,9 +80,10 @@
                 <th>Name</th>
                 <th>email</th>
                 <th>Position</th>
-               
+               @can('user-edit')
                 <th>Options</th>
-                <th>Roles</th>
+              @endcan
+              
               </tr>
             </thead>
             <tbody>
@@ -93,9 +92,9 @@
               <tr id="row_{{ $users->id}}">
                 <td>{{ $users->name}}</td>
                 <td>{{ $users->email}}</td>
-                <td>{{ $users->role}}</td>
+               
                 
-                 
+                @can('user-edit') 
                 <td><div class="btn-group">
  <a href="{{ route('user.edit',$users->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   
@@ -108,7 +107,7 @@
 <a class="dropdown-item" href="javascript:void(0)"  data-id="{{$users->id}}" onclick="deletePost(event.target)">Delete</a>
     
 </div></td>
-               
+        @endcan       
                
 <td><span class="badge badge-success">
                 <?php $datas   =   App\Models\User::datainsert($users->id);

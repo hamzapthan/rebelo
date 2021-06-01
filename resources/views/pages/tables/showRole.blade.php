@@ -14,7 +14,7 @@
 
 <div class="row">
 <a href="{{ route('create.role')}}">
-      <button type="button" class="btn btn-primary">Add New Role</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Role</button></a>
 
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
