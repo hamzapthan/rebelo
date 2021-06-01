@@ -13,6 +13,12 @@ class StorageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct(){
+        $this->middleware('permission:storage-list|storage-create|storage-edit|storage-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:storage-create', ['only' => ['create','store']]);
+        $this->middleware('permission:storage-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:storage-delete', ['only' => ['destroy']]);
+     }
     public function index()
     {
         //
@@ -37,7 +43,8 @@ class StorageController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
+         $subpro_id = $request->subpro_id;
         $validate = $request->validate([
            'storage' => 'required',
            'subpro_id' => 'required',
@@ -74,7 +81,9 @@ class StorageController extends Controller
         $proPrice->status = 1;
 
         $insertStorage->price()->save($proPrice);
-        return redirect()->back()->with('message','Data inserted Successfully');
+        
+        return redirect()->route('subpro.storage',$subpro_id);
+        //return redirect()->back()->with('message','Data inserted Successfully');
             }
     }
 
@@ -124,5 +133,10 @@ class StorageController extends Controller
     {
         $storeage_id = Storage::find($id)->delete();
         return response()->json(['success'=>'data deleted successsfully']);
+    }
+
+    public function createid(Request $request){
+         $id = $request->id;
+         return view('pages.forms.addStorage',compact('id'));
     }
 }

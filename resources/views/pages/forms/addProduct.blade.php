@@ -19,7 +19,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Validation</h4>
+        <h4 class="card-title">Edit Product</h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -46,9 +46,7 @@
           <label>Select</label>
           <?php
                $cat_id = $editProduct->cat_id; 
-               echo $cat_id;
               $countries = App\Models\Category::status();
-              echo $countries;
                        ?>
          
           <select class="js-example-basic-single w-100" name="cat_id" >

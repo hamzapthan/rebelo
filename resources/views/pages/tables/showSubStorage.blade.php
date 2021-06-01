@@ -103,8 +103,12 @@
 
 @else
 <div class="row">
-<a href="{{ route('create.role')}}">
-      <button type="button" class="btn btn-primary">Add New Role</button></a>
+
+  <form action="{{ route('create.storage.id') }}" method="post"> 
+    @csrf 
+      <input type="hidden" value="{{ $id }}" name="id">
+      <button type="submit" class="btn btn-primary">Add New Storage</button></a>
+  </form>
 
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
@@ -129,7 +133,7 @@
                 <td>{{ $i++   }}</td>
                 <td>{{  $subStorages->storage }}</td>
                 <td><a href="{{ route('show.storage.single',$subStorages->id)}}">Show</a></td>
-                <td><a href="{{ route('edit.storage',$subStorages->id) }}">Edit</a></td>
+                <td><a href="{{ route('price.edit',$subStorages->id) }}">Edit</a></td>
                 <td><a  href="javascript:void(0)"  data-id="{{$subStorages->id}}" onclick="deletePost(event.target)">Delete</a></td>
                 
 

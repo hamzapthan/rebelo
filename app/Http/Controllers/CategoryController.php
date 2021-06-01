@@ -13,6 +13,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct(){
+        $this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:category-create', ['only' => ['create','store']]);
+        $this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:category-delete', ['only' => ['destroy']]);
+     }
+
     public function index()
     {
         $category = Category::status();
@@ -104,7 +111,7 @@ class CategoryController extends Controller
     {
         
         $validated = $request->validate([
-            'catName' => 'required|unique:categories|max:25',
+            'catName' => 'required',
             'catDetail' => 'required',
             'image' => 'required',
         ]);
@@ -127,7 +134,7 @@ class CategoryController extends Controller
           $updateCat->status = 1;
           $post = User::find($user_id);
           $updateCat->users()->associate($post);
-          $updateCat->save();
+          $updateCat->update();
       
       return redirect()->back()->with('message', 'Data Updated Successfully!');
          }

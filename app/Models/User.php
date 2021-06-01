@@ -48,6 +48,9 @@ class User extends Authenticatable
     public function category(){
         return $this->hasMany(Category::class,'user_id','id');
     }
+    public function sellproduct(){
+        return $this->hasMany(SellProduct::class,'user_id','id');
+    }
 
     public function userproduct(){
         return $this->hasMany(Product::class,'user_id','id');
@@ -80,6 +83,14 @@ class User extends Authenticatable
 
     public function scopeshowFrontUser($query){
         return $query->where('role',0)->get();
+    }
+
+    public function scopecountFrontendCustomer($query){
+        return $query->where('role',0)->count();
+    }
+
+    public function scopecountAdminCustomer($query){
+        return $query->where('role',1)->count();
     }
 
 }

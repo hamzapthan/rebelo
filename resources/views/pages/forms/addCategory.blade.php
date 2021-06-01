@@ -19,7 +19,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Validation</h4>
+        <h4 class="card-title">Eidt Category  </h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}

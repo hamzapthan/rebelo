@@ -35,11 +35,20 @@ class SubProduct extends Model
       public function backproproduct(){
           return $this->belongsTo(Product::class,'pro_id','id');
     }
+    public function productsell(){
+        return $this->hasMany(SellProduct::class,'subpro_id','id');
+  }
     public function subprooductstorage(){
         return $this->hasMany(Storage::class,'subpro_id','id');
     }
     public function scopesubproductOn($query){
         return $query->where('status',1)->get();
     }
-   
+
+    public function orderitems(){
+        return $this->hasMany(SubProduct::class,'subpro_id','id');
+    }
+    public function scopecountsubProducts($query){
+        return $query->count();
+    }
 }

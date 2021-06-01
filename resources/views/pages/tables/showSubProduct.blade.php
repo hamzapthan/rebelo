@@ -29,6 +29,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Brand</th>
+                <th>Prodcuct</th>
                 <th>Storage</th>
                 <th>FullView</th>
                 <th>Images</th>
@@ -44,6 +45,11 @@
               <td>{{ $i++ }}</td>
                 <td>{{ $subProducts->subName}}</td>
                 <td>{{ $subProducts->subBrnad}}</td>
+              <?php   $id = $subProducts->id;
+                       $productName = App\Models\SubProduct::find($id)->backproproduct;
+                      
+              ?>
+                <td>{{   $productName->proName }}</td>
                 <td><a href="{{route('subpro.storage',$subProducts->id)}}">Storage</a></td>
                 
                 <td><a href="{{ route('show.subPro',$subProducts->id)}}">View</a>

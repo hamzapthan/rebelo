@@ -30,14 +30,14 @@ class LoginController extends Controller
     protected $redirectTo;
     public function redirectTo(){
         if(Auth::user()->role == 1){
-        $id = Auth::user()->id;
-         $role_name = User::join('model_has_roles','model_has_roles.model_id','=','users.id')
-                                 ->join('roles','roles.id','=','model_has_roles.role_id')
-                                 ->where('model_has_roles.model_id',$id)
-                                 ->select('roles.*')
-                                 ->get();
-            $role =  $role_name[0]["name"];
-            if($role == 'Admin'){
+        // $id = Auth::user()->id;
+        //  $role_name = User::join('model_has_roles','model_has_roles.model_id','=','users.id')
+        //                          ->join('roles','roles.id','=','model_has_roles.role_id')
+        //                          ->where('model_has_roles.model_id',$id)
+        //                          ->select('roles.*')
+        //                          ->get();
+        //     $role =  $role_name[0]["name"];
+        //     if($role == 'Admin'){
            $this->redirectTo = 'admin/dashboard';
        
            return $this->redirectTo;
@@ -47,13 +47,14 @@ class LoginController extends Controller
          return $this->redirectTo;
        
        }
-        }elseif(Auth::user()->role == 0){
-            $this->redirectTo = 'front/dashboard';
-           return $this->redirectTo;
-        }else{
-             $this->redirectTo = 'admin/login';
-                return $this->redirectTo;
-        }
+    
+        // }elseif(Auth::user()->role == 0){
+        //     $this->redirectTo = 'front/dashboard';
+        //    return $this->redirectTo;
+        // }else{
+        //      $this->redirectTo = 'admin/login';
+        //         return $this->redirectTo;
+        // }
         // switch(Auth::user()->role){
         //   case 1:
         //   $this->redirectTo = 'admin/dashboard';
@@ -69,7 +70,7 @@ class LoginController extends Controller
 
 
         // }
-    } 
+    }
 
     /**
      * Create a new controller instance.

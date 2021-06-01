@@ -16,12 +16,13 @@
       <li class="nav-item  {{  request()->routeIs('/') ? 'active' : '' }}">
       
       <li class="nav-item {{  request()->routeIs('/') ? 'active' : '' }}">
-        <a href="{{ url('/') }}" class="nav-link">
+        <a href="{{ url('/admin/dashboard') }}" class="nav-link">
           <i class="link-icon" data-feather="box"></i>
           <span class="link-title">Dashboard</span>
         </a>
       </li>
       <li class="nav-item nav-category">web apps</li>
+     @can('user-list')
       <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       
         <a class="nav-link" data-toggle="collapse" href="#user" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
@@ -29,20 +30,53 @@
           <span class="link-title">User</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
-        <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="user">
+         <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="user">
           <ul class="nav sub-menu">
+         @can('user-list')
             <li class="nav-item">
             <a href="{{ route('create.user') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add Admin User</a>
             </li>
+            @endcan
+            
+            @can('user-admin')
             <li class="nav-item">
             <a href="{{ route('show.user') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show Admin User</a>
             </li>
+            @endcan
+            @can('user-front')
             <li class="nav-item">
             <a href="{{ route('show.front.user') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show Frontend User</a>
             </li>
+            @endcan
            </ul>
         </div>
       </li>
+      @endcan
+      @can('role-list')
+      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
+      
+        <a class="nav-link" data-toggle="collapse" href="#roles" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
+          <i class="link-icon" data-feather="mail"></i>
+          <span class="link-title">Roles</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="roles">
+          <ul class="nav sub-menu">
+          @can('role-create')
+            <li class="nav-item">
+            <a href="{{ route('create.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add Roles</a>
+            </li>
+           @endcan
+           @can('role-list')
+            <li class="nav-item">
+            <a href="{{ route('show.role') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show Roles</a>
+            </li>
+            @endcan
+           </ul>
+        </div>
+      </li>
+      @endcan
+      
       <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Category" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
@@ -51,13 +85,16 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="Category">
         <ul class="nav sub-menu">
+        @can('category-create')
           <li class="nav-item">
           <a href="{{ route('create.cat') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">ADD</a>
           </li>
+          @endcan
+          @can('category-list')
           <li class="nav-item">
           <a href="{{ route('show.cat.all') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Show</a>
          </li>
-          
+          @endcan
         </ul>
       </div>
      </li>
@@ -70,13 +107,16 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="Products">
         <ul class="nav sub-menu">
+        @can('category-list')
           <li class="nav-item">
           <a href="{{ route('create.pro') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add</a>
           </li>
+          @endcan
+          @can('category-create')
           <li class="nav-item">
           <a href="{{ route('show.pro.all') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Show</a>
           </li>
-         
+         @endcan
         </ul>
       </div>
      </li>
@@ -88,15 +128,20 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="SubProducts">
         <ul class="nav sub-menu">
+        @can('subProduct-create')
           <li class="nav-item">
           <a href="{{ route('create.subPro') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add</a>
           </li>
+          @endcan
+          @can('subProduct-list')
           <li class="nav-item">
           <a href="{{ route('show.subPro.all') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Show</a>
           </li>
+          @endcan
         </ul>
       </div>
      </li>
+     @can('storage-list')
      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Storage" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
@@ -105,14 +150,17 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="Storage">
         <ul class="nav sub-menu">
+         @can('storage-create')
           <li class="nav-item">
           <a href="{{ route('create.storage') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Add</a>
           </li>
-          
+          @endcan
          </ul>
       </div>
      </li>
-     <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
+     @endcan
+   @can('order-list')
+    <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Orders" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
         <span class="link-title">Orders</span>
@@ -120,20 +168,21 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="Orders">
         <ul class="nav sub-menu">
+         @can('order-list')
           <li class="nav-item">
-          <a href="{{ url('/email/inbox') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Inbox</a>
+          <a href="{{ route('order.show.all') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Pending Order</a>
           </li>
+          @endcan
+          @can('order-list')
           <li class="nav-item">
-          <a href="{{ url('/email/read') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Read</a>
-         
-          </li>
-          <li class="nav-item">
-          <a href="{{ url('/email/compose') }}" class="nav-link {{  request()->routeIs('email/compose') ? 'active' : '' }}">Compose</a>
-          
-          </li>
+          <a href="{{ route('order.show.deliver') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Delivered Order</a>
+         </li>
+          @endcan         
         </ul>
       </div>
      </li>
+     @endcan
+     @can('payment-list')
      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Payments" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
@@ -156,6 +205,8 @@
         </ul>
       </div>
      </li>
+     @endcan
+     @can('sellingPro-list')
      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#SellingProducts" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
@@ -164,20 +215,20 @@
       </a>
       <div class="collapse {{  request()->routeIs('email/*') ? 'active' : '' }}" id="SellingProducts">
         <ul class="nav sub-menu">
+        @can('sellingPro-list')
           <li class="nav-item">
-          <a href="{{ url('/email/inbox') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Inbox</a>
+          <a href="{{ route('sell.pro') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">Show</a>
           </li>
+          @endcan
+          @can('sellingPro-delete')
           <li class="nav-item">
-          <a href="{{ url('/email/read') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Read</a>
-         
+          <a href="{{ route('sell.pro') }}" class="nav-link {{  request()->routeIs('email/inbox') ? 'active' : '' }}">()()()()delete)</a>
           </li>
-          <li class="nav-item">
-          <a href="{{ url('/email/compose') }}" class="nav-link {{  request()->routeIs('email/compose') ? 'active' : '' }}">Compose</a>
-          
-          </li>
+          @endcan
         </ul>
       </div>
      </li>
+     @endcan
 
     </ul>
   </div>

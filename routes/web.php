@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\ProPriceController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\SellingProController;
 
 /*
 |--------------------------------------------------------------------------
@@ -196,19 +198,36 @@ Route::get('/deleteRole/{id}',[RoleController::class,'destroy'])->name('delete.r
 
 //Routes for storage
 Route::get('/createStorage',[StorageController::class,'create'])->name('create.storage');  // create page show
+Route::post('/create',[StorageController::class,'createid'])->name('create.storage.id');  // create page show
+
 Route::post('/insertStorage',[StorageController::class,'store'])->name('insert.storage');  // Insert data
 Route::get('/storageSingle/{id}',[StorageController::class,'show'])->name('show.storage.single');  // show ssingle pro
-Route::get('/storage/{id}/edit',[StorageController::class,'edit'])->name('edit.storage');  // show all pro
 Route::DELETE('/deleteStorage/{id}',[StorageController::class,'destroy'])->name('delete.storage');  // show all pro
 Route::post('/updateStorage/{id}',[StorageController::class,'update'])->name('update.storage');  // show ssingle pro
 
- Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
+
+Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
+Route::get('/storage/{id}/edit',[StorageController::class,'edit'])->name('edit.storage');  // show all pro
 
 //Price against Products
 Route::get('/price/{id}/edit',[ProPriceController::class,'edit'])->name('price.edit');  // show all pro
 Route::post('/updateProPrice/{id}',[ProPriceController::class,'update'])->name('update.price');  // Insert data
 
 //Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
+
+//routes for orderd
+
+Route::get('/pendingOrders',[OrderController::class,'index'])->name('order.show.all');  // show all pro
+Route::get('/deliveredOrders',[OrderController::class,'orderDelivered'])->name('order.show.deliver');  // show all pro
+
+Route::get('/orderDetail/{id}',[OrderController::class,'show'])->name('order.show.single');  // show all pro
+Route::get('/orderdeliver/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');  // show all pro
+
+Route::get('/orderitemdeliver/{id}',[OrderController::class,'deliver'])->name('order.deliver.item');  // show all pro
+
+// Routes for products come to sell
+Route::get('/sellingPro',[SellingProController::class,'index'])->name('sell.pro');  // show all pro
+Route::get('/sellingView/{id}',[SellingProController::class,'show'])->name('sell.pro.view');  // show all pro
 
 
 });

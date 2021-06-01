@@ -52,6 +52,7 @@ $.ajax({
   },
   success:function(response){
      alert('Data Is deleted');
+     window.location.reload();
       
    }
 });

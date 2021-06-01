@@ -45,7 +45,7 @@ class Product extends Model
         return $this->hasMany(SubProduct::class,'pro_id','id')->orderBy('status','DESC');
     }
 
-    
+   
     
    
 }

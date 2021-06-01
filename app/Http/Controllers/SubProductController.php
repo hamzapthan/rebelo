@@ -7,6 +7,7 @@ use App\Models\SubProduct;
 use App\Models\User;
 use App\Models\Product;
 use Auth;
+use File;
 class SubProductController extends Controller
 {
     /**
@@ -14,6 +15,12 @@ class SubProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct(){
+        $this->middleware('permission:subProduct-list|subProduct-create|subProduct-edit|subProduct-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:subProduct-create', ['only' => ['create','store']]);
+        $this->middleware('permission:subProduct-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:subProduct-delete', ['only' => ['destroy']]);
+     }
     public function index()
     {
         $subProduct = SubProduct::subProStatus();
@@ -127,24 +134,26 @@ class SubProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-     $updateSubPro = SubProduct::find($id);
-        $user = User::find($request->get('user_id'));
-        $updateSubPro->user()->associate($user);
-        $product = Product::find($request->get('pro_id'));
-        $updateSubPro->backproproduct()->associate($product);
-        $updateSubPro->subName = $request->subName;
-        $updateSubPro->subBrnad = $request->subBrnad;
-        $updateSubPro->subDetail = $request->subDetail;
-        $updateSubPro->subColour = $request->subColour;
-        $updateSubPro->subImage = $request->subImage;
-        $updateSubPro->subMetaTitle = $request->subMetaTitle;
-        $updateSubPro->subMetaDesc = $request->subMetaDesc;
-        $updateSubPro->subMetaKeyword = $request->subMetaKeyword;
-        $updateSubPro->status = 1;
+        // i am using the store method to update tit
+    //  $updateSubPro = SubProduct::find($id);
+    //     $user = User::find($request->get('user_id'));
+    //     $updateSubPro->user()->associate($user);
+    //     $product = Product::find($request->get('pro_id'));
+    //     $updateSubPro->backproproduct()->associate($product);
+    //     $updateSubPro->subName = $request->subName;
+    //     $updateSubPro->subBrnad = $request->subBrnad;
+    //     $updateSubPro->subDetail = $request->subDetail;
+    //     $updateSubPro->subColour = $request->subColour;
+    //     $updateSubPro->subImage = $request->subImage;
+    //     $updateSubPro->subMetaTitle = $request->subMetaTitle;
+    //     $updateSubPro->subMetaDesc = $request->subMetaDesc;
+    //     $updateSubPro->subMetaKeyword = $request->subMetaKeyword;
+    //     $updateSubPro->status = 1;
       
-        $updateSubPro->save();
-        return response($updateSubPro);
-    }
+    //     $updateSubPro->save();
+    //     return response($updateSubPro);
+    // 
+}
 
      public function destroy($id)
     { 
@@ -167,9 +176,10 @@ class SubProductController extends Controller
    public function image($id){
        
     $subProImage = SubProduct::find($id);
-    return view('pages.forms.subProImage',compact('subProImage'));
+return view('pages.forms.subProImage',compact('subProImage'));
      
    }
+   
    public function deleteimage($subpro_id,$image){
       
        $post = SubProduct::find($subpro_id);
@@ -190,7 +200,8 @@ class SubProductController extends Controller
    public function subProStorage($id){
        
     $subStorage = SubProduct::find($id)->subprooductstorage;
-   return view('pages.tables.showSubStorage',compact('subStorage'));
+    
+   return view('pages.tables.showSubStorage',compact('subStorage','id'));
      
    }
 

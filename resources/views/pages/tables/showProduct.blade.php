@@ -29,6 +29,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Brand</th>
+                <th>Category</th>
                 <th>Sub Products</th>
                 <th>Status</th>
                 <th>Options</th>
@@ -42,7 +43,14 @@
               <td>{{ $i++ }}</td>
                 <td>{{ $products->proName}}</td>
                 <td>{{ $products->proBrnad}}</td>
+                <?php   $id = $products->id;    
+                       $catName =  App\Models\Product::find($id)->backcatproduct;
+                       
+                     
+                  ?>
 
+                <td>{{ $catName->catName}}</td>
+                  
                 <?php
                         $pro_id = $products->id;
                          $catPro = App\Models\Product::find($pro_id)->proproduct;

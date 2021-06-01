@@ -30,7 +30,9 @@
           <fieldset>
             <div class="form-group">
               <label for="name">Name</label>
-              <input id="name" class="form-control" name="subName" type="text" value="{{ $subproUpdate->subName }}">
+              <input id="name" class="form-control" name="subName" type="text" 
+              value="{{old('subName', $subproUpdate->subName)}}"
+             >
               @if($errors->has('subName'))
               <div class="alert alert-danger">{{ $errors->first('subName') }}</div>
               @endif
@@ -97,7 +99,7 @@
         <img src="{{ asset($images)}}" alt="image" style="border-radius: 0px; width: 75px; height: 70px;" >
        @endforeach
         </div>
-        <div class="form-group">
+             <div class="form-group">
             <label>File upload</label>
             <input type="file" name="subImage[]" class="file-upload-default" accept="image/*" multiple="multiple">
             <div class="input-group col-xs-12">

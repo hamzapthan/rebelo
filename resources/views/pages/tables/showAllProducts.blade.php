@@ -91,7 +91,12 @@
               <td>{{ $i++ }}</td>
                 <td>{{ $subProducts->subName}}</td>
                 <td>{{ $subProducts->subBrnad}}</td>
-                <td>{{ $subProducts->subImage}}</td>
+              <td>
+               @foreach(json_decode($subProducts->subImage,true) as $images)
+               <img src="{{asset($images)}}" alt="image" style="border-radius: 0px; width: 75px; height: 70px;" >
+                  @break
+                 @endforeach 
+                 </td>
                 <td>{{ $subProducts->subColour}}</td>
                @if($subProducts->status ==1 )
                 <td><span class="badge badge-success">On</span></td>
