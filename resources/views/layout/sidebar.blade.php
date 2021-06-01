@@ -203,7 +203,7 @@
          
           </li>
           <li class="nav-item">
-          <a href="{{ url('/email/compose') }}" class="nav-link {{  request()->routeIs('email/compose') ? 'active' : '' }}">Compoooooose</a>
+          <a href="{{ url('/email/compose') }}" class="nav-link {{  request()->routeIs('email/compose') ? 'active' : '' }}">Compose</a>
           
           </li>
         </ul>
