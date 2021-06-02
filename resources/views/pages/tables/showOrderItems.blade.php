@@ -44,6 +44,8 @@
                 <td>{{ $orderAlls->notes}}</td>
             @if($orderAlls->status == 1)
              <td><span class="badge badge-success">Delivered</span></td>
+                @elseif($orderAlls->status == 2)
+                <td><span class="badge badge-danger">Canacel</span></td>
                 @else
                 <td><span class="badge badge-danger">Pending</span></td>
                      @endif     
@@ -77,7 +79,7 @@
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Status</th>
-                <th>Options</th>
+                <!-- <th>Options</th> -->
                 <!-- <th>Phone No</th>
                 <th>Notes</th> -->
               </tr>
@@ -98,18 +100,14 @@
                 <td>{{ $product->subBrnad }}</td>
               <td>{{ $orderDetails->quantity}}</td>
                 <td>{{ $orderDetails->price}} {{$orderDetails->last_name }}  </td>
-                @if($orderDetails->status == 1)
-             <td><span class="badge badge-success">Delivered</span></td>
-                @else
-                <td><span class="badge badge-danger">Pending</span></td>
-                     @endif     
-
-                <td>
+               <td>
              @if($orderDetails->status == 0)
                 <a href="{{ route('order.deliver.item',$orderDetails->id)}}"> <button class="btn btn-primary">Pending</button>  </a>
-               @else
-                <button class="btn btn-primary">Delivered</button>
-               
+                @elseif($orderDetails->status == 2)
+                <span class="badge badge-danger">Cancel</span>
+                 @else
+                 <button class="btn btn-primary">Deliver</button>
+                   
                @endif 
                 
                 

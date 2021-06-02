@@ -219,6 +219,9 @@ Route::post('/updateProPrice/{id}',[ProPriceController::class,'update'])->name('
 
 Route::get('/pendingOrders',[OrderController::class,'index'])->name('order.show.all');  // show all pro
 Route::get('/deliveredOrders',[OrderController::class,'orderDelivered'])->name('order.show.deliver');  // show all pro
+Route::get('/cancelOrders',[OrderController::class,'orderCanceled'])->name('order.show.cancel');  // show all pro
+Route::get('/cancelDetail/{id}',[OrderController::class,'showCancelOrder'])->name('order.show.single');  // show all pro
+Route::get('/ordercancel/{id}',[OrderController::class,'statusOrderCancel'])->name('order.status.cancel');  // show all pro
 
 Route::get('/orderDetail/{id}',[OrderController::class,'show'])->name('order.show.single');  // show all pro
 Route::get('/orderdeliver/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');  // show all pro

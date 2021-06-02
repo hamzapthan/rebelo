@@ -7,20 +7,20 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
   </ol>
 </nav>
 
 <div class="row">
+@can('product-create')
      <a href="{{ route('create.pro')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New Product</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
      
        <div>
-        <h6 class="card-title">Category </h6>
+        <h6 class="card-title">Product </h6>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
@@ -32,7 +32,9 @@
                 <th>Category</th>
                 <th>Sub Products</th>
                 <th>Status</th>
-                <th>Optionsdd</th>
+                @can('product-edit')
+                  <th>Options</th>
+              @endcan
               </tr>
             </thead>
             <tbody>
@@ -62,7 +64,9 @@
                 @else
                <td> <span class="badge badge-danger">Off</span> </td>
                 @endif
+                @can('product-edit')
                 <td>
+               
                 <div class="btn-group">
  <a href="{{ route('pro.edit',$products->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -74,10 +78,11 @@
      @else
      <a href="javascript:void(0)" data-id="{{ $products->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
      @endif
-    
-<a  href="javascript:void(0)"  data-id="{{$products->id}}" onclick="deletePost(event.target)">Delete</a>
-    
+     @can('product-delete')
+<a href="javascript:void(0)"  data-id="{{$products->id}}" onclick="deletePost(event.target)" class="dropdown-item">Delete</a>
+    @endcan
 </div></td>
+@endcan
                
                 
               </tr>

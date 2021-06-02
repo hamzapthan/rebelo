@@ -27,4 +27,9 @@ class Order extends Model
       public function scopecountincome($query){
         return $query->where('status',1)->sum('grand_total');
       }
-}
+    
+      public function scopeorderCancel($query){
+        return $query->where('status',2)->get();
+      }
+
+    }

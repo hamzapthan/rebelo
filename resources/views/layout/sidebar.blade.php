@@ -181,6 +181,11 @@
           <li class="nav-item">
           <a href="{{ route('order.show.deliver') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Delivered Order</a>
          </li>
+          @endcan  
+          @can('order-cancel')
+          <li class="nav-item">
+          <a href="{{ route('order.show.cancel') }}" class="nav-link {{  request()->routeIs('email/read') ? 'active' : '' }}">Cancel Order</a>
+         </li>
           @endcan         
         </ul>
       </div>

@@ -67,8 +67,10 @@
 @else
 
 <div class="row">
+@can('user-create')
 <a href="{{ route('create.user')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New User</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -95,6 +97,7 @@
                
                 
                 @can('user-edit') 
+              
                 <td><div class="btn-group">
  <a href="{{ route('user.edit',$users->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   
@@ -103,9 +106,9 @@
   </button>
   
   <div class="dropdown-menu">
-   
+   @can('user-delete')
 <a class="dropdown-item" href="javascript:void(0)"  data-id="{{$users->id}}" onclick="deletePost(event.target)">Delete</a>
-    
+    @endcan
 </div></td>
         @endcan       
                

@@ -7,14 +7,14 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
-  </ol>
+      </ol>
 </nav>
 
 <div class="row">
+@can('category-create')
      <a href="{{ route('create.cat')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New Category</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -32,7 +32,10 @@
                 <th>Image</th>
                 <th>Products</th>
                 <th>Status</th>
+                @can('category-edit')
                 <th>Options</th>
+                @endcan
+              
               </tr>
             </thead>
             <tbody>
@@ -48,13 +51,13 @@
                         $cat_id = $categories->id;
                         $catPro = App\Models\Category::find($cat_id)->catproduct;
                            ?>
-                <td><a href="{{route('show.catPro',$cat_id) }}">Products</a><?php  echo count($catPro) ?></td>
+                <td><a href="{{route('show.catPro',$cat_id) }}">Products</a> <?php  echo count($catPro) ?></td>
                 @if($categories->status ==1 )
                 <td><span class="badge badge-success">On</span></td>
                 @else
                <td> <span class="badge badge-danger">Off</span> </td>
                 @endif
-  
+  @can('category-edit')
                 <td><div class="btn-group">
  <a href="{{ route('cat.edit',$categories->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   
@@ -64,14 +67,19 @@
   
   <div class="dropdown-menu">
   @if($categories->status ==1 )
+  @can('category-delete')
      <a href="javascript:void(0)" data-id="{{ $categories->id }}" onclick="statusProOff(event.target)" class="dropdown-item">Mark as 'Off'</a>
+    @endcan
      @else
+     @can('category-delete')
      <a href="javascript:void(0)" data-id="{{ $categories->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
+      @endcan
      @endif
-    
-<a class="dropdown-item" href="javascript:void(0)"  data-id="{{$categories->id}}" onclick="deletePost(event.target)">Delete</a>
-    
+     @can('category-delete')
+    <a class="dropdown-item" href="javascript:void(0)"  data-id="{{$categories->id}}" onclick="deletePost(event.target)">Delete</a>
+    @endcan
 </div></td>
+@endcan
                
                 
               </tr>

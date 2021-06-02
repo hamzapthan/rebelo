@@ -7,14 +7,15 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+   
   </ol>
 </nav>
 
 <div class="row">
+@can('subProduct-create')
      <a href="{{ route('create.subPro')}}">
-      <button type="button" class="btn btn-primary">Add New Sub Products</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Sub Products</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -34,7 +35,9 @@
                 <th>FullView</th>
                 <th>Images</th>
                 <th>Status</th>
+                @can('subProduct-edit')
                 <th>Options</th>
+                @endcan
               </tr>
             </thead>
             <tbody>
@@ -70,7 +73,7 @@
                 @else
                <td> <span class="badge badge-danger">Off</span> </td>
                 @endif
-  
+                @can('subProduct-edit')
                 <td><div class="btn-group">
  <a href="{{ route('subpro.edit',$subProducts->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   
@@ -84,10 +87,11 @@
      @else
      <a href="javascript:void(0)" data-id="{{ $subProducts->id }}" onclick="statusProOn(event.target)" class="dropdown-item">Mark as 'On'</a>
      @endif
-    
+     @can('subProduct-delete')
 <a class="dropdown-item" href="javascript:void(0)"  data-id="{{$subProducts->id}}" onclick="deleteSubPro(event.target)">Delete</a>
-    
+    @endcan
 </div></td>
+@endcan
                
                 
               </tr>

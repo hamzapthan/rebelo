@@ -7,14 +7,15 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+   
   </ol>
 </nav>
 
 <div class="row">
+@can('role-edit')
 <a href="{{ route('edit.role',$role->id)}}">
-      <button type="button" class="btn btn-primary">Edit Role</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Edit Role</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">

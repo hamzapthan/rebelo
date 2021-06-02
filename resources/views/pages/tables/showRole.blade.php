@@ -7,15 +7,15 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
+   
   </ol>
 </nav>
 
 <div class="row">
+@can('role-create')
 <a href="{{ route('create.role')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New Role</button></a>
-
+@endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -27,9 +27,12 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Permissions</th>
+                @can('role-edit')
                 <th>Edit</th>
+                @endcan
+                @can('role-delete')
                 <th>Delete</th>
-               
+               @endcan
               </tr>
             </thead>
             <tbody>
@@ -39,9 +42,12 @@
                 <td>{{ $i++   }}</td>
                 <td>{{  $roles->name }}</td>
                 <td><a href="{{ route('show.role.per',$roles->id)}}">Permissions</a></td>
+              @can('role-edit')
                 <td><a href="{{ route('edit.role',$roles->id) }}">Edit</a></td>
+                @endcan
+                @can('role-delete')
                 <td><a href=" {{ route('delete.role',$roles->id) }}">Delete</a></td>
-               
+              @endcan 
                
               </tr>
               @endforeach

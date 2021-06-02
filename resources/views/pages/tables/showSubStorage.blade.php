@@ -7,9 +7,7 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
-  </ol>
+     </ol>
 </nav>
 @if(isset($storagePrice))
 <div class="row">
@@ -31,7 +29,9 @@
                 <th>Prob3</th>
                 <th>Prob4</th>
                 <th>Prob5</th>
+                @can('storage-edit')
                 <th>Edit</th>
+                @endcan
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +46,9 @@
                 <td>{{  $storagePrices->prob3 }}</td>
                 <td>{{  $storagePrices->prob4 }}</td>
                 <td>{{  $storagePrices->prob5 }}</td>
+                @can('storage-edit')
                 <td> <a href="{{ route('price.edit',$storagePrices->id)   }}">Edit</a> </td>
+                @endcan
                 </tr>
               @endforeach
             </tbody>
@@ -102,14 +104,15 @@
 </div>
 
 @else
-<div class="row">
 
+<div class="row">
+@can('create-storage')
   <form action="{{ route('create.storage.id') }}" method="post"> 
     @csrf 
       <input type="hidden" value="{{ $id }}" name="id">
       <button type="submit" class="btn btn-primary">Add New Storage</button></a>
   </form>
-
+@endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -121,21 +124,27 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Show</th>
+                @can('storage-edit')
                 <th>Edit</th>
+                @endcan
+                @can('storage-delete')
                 <th>Delete</th>
-               
+               @endcan
               </tr>
             </thead>
             <tbody>
-            {{  $i=1 }}
+            <?php   $i=1; ?>
             @foreach($subStorage as $subStorages)
               <tr id="row_{{$subStorages->id}}">
                 <td>{{ $i++   }}</td>
                 <td>{{  $subStorages->storage }}</td>
                 <td><a href="{{ route('show.storage.single',$subStorages->id)}}">Show</a></td>
+               @can('storage-edit')
                 <td><a href="{{ route('price.edit',$subStorages->id) }}">Edit</a></td>
+                @endcan
+                @can('storage-delete')
                 <td><a  href="javascript:void(0)"  data-id="{{$subStorages->id}}" onclick="deletePost(event.target)">Delete</a></td>
-                
+                @endcan
 
                
               </tr>

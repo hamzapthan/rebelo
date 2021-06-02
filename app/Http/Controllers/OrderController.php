@@ -26,6 +26,8 @@ class OrderController extends Controller
     $orderAll = Order::delivered();
     return view('pages.tables.showOrder',compact('orderAll'));
     }
+   
+    
 
     /**
      * Show the form for creating a new resource.
@@ -61,6 +63,12 @@ class OrderController extends Controller
        return view('pages.tables.showOrderItems',compact('orderAlls','orderDetail'));
     }
 
+    // public function showCancelOrder($id)
+    // {
+    //     $orderAlls = Order::find($id);
+    //    $orderDetail = Order::find($id)->orderDetail;
+    //    return view('pages.tables.showOrderItems',compact('orderAlls','orderDetail'));
+    // }
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,5 +117,22 @@ class OrderController extends Controller
         
         
     }
+
+    public function orderCanceled()
+    {
+       $cancelOrder =  Order::orderCancel();
+       return view('pages.tables.showOrder',compact('cancelOrder'));    
+    }
+    public function statusOrderCancel($id)
+    {
+        $statusOrderDetail = Order::find($id)->orderDetail;
+       foreach($statusOrderDetail as $change){
+           $ids = $change->id;
+           $changes = OrderItem::where('id',$ids)->update(array('status'=>'2'));
+       }
+    $orderItem = Order::where('id',$id)->update(array('status'=>'2'));
+   
+     return redirect()->back();
+        }
 
 }
