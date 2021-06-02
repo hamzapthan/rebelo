@@ -10,8 +10,7 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Forms</a></li>
-   
+    
   </ol>
 </nav>
 @if(isset($id))
@@ -19,13 +18,13 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Storage Form</h4>
+        <h4 class="card-title">Add Storage Specification</h4>
          @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{route('insert.storage')}}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.storage') }}">
         @csrf
           <fieldset>
             <div class="form-group">
@@ -107,7 +106,7 @@
 
             <div class="form-group">
              
-              <input id="name" class="form-control" name="subpro_id" value="{{ $id }}" type="hidden">
+              <input id="name" class="form-control" name="subpro_id" value="{{ $id }}" type="text">
             </div>
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
@@ -122,13 +121,13 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Storage Form</h4>
+        <h4 class="card-title">Add Storage Specification</h4>
          @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{route('insert.storage')}}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.storage')}}">
         @csrf
           <fieldset>
             <div class="form-group">
@@ -162,50 +161,86 @@
             <div class="form-group">
               <label for="name">Prob1</label>
               <input id="name" class="form-control" name="prob1" type="number">
+              @if($errors->has('prob1'))
+              <div class="alert alert-danger">{{ $errors->first('prob1') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob2</label>
               <input id="name" class="form-control" name="prob2" type="number">
+              @if($errors->has('prob2'))
+              <div class="alert alert-danger">{{ $errors->first('prob2') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob3</label>
               <input id="name" class="form-control" name="prob3" type="number">
+              @if($errors->has('prob3'))
+              <div class="alert alert-danger">{{ $errors->first('prob3') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob4</label>
               <input id="name" class="form-control" name="prob4" type="number">
+              @if($errors->has('prob4'))
+              <div class="alert alert-danger">{{ $errors->first('prob4') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob5</label>
               <input id="name" class="form-control" name="prob5" type="number">
+              @if($errors->has('prob5'))
+              <div class="alert alert-danger">{{ $errors->first('prob5') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob6</label>
               <input id="name" class="form-control" name="prob6" type="number">
+              @if($errors->has('prob6'))
+              <div class="alert alert-danger">{{ $errors->first('prob6') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob7</label>
               <input id="name" class="form-control" name="prob7" type="number">
+              @if($errors->has('prob'))
+              <div class="alert alert-danger">{{ $errors->first('prob') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob8</label>
               <input id="name" class="form-control" name="prob8" type="number">
+              @if($errors->has('prob8'))
+              <div class="alert alert-danger">{{ $errors->first('prob8') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob9</label>
               <input id="name" class="form-control" name="prob9" type="number">
+              @if($errors->has('prob9'))
+              <div class="alert alert-danger">{{ $errors->first('prob9') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob10</label>
               <input id="name" class="form-control" name="prob10" type="number">
+              @if($errors->has('prob10'))
+              <div class="alert alert-danger">{{ $errors->first('prob10') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob11</label>
               <input id="name" class="form-control" name="prob11" type="number">
+              @if($errors->has('prob11'))
+              <div class="alert alert-danger">{{ $errors->first('prob11') }}</div>
+              @endif
             </div>
             <div class="form-group">
               <label for="name">Prob12</label>
               <input id="name" class="form-control" name="prob12" type="number">
+              @if($errors->has('prob12'))
+              <div class="alert alert-danger">{{ $errors->first('prob12') }}</div>
+              @endif
             </div>
 
   

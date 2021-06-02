@@ -200,7 +200,7 @@ return view('pages.forms.subProImage',compact('subProImage'));
    public function subProStorage($id){
        
     $subStorage = SubProduct::find($id)->subprooductstorage;
-    
+  
    return view('pages.tables.showSubStorage',compact('subStorage','id'));
      
    }

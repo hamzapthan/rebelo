@@ -19,7 +19,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Validation</h4>
+        <h4 class="card-title">Edit Admin User</h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -102,7 +102,7 @@
             <div class="form-group">
               <label for="email">Email</label>
               <input id="email" class="form-control" name="email" type="email">
-              @if($errors->has('eamil'))
+              @if($errors->has('email'))
               <div class="alert alert-danger">{{ $errors->first('email') }}</div>
               @endif
             </div>

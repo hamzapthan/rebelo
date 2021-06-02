@@ -45,12 +45,26 @@ class StorageController extends Controller
     {
        
          $subpro_id = $request->subpro_id;
+       
         $validate = $request->validate([
            'storage' => 'required',
            'subpro_id' => 'required',
            'new' => 'required',
            'working' => 'required',
            'dead' => 'required',
+           'prob1' => 'required',
+           'prob2' => 'required',
+           'prob3' => 'required',
+           'prob4' => 'required',
+           'prob5' => 'required',
+           'prob6' => 'required',
+           'prob7' => 'required',
+           'prob8' => 'required',
+           'prob9' => 'required',
+           'prob10' => 'required',
+           'prob11' => 'required',
+           'prob12' => 'required',
+           
             ]);
             if(!$validate){
               return Redirect::back()->withErrors($validate);
@@ -81,8 +95,8 @@ class StorageController extends Controller
         $proPrice->status = 1;
 
         $insertStorage->price()->save($proPrice);
-        
-        return redirect()->route('subpro.storage',$subpro_id);
+       
+        return redirect()->route('subpro.storage',['id'=>$subpro_id]);
         //return redirect()->back()->with('message','Data inserted Successfully');
             }
     }
@@ -136,6 +150,7 @@ class StorageController extends Controller
     }
 
     public function createid(Request $request){
+        
          $id = $request->id;
          return view('pages.forms.addStorage',compact('id'));
     }

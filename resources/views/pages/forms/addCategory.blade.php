@@ -10,7 +10,6 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Forms</a></li>
    
   </ol>
 </nav>
@@ -77,7 +76,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Form Validation</h4>
+        <h4 class="card-title">Add Category</h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}

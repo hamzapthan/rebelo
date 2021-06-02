@@ -106,7 +106,7 @@
 @else
 
 <div class="row">
-@can('create-storage')
+@can('storage-create')
   <form action="{{ route('create.storage.id') }}" method="post"> 
     @csrf 
       <input type="hidden" value="{{ $id }}" name="id">
@@ -139,9 +139,16 @@
                 <td>{{ $i++   }}</td>
                 <td>{{  $subStorages->storage }}</td>
                 <td><a href="{{ route('show.storage.single',$subStorages->id)}}">Show</a></td>
-               @can('storage-edit')
-                <td><a href="{{ route('price.edit',$subStorages->id) }}">Edit</a></td>
+               
+                <?php  $priceId = $subStorages->id;
+            $price =   App\Models\Storage::find($priceId)->price;
+         foreach($price as $prices){
+            ?>
+                @can('storage-edit')
+                <td><a href="{{ route('price.edit',$prices->id) }}">Edit</a></td>
                 @endcan
+               
+               <?php }?>
                 @can('storage-delete')
                 <td><a  href="javascript:void(0)"  data-id="{{$subStorages->id}}" onclick="deletePost(event.target)">Delete</a></td>
                 @endcan

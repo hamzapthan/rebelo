@@ -25,9 +25,9 @@
               <tr>
                 <th>Name</th>
                 <th>email</th>
-                <th>Position</th>
-               
                 <th>Options</th>
+               
+                <th>Position</th>
               
               </tr>
             </thead>
@@ -83,9 +83,10 @@
               <tr>
                 <th>Name</th>
                 <th>email</th>
-                <th>Position</th>
-               @can('user-edit')
                 <th>Options</th>
+               @can('user-edit')
+                
+                <th>Position</th>
               @endcan
               
               </tr>

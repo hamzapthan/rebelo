@@ -78,6 +78,7 @@ class ProPriceController extends Controller
      */
     public function edit($id)
     {
+       
         $storagePrice = ProPrice::find($id);
 
     return view('pages.forms.editPrice',compact('storagePrice')); 
