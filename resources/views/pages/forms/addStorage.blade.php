@@ -106,7 +106,7 @@
 
             <div class="form-group">
              
-              <input id="name" class="form-control" name="subpro_id" value="{{ $id }}" type="text">
+              <input id="name" class="form-control" name="subpro_id" value="{{ $id }}" type="hidden">
             </div>
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
