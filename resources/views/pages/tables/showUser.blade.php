@@ -11,8 +11,10 @@
 </nav>
 @if(isset($frontendUser))
 <div class="row">
+@can('user-create')
         <a href="{{ route('create.user')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New User</button></a>
+      @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -26,7 +28,7 @@
                 <th>Position</th>
                
                 <th>Options</th>
-                <th>Roles</th>
+              
               </tr>
             </thead>
             <tbody>
