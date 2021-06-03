@@ -223,7 +223,7 @@ Route::get('/cancelOrders',[OrderController::class,'orderCanceled'])->name('orde
 Route::get('/cancelDetail/{id}',[OrderController::class,'showCancelOrder'])->name('order.show.single');  // show all pro
 Route::get('/ordercancel/{id}',[OrderController::class,'statusOrderCancel'])->name('order.status.cancel');  // show all pro
 
-Route::get('/orderDetail/{id}',[OrderController::class,'show'])->name('order.show.single');  // show all pro
+Route::get('/orderDetail/{id}',[OrderController::class,'show'])->name('order.show.singles');  // show all pro
 Route::get('/orderdeliver/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');  // show all pro
 
 Route::get('/orderitemdeliver/{id}',[OrderController::class,'deliver'])->name('order.deliver.item');  // show all pro

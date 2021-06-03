@@ -38,7 +38,7 @@
                 <td>{{ $orderAlls->first_name}}  {{ $orderAlls->last_name}}</td>
                 <td>{{ $orderAlls->grand_total}}</td>
                 <td>{{ $orderAlls->created_at}}</td>
-                <td><a href="{{ route('order.show.single',$orderAlls->id)}}">View</a> </td>
+                <td><a href="{{ route('order.show.singles',$orderAlls->id)}}">View</a> </td>
             
               </tr>
               @endforeach  
@@ -64,7 +64,11 @@
                 <th>Total</th>
                 <th>Date</th>
                 <th>Order Details</th>
-                <th>Cancel</th>
+                @foreach($orderAll as $orderAlls)
+                @if($orderAlls->status == 2 )
+                <th>Cancel Order</th>
+                @endif
+                @endforeach
               </tr>
             </thead>
             <tbody>
@@ -78,8 +82,10 @@
                 <td>{{ $orderAlls->first_name}}  {{ $orderAlls->last_name}}</td>
                 <td>{{ $orderAlls->grand_total}}</td>
                 <td>{{ $orderAlls->created_at}}</td>
-                <td><a href="{{ route('order.show.single',$orderAlls->id)}}">View</a> </td>
+                <td><a href="{{ route('order.show.singles',$orderAlls->id)}}">View</a> </td>
+           @if($orderAlls->status ==2 )
             <td> <a href="{{ route('order.status.cancel',$orderAlls->id)}}"> <button class="btn btn-danger">Cancel</button>  </a>
+           @endif
                </td>
               </tr>
               @endforeach  

@@ -89,8 +89,8 @@
             @foreach($orderDetail as $orderDetails)
               <tr>
               <?php    $id = $orderDetails->id;  
-               $rowCount = App\Models\OrderItem::find($id)->count();
-               $statusSum = App\Models\OrderItem::find($id)->sum('status');
+            // //  echo  $rowCount = App\Models\OrderItem::find($id)->count();  die;
+            //  echo   $statusSum = App\Models\OrderItem::find($id)->sum('status');
              
 
                $product = App\Models\OrderItem::find($id)->backtosubproduct;
@@ -118,11 +118,7 @@
               @endforeach
              
              
-              <?php  if($rowCount==$statusSum ){
-                    $ids = $orderAlls->id;   
-                    $changeStatus = App\Models\Order::where('id',$ids)->update(array('status'=>'1'));
-                      
-          }  ?>
+             
             </tbody>
           </table>
         </div>

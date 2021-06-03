@@ -21,6 +21,7 @@ class OrderController extends Controller
     
     return view('pages.tables.showOrder',compact('orderAll'));
     }
+    
     public function orderDelivered()
     {
     $orderAll = Order::delivered();
@@ -60,7 +61,13 @@ class OrderController extends Controller
     {
         $orderAlls = Order::find($id);
        $orderDetail = Order::find($id)->orderDetail;
-       return view('pages.tables.showOrderItems',compact('orderAlls','orderDetail'));
+       $ordercount = Order::find($id)->orderDetail()->count();
+       $statusSum = Order::find($id)->orderDetail()->sum('status');
+       if($ordercount == $statusSum){
+        $changeStatus = Order::where('id',$id)->update(array('status'=>'1'));
+        
+       }
+       return view('pages.tables.showOrderItems',compact('orderAlls','orderDetail','ordercount'));
     }
 
     // public function showCancelOrder($id)
@@ -121,8 +128,10 @@ class OrderController extends Controller
     public function orderCanceled()
     {
        $cancelOrder =  Order::orderCancel();
+       
        return view('pages.tables.showOrder',compact('cancelOrder'));    
     }
+
     public function statusOrderCancel($id)
     {
         $statusOrderDetail = Order::find($id)->orderDetail;
@@ -130,7 +139,7 @@ class OrderController extends Controller
            $ids = $change->id;
            $changes = OrderItem::where('id',$ids)->update(array('status'=>'2'));
        }
-    $orderItem = Order::where('id',$id)->update(array('status'=>'2'));
+          $orderItem = Order::where('id',$id)->update(array('status'=>'2'));
    
      return redirect()->back();
         }

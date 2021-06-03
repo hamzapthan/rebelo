@@ -12,6 +12,7 @@ class Order extends Model
     public function orderDetail(){
         return $this->hasMany(OrderItem::class,'order_id','id');
       }
+     
       public function scopependings($query){
         return $query->where('status',0)->orderBy('created_at','Desc')->get();
       }
