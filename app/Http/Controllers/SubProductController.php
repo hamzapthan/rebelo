@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\Product;
 use Auth;
 use File;
+
+use Illuminate\Support\Facades\Validator;
 class SubProductController extends Controller
 {
     /**
@@ -45,19 +47,21 @@ class SubProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
+        
         
         $validated = $request->validate([
             'subName' => 'required',
             'subBrnad' => 'required',
             'subColour' => 'required',
-            'subImage' => 'required|subImage|mimes:jpeg,png,jpg|max:2048',
+         'subImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'subDetail' => 'required',
             'subMetaTitle' => 'required',
             'subMetaDesc' => 'required',
             'subMetaKeyword' => 'required',
             
         ]);
+        
          if(!$validated){
             return Redirect::back()->withErrors($validated);
 
