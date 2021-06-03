@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'catName' => 'required|unique:categories|max:25',
             'catDetail' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
          if(!$validated){
             return Redirect::back()->withErrors($validated);
@@ -113,7 +113,7 @@ class CategoryController extends Controller
         $validated = $request->validate([
             'catName' => 'required',
             'catDetail' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
          if(!$validated){
             return Redirect::back()->withErrors($validated);

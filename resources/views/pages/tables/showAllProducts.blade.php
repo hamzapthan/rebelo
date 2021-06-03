@@ -116,13 +116,18 @@
   </div>
 </div>
 @elseif(isset($subProSingle,$proName))
-<div class="row">
-   
-  <div class="col-md-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
+@can('subProduct-edit')
       <a href="{{ route('subpro.edit',$subProSingle->id)}}">
-      <button type="button" class="btn btn-primary ml-3 mb3">Edit</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Edit</button></a>
+      @endcan  
+<div class="row">
+
+  <div class="col-md-12 grid-margin stretch-card">
+ 
+    <div class="card">
+  
+      <div class="card-body">
+      
        <div>
         <h6 class="card-title">Product Against {{$proName}} </h6>
         </div>

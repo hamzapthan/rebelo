@@ -51,9 +51,8 @@ class SubProductController extends Controller
             'subName' => 'required',
             'subBrnad' => 'required',
             'subColour' => 'required',
-            'subImage' => 'required',
+            'subImage' => 'required|subImage|mimes:jpeg,png,jpg|max:2048',
             'subDetail' => 'required',
-            
             'subMetaTitle' => 'required',
             'subMetaDesc' => 'required',
             'subMetaKeyword' => 'required',

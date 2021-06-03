@@ -7,8 +7,6 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
   </ol>
 </nav>
 
@@ -24,7 +22,9 @@
         <div class="table-responsive">
         
                   <img src="{{asset($images)}}" alt="image" style="border-radius: 0px; width: 175px; height: 170px;" >
+                 @can('subProduct-delete')
                   <button data-image="{{ $images }}" data-id="{{ $subProImage->id }}" onclick="deleteSubProImage(event.target)" >delete</button>
+             @endcan
               </div>
               @endforeach 
       </div>
