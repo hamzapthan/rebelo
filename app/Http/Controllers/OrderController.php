@@ -62,11 +62,10 @@ class OrderController extends Controller
         $orderAlls = Order::find($id);
        $orderDetail = Order::find($id)->orderDetail;
        $ordercount = Order::find($id)->orderDetail()->count();
-       $statusSum = Order::find($id)->orderDetail()->sum('status');
-       if($ordercount == $statusSum){
-        $changeStatus = Order::where('id',$id)->update(array('status'=>'1'));
-        
-       }
+     
+      
+      
+      
        return view('pages.tables.showOrderItems',compact('orderAlls','orderDetail','ordercount'));
     }
 
@@ -112,9 +111,9 @@ class OrderController extends Controller
 
     public function deliver($id)
     {
+       
         $orderItem = OrderItem::where('id',$id)->update(array('status'=>'1'));
-     return redirect()->back();
-        
+     return response()->json(['data'=>'success']);        
         
     }
     public function orderDeliver($id)

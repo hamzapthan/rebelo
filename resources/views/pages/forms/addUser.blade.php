@@ -25,7 +25,7 @@
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.user') }}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('admin.insert.user') }}">
         @csrf
           <fieldset>
             <div class="form-group">
@@ -37,8 +37,8 @@
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input id="email" class="form-control" name="email" type="email" value="{{ $userEdit->email }}">
-              @if($errors->has('eamil'))
+              <input id="name" class="form-control" name="email" type="email" value="{{ $userEdit->email }}">
+              @if($errors->has('email'))
               <div class="alert alert-danger">{{ $errors->first('email') }}</div>
               @endif
             </div>
@@ -89,7 +89,7 @@
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.user') }}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('admin.insert.user') }}">
         @csrf
           <fieldset>
             <div class="form-group">

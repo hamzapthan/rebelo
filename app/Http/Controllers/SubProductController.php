@@ -18,10 +18,10 @@ class SubProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     function __construct(){
-        $this->middleware('permission:subProduct-list|subProduct-create|subProduct-edit|subProduct-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:subProduct-create', ['only' => ['create','store']]);
-        $this->middleware('permission:subProduct-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:subProduct-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
      }
     public function index()
     {
@@ -77,6 +77,7 @@ class SubProductController extends Controller
             $fileNames[] = $subproImage; 
         }
           $images = json_encode($fileNames);
+         
           $user_id =   Auth::user()->id;
           $pro_id = $request->pro_id;
           $addCategory = SubProduct::updateOrCreate(['id'=>$request->id],[

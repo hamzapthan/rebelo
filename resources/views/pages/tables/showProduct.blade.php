@@ -58,12 +58,15 @@
                          $catPro = App\Models\Product::find($pro_id)->proproduct;
                           ?>
                 <td><a href="{{ route('pro.subpro',$products->id)}}">Sub Products</a>(<?php  echo count($catPro);  ?>)</td>
-
+                <td>
+                <div id="status_div_{{$products->id}}">
                  @if($products->status ==1 )
-                <td><span class="badge badge-success">On</span></td>
+                <span class="badge badge-success">On</span>
                 @else
-               <td> <span class="badge badge-danger">Off</span> </td>
+                <span class="badge badge-danger">Off</span> 
                 @endif
+                </div>
+                </td>
                 @can('product-edit')
                 <td>
                
@@ -99,8 +102,8 @@
     success: function(response) {
         if(response) {
           alert("data is modifiertwetweed");
-          window.location.reload();
-   
+          var sts = "status_div_"+pro_id; 
+           $('#'+sts).html("<span class='badge badge-danger'>Off</span>");
           }
        }
      });
@@ -116,7 +119,7 @@
     success: function(response) {
         if(response) {
           alert("data is modifiertwetweed");
-          window.location.reload();
+          // window.location.reload();
    
           }
        }
@@ -138,8 +141,8 @@ $.ajax({
   },
   success:function(response){
      alert('Data Is deleted');
-     window.location.reload();
-   
+    //  window.location.reload();
+    
 
    }
 });

@@ -43,7 +43,7 @@
                 <td>{{ $orderAlls->phone_number}}</td>
                 <td>{{ $orderAlls->notes}}</td>
             @if($orderAlls->status == 1)
-             <td><span class="badge badge-success">Delivered</span></td>
+             <td><span class="badge badge-primary">Delivered</span></td>
                 @elseif($orderAlls->status == 2)
                 <td><span class="badge badge-danger">Canacel</span></td>
                 @else
@@ -56,6 +56,16 @@
                
                @endif 
                </td> -->
+               <?php 
+             $id = $orderAlls->id;
+             $ordercount = App\Models\Order::find($id)->orderDetail()->count();
+             $statusSum = App\Models\Order::find($id)->orderDetail()->sum('status');
+             if($ordercount == $statusSum){
+              $changeStatus = Order::where('id',$id)->update(array('status'=>'1'));
+             }
+             
+             ?>
+             
               </tr>
             </tbody>
           </table>
@@ -89,10 +99,7 @@
             @foreach($orderDetail as $orderDetails)
               <tr>
               <?php    $id = $orderDetails->id;  
-            // //  echo  $rowCount = App\Models\OrderItem::find($id)->count();  die;
-            //  echo   $statusSum = App\Models\OrderItem::find($id)->sum('status');
-             
-
+          
                $product = App\Models\OrderItem::find($id)->backtosubproduct;
                
                 ?>
@@ -101,24 +108,24 @@
               <td>{{ $orderDetails->quantity}}</td>
                 <td>{{ $orderDetails->price}} {{$orderDetails->last_name }}  </td>
                <td>
+               <div id="status_div_{{ $orderDetails->id }}">
              @if($orderDetails->status == 0)
-                <a href="{{ route('order.deliver.item',$orderDetails->id)}}"> <button class="btn btn-primary">Pending</button>  </a>
+                   <button class="btn btn-secondary" data-ids="{{ $orderDetails->id }}" onclick="statusProOn(event.target)">Pending</button>
+    
                 @elseif($orderDetails->status == 2)
                 <span class="badge badge-danger">Cancel</span>
                  @else
-                 <button class="btn btn-primary">Deliver</button>
+                 <span class="badge badge-primary">Delivered</span>
                    
                @endif 
                 
-                
+               </div>
                 </td>
              
              
               </tr>
               @endforeach
-             
-             
-             
+            
             </tbody>
           </table>
         </div>
@@ -135,4 +142,25 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
+  <script>
+  
+  function statusProOn(event){
+    
+    var order_id  = $(event).data("ids");
+    let _url = `../orderitemdeliver/${order_id}`;
+     $.ajax({
+       url: _url,
+       type: "Get",
+       success: function(response) {
+        if(response) {
+          alert("data is modified");
+          var sts = "status_div_"+order_id; 
+           $('#'+sts).html("<span class='badge badge-primary'>Delivered</span>");
+
+          }
+       }
+     });
+  }
+  
+  </script>
 @endpush

@@ -84,6 +84,9 @@ class User extends Authenticatable
     public function scopeshowFrontUser($query){
         return $query->where('role',0)->get();
     }
+    public function scopeshowAdminUser($query){
+        return $query->where('role',1)->get();
+    }
 
     public function scopecountFrontendCustomer($query){
         return $query->where('role',0)->count();

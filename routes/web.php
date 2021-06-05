@@ -10,6 +10,10 @@ use App\Http\Controllers\StorageController;
 use App\Http\Controllers\ProPriceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SellingProController;
+use App\Http\Controllers\MainController;
+
+use App\Http\Controllers\Admin\UsersController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -134,7 +138,12 @@ Route::get('admin/table', function() {
 // Route::any('/{page?}',function(){
 //     return View::make('pages.error.404');
 // })->where('page','.*');
+
+
 Route::group(['middleware' => ['auth']], function () { 
+    Route::group(['prefix' => 'admin'], function(){
+
+    Route::group(['prefix' => 'category'], function(){
 Route::get('/createCat',[CategoryController::class,'create'])->name('create.cat');  // create page show
 Route::post('/insertCat',[CategoryController::class,'store'])->name('insert.cat');  // Insert data
 Route::get('/showCat',[CategoryController::class,'index'])->name('show.cat.all');  // show all category
@@ -146,9 +155,11 @@ Route::Delete('/deleteCat/{cat_id}',[CategoryController::class,'destroy'])->name
 Route::get('/showCatPro/{cat_id}',[CategoryController::class,'showCatPro'])->name('show.catPro');  // show ssingle product
 
 Route::get('/showCat/{id}',[CategoryController::class,'show'])->name('show.cat');  // show ssingle product
-
+    });
 
 //  Routes for Product
+Route::group(['prefix' => 'subCategory'], function(){
+
 Route::get('/createPro',[ProductController::class,'create'])->name('create.pro');  // create page show
 Route::post('/insertPro',[ProductController::class,'store'])->name('insert.pro');  // Insert data
 Route::get('/showPro',[ProductController::class,'index'])->name('show.pro.all');  // show all pro
@@ -161,8 +172,10 @@ Route::get('/showSubPro/{pro_id}',[ProductController::class,'showProSubProducts'
 
 
 Route::get('/showPro/{id}',[ProductController::class,'show'])->name('show.pro');  // show ssingle pro
-
+    });
 //  Routes for SubProduct
+Route::group(['prefix' => 'products'], function(){
+
 Route::get('/createSubPro',[SubProductController::class,'create'])->name('create.subPro');  // create page show
 Route::post('/insertSubPro',[SubProductController::class,'store'])->name('insert.subPro');  // Insert data
 Route::get('/showSubProall',[SubProductController::class,'index'])->name('show.subPro.all');  // show all pro
@@ -176,16 +189,21 @@ Route::get('/showSubPros/{id}',[SubProductController::class,'show'])->name('show
 Route::get('/subProStorage/{id}',[SubProductController::class,'subProStorage'])->name('subpro.storage');  // show ssingle pro
 
 Route::post('/updateSubPro/{id}',[SubProductController::class,'update'])->name('update.subPro');  // show ssingle pro
+});
 
 //Route for Users
+Route::group(['prefix' => 'users'], function(){
 Route::get('/createUser',[UserController::class,'create'])->name('create.user');  // show all pro
 Route::post('/insertUser',[UserController::class,'store'])->name('insert.user');  // Insert data
 Route::get('/showAdminUser',[UserController::class,'index'])->name('show.user');  // show all pro
 Route::get('/showFrontUser',[UserController::class,'frontUser'])->name('show.front.user');  // show all pro
 Route::Delete('/deleteUser/{id}',[UserController::class,'destroy'])->name('user.destroy');  // show all pro
 Route::get('/user/{id}/edit',[UserController::class,'edit'])->name('user.edit');  // show ssingle product
+});
 
 //routes for role
+Route::group(['prefix' => 'roles'], function(){
+
 Route::get('/createRole',[RoleController::class,'create'])->name('create.role');  // show all pro
 Route::post('/insertRole',[RoleController::class,'store'])->name('store.role');  // show all pro
 Route::get('/showAllRole',[RoleController::class,'index'])->name('show.role');  // show all pro
@@ -193,10 +211,12 @@ Route::get('/showRolePer/{id}',[RoleController::class,'showRolePermission'])->na
 Route::get('/role/{id}/edit',[RoleController::class,'edit'])->name('edit.role');  // show all pro
 Route::post('/roleUpdate/{id}',[RoleController::class,'update'])->name('update.role');  // show all pro
 Route::get('/deleteRole/{id}',[RoleController::class,'destroy'])->name('delete.role');  // show all pro
-
+});
 
 
 //Routes for storage
+Route::group(['prefix' => 'storages'], function(){
+
 Route::get('/createStorage',[StorageController::class,'create'])->name('create.storage');  // create page show
 Route::post('/create',[StorageController::class,'createid'])->name('create.storage.id');  // create page show
 
@@ -208,14 +228,17 @@ Route::post('/updateStorage/{id}',[StorageController::class,'update'])->name('up
 
 Route::get('/showStorage',[StorageController::class,'index'])->name('show.storage');  // show all pro
 Route::get('/storage/{id}/edit',[StorageController::class,'edit'])->name('edit.storage');  // show all pro
-
+});
 //Price against Products
+Route::group(['prefix' => 'prices'], function(){
+
 Route::get('/price/{id}/edit',[ProPriceController::class,'edit'])->name('price.edit');  // show all pro
 Route::post('/updateProPrice/{id}',[ProPriceController::class,'update'])->name('update.price');  // Insert data
-
+});
 //Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
 
 //routes for orderd
+Route::group(['prefix' => 'orders'], function(){
 
 Route::get('/pendingOrders',[OrderController::class,'index'])->name('order.show.all');  // show all pro
 Route::get('/deliveredOrders',[OrderController::class,'orderDelivered'])->name('order.show.deliver');  // show all pro
@@ -226,15 +249,39 @@ Route::get('/ordercancel/{id}',[OrderController::class,'statusOrderCancel'])->na
 Route::get('/orderDetail/{id}',[OrderController::class,'show'])->name('order.show.singles');  // show all pro
 Route::get('/orderdeliver/{id}',[OrderController::class,'orderDeliver'])->name('order.deliver');  // show all pro
 
-Route::get('/orderitemdeliver/{id}',[OrderController::class,'deliver'])->name('order.deliver.item');  // show all pro
-
+Route::get('orderitemdeliver/{id}',[OrderController::class,'deliver'])->name('order.deliver.item');  // show all pro
+});
 // Routes for products come to sell
+Route::group(['prefix' => 'sell'], function(){
+
 Route::get('/sellingPro',[SellingProController::class,'index'])->name('sell.pro');  // show all pro
 Route::get('/sellingView/{id}',[SellingProController::class,'show'])->name('sell.pro.view');  // show all pro
-
-
+});
+    });
 });
 
 Auth::routes();
 Route::get('admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard')->middleware('auth');
+
+
+
+
+Route::get('students', [MainController::class, 'index']);
+Route::get('students/list', [MainController::class, 'getStudents'])->name('students.list');
+
+
+Route::resource('sample', 'App\Http\Controllers\MainController');
+Route::post('sample/update', 'App\Http\Controllers\MainController@update')->name('sample.update');
+Route::get('sample/destroy/{id}', 'App\Http\Controllers\MainController@destroy');
+
+
+
+/////////////////////////////////////////////////////////////////////
+
+Route::get('/adminUser', [UsersController::class, 'index'])->name('admin.user.index');
+Route::get('/delete/user/{user_id}',[UsersController::class, 'destroy'])->name('admin.user.delete');
+Route::get('/user/edit/{id}',[UsersController::class,'edit'])->name('admin.user.edit');  // show ssingle product
+Route::post('/insertUsers',[UsersController::class,'store'])->name('admin.insert.user');  // Insert data
+Route::get('/showAdminUsers',[UsersController::class,'adminUser'])->name('admin.show.user');  // show all pro
+Route::get('/showFrontUsers',[UsersController::class,'frontUser'])->name('admin.show.front.user');  // show all pro
 

@@ -95,9 +95,9 @@
       type: "Get",
     success: function(response) {
         if(response) {
-          alert("data is modifiertwetweed");
+          alert("data is modified");
           $("#row_"+cat_id).remove();
-          window.location.reload();
+         
           }
        }
      });
@@ -111,7 +111,7 @@
       type: "Get",
     success: function(response) {
         if(response) {
-          alert("data is modifiertwetweed");
+          alert("data is modified");
           window.location.reload();
    
           }
