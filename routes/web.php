@@ -1,18 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\SubProductController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\StorageController;
-use App\Http\Controllers\ProPriceController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\SellingProController;
-use App\Http\Controllers\MainController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SubProductController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\StorageController;
+use App\Http\Controllers\Admin\ProPriceController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\SellingProController;
+use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\GeneralSettingController;
 
-use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\UsersController;
+
+
 
 
 /*
@@ -30,6 +34,7 @@ use App\Http\Controllers\Admin\UsersController;
 Route::get('/', function () {
     return view('dashboard');
 });
+
 
 Route::group(['prefix' => 'email'], function(){
     Route::get('inbox', function () { return view('pages.email.inbox'); });
@@ -256,12 +261,26 @@ Route::group(['prefix' => 'sell'], function(){
 
 Route::get('/sellingPro',[SellingProController::class,'index'])->name('sell.pro');  // show all pro
 Route::get('/sellingView/{id}',[SellingProController::class,'show'])->name('sell.pro.view');  // show all pro
+
+Route::get('/sellingPro',[SellingProController::class,'index'])->name('sell.pro');  // show all pro
+Route::get('/sellingView/{id}',[SellingProController::class,'show'])->name('sell.pro.view');  // show all pro
+
 });
-    });
+
+Route::group(['prefix' => 'slider'], function(){
+
+Route::get('/plugin',[GeneralSettingController::class,'index'])->name('general.index');  // show all pro
+Route::post('/plugin',[GeneralSettingController::class,'sliderStore'])->name('slider.store');  // show all pro
+    
+});
+
+
+
+});
 });
 
 Auth::routes();
-Route::get('admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard')->middleware('auth');
+Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin.dashboard')->middleware('auth');
 
 
 
@@ -270,9 +289,9 @@ Route::get('students', [MainController::class, 'index']);
 Route::get('students/list', [MainController::class, 'getStudents'])->name('students.list');
 
 
-Route::resource('sample', 'App\Http\Controllers\MainController');
-Route::post('sample/update', 'App\Http\Controllers\MainController@update')->name('sample.update');
-Route::get('sample/destroy/{id}', 'App\Http\Controllers\MainController@destroy');
+Route::resource('sample', 'App\Http\Controllers\Admin\MainController');
+Route::post('sample/update', 'App\Http\Controllers\Admin\MainController@update')->name('sample.update');
+Route::get('sample/destroy/{id}', 'App\Http\Controllers\Admin\MainController@destroy');
 
 
 
@@ -285,3 +304,4 @@ Route::post('/insertUsers',[UsersController::class,'store'])->name('admin.insert
 Route::get('/showAdminUsers',[UsersController::class,'adminUser'])->name('admin.show.user');  // show all pro
 Route::get('/showFrontUsers',[UsersController::class,'frontUser'])->name('admin.show.front.user');  // show all pro
 
+Route::get('/hamza',[UsersController::class,'hamza'])->name('show.hamza');  // show all pro

@@ -25,6 +25,7 @@
        <th>First Name</th>
                 <th >Last Name</th>
                 <th >Action</th>
+                <th >Edit</th>
       </tr>
      </thead>
     </table>
@@ -110,6 +111,11 @@ $(document).ready(function(){
    {
     data: 'action',
     name: 'action',
+    orderable: false
+   },
+   {
+    data: 'edit',
+    name: 'edit',
     orderable: false
    }
   ]

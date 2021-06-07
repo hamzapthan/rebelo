@@ -26,7 +26,8 @@
       <li class="nav-item">
       
         <a class="nav-link" data-toggle="collapse" href="#users" role="button" aria-expanded="" aria-controls="user">
-        <i data-feather="users"></i>
+        <i  class="link-icon" data-feather="user"></i>
+       
           <span class="link-title">User</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
@@ -57,7 +58,7 @@
       <li class="nav-item">
       
         <a class="nav-link" data-toggle="collapse" href="#roles" role="button" aria-expanded="" aria-controls="roles">
-          <i class="link-icon" data-feather="mail"></i>
+        <i class="link-icon" data-feather="users"></i>
           <span class="link-title">Roles</span>
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
@@ -81,7 +82,8 @@
       @can('category-list')
       <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#Category" role="button" aria-expanded=""   aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+        <!-- <i class="link-icon" data-feather="mail"></i> -->
+        <i class="link-icon" data-feather="list"></i>
         <span class="link-title">Category</span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>
@@ -104,7 +106,7 @@
 @can('subCat-list')
      <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#subCategory" role="button" aria-expanded="" aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+      <i class="link-icon" data-feather="command"></i>
         <span class="link-title">Sub Category</span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>
@@ -129,7 +131,7 @@
      @can('product-list')
      <li class="nav-item ">
       <a class="nav-link" data-toggle="collapse" href="#SubProducts" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+        <i class="link-icon" data-feather="box"></i>
         <span class="link-title">Products</span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>
@@ -150,7 +152,7 @@
      </li>
      @endcan
 
-     @can('storage-create')
+     <!-- @can('storage-create')
      <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#Storage" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
         <i class="link-icon" data-feather="mail"></i>
@@ -167,11 +169,11 @@
          </ul>
       </div>
      </li>
-     @endcan
+     @endcan -->
    @can('order-list')
     <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Orders" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+      <i class="link-icon" data-feather="shopping-cart"></i>
         <span class="link-title">Orders</span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>
@@ -199,7 +201,7 @@
      @can('payment-list')
      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#Payments" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+      <i class="link-icon" data-feather="dollar-sign"></i>
         <span class="link-title">Payments</span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>
@@ -223,7 +225,7 @@
      @can('sellingPro-list')
      <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
       <a class="nav-link" data-toggle="collapse" href="#SellingProducts" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
-        <i class="link-icon" data-feather="mail"></i>
+        <i class="link-icon" data-feather="zap"></i>
         <span class="link-title">Selling Products</span></span>
         <i class="link-arrow" data-feather="chevron-down"></i>
       </a>

@@ -23,10 +23,12 @@
         <thead>
               <tr>
                  <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-               <th>Options</th>
-               <th>Edit</th>
+               
+                <th>Brand</th>
+               <th>Category</th>
+               <th>Product</th>
+               <th>Status</th>
+               <th>Option</th>
               </tr>
             </thead>
             <tbody>
@@ -72,22 +74,17 @@ $(document).ready(function(){
   processing: true,
   serverSide: true,
   ajax: {
-   url: "{{ route('admin.user.index') }}",
+   url: "{{ route('show.hamza') }}",
   },
   columns: [
     
    {
-    data: 'name',
-    name: 'name'
+    data: 'proName',
+    name: 'proName'
    },
    {
-    data: 'email',
-    name: 'email'
-   },
-   {
-    data: 'action',
-    name: 'action',
-    orderable: true
+    data: 'proBrnad',
+    name: 'proBrnad'
    },
    {
     data: 'actions',
@@ -95,14 +92,12 @@ $(document).ready(function(){
     orderable: true
    },
    {
-    data: 'edit',
-    name: 'edit',
+    data: 'action',
+    name: 'action',
     orderable: true
    }
 
-
-
- 
+   
   ]
  });
 
