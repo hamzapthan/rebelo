@@ -241,10 +241,26 @@
           <a href="{{ route('sell.pro') }}" class="nav-link {{  request()->routeIs('sell.pro') ? 'active' : '' }}">()()()()delete)</a>
           </li>
           @endcan
+         @endcan
+     <li class="nav-item {{  request()->routeIs('email/*') ? 'active' : '' }}">
+      <a class="nav-link" data-toggle="collapse" href="#SellingProducts" role="button" aria-expanded="{{  request()->routeIs('email/*') ? 'active' : '' }}" aria-controls="email">
+        <i class="link-icon" data-feather="zap"></i>
+        <span class="link-title">General Setting</span></span>
+        <i class="link-arrow" data-feather="chevron-down"></i>
+      </a>
+      <div class="collapse {{ show_class(['admin/sell/*'])  }}" id="SellingProducts">
+        <ul class="nav sub-menu">
+      
+          <li class="nav-item">
+          <a href="{{ route('sell.pro') }}" class="nav-link {{  request()->routeIs('sell.pro') ? 'active' : '' }}">Add</a>
+          </li>
+          <li class="nav-item">
+          <a href="{{ route('sell.pro') }}" class="nav-link {{  request()->routeIs('sell.pro') ? 'active' : '' }}">Show</a>
+          </li>
         </ul>
       </div>
      </li>
-     @endcan
+
 
     </ul>
   </div>

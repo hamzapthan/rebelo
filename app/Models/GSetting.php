@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class GSetting extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'pageName', 'section','content','status'
+       ];
 }

@@ -42,12 +42,15 @@
                 <td>{{ $orderAlls->country}}</td>
                 <td>{{ $orderAlls->phone_number}}</td>
                 <td>{{ $orderAlls->notes}}</td>
-            @if($orderAlls->status == 1)
+                <td id="order_status_deliver">
+                     </td>
+               
+                {{-- @if($orderAlls->status == 1)
              <td><span class="badge badge-primary">Delivered</span></td>
-                @elseif($orderAlls->status == 2)
+                {{-- @elseif($orderAlls->status == 2)
                 <td><span class="badge badge-danger">Canacel</span></td>
                 @else
-                <td><span class="badge badge-danger">Pending</span></td>
+                <td id="row"><span class="badge badge-danger">Pending</span></td>
                      @endif     
               <!-- <td>  @if($orderAlls->status == 0)
                 <a href="{{ route('order.deliver',$orderAlls->id)}}"> <button>Pending</button>  </a>
@@ -55,16 +58,8 @@
                 <button>Delivered</button>
                
                @endif 
-               </td> -->
-               <?php 
-             $id = $orderAlls->id;
-             $ordercount = App\Models\Order::find($id)->orderDetail()->count();
-             $statusSum = App\Models\Order::find($id)->orderDetail()->sum('status');
-             if($ordercount == $statusSum){
-              $changeStatus = Order::where('id',$id)->update(array('status'=>'1'));
-             }
+               </td> --> --}}
              
-             ?>
              
               </tr>
             </tbody>
@@ -153,10 +148,14 @@
        type: "Get",
        success: function(response) {
         if(response) {
-          alert("data is modified");
+         
           var sts = "status_div_"+order_id; 
            $('#'+sts).html("<span class='badge badge-primary'>Delivered</span>");
 
+            if(response.order_status == "true"){
+                alert("data is modified");
+           $('#order_status_deliver').html("<span class='badge badge-primary'>Delivered</span>");   
+            }
           }
        }
      });

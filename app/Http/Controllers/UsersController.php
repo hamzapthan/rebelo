@@ -49,10 +49,10 @@ class UsersController extends Controller
             if($request->ajax())
             {
                 $data = Product::all();
-                foreach($datas as $data){
-                    $pro_id = $data->id;
-                    $getdatas = Product::find($pro_id)->backcatproduct;
-                }
+                // foreach($datas as $data){
+                //     $pro_id = $data->id;
+                //     $getdatas = Product::find($pro_id)->backcatproduct;
+                // }
             return DataTables::of($data)
                     ->addColumn('actions', function($data){
                         $actions = '<a href="/user/edit/'. $data->id .'"><button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button></a>';

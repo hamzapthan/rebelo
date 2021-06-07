@@ -114,9 +114,24 @@ class OrderController extends Controller
     {
        
         $orderItem = OrderItem::where('id',$id)->update(array('status'=>'1'));
-     return response()->json(['data'=>'success']);        
+
+       
+            $orderStatus='';
+             $order_item = Orderitem::where('id',$id)->first();
+           
+             $order_items_deliver = Orderitem::where('order_id',$order_item->order_id)->where('status', 1)->count();
+             $order_items = Orderitem::where('order_id',$order_item->order_id)->count();
+            
+             if($order_items_deliver == $order_items){
+                 $orderStatus = 'true';
+               Order::where('id',$order_item->order_id)->update(array('status'=>'1'));
+             }else{
+                 $orderStatus = 'false';
+             }
+     return response()->json(['data'=>'success', 'order_status'=>$orderStatus]);        
         
     }
+
     public function orderDeliver($id)
     {
         $orderItem = Order::where('id',$id)->update(array('status'=>'1'));
@@ -131,6 +146,7 @@ class OrderController extends Controller
        
        return view('pages.tables.showOrder',compact('cancelOrder'));    
     }
+
 
     public function statusOrderCancel($id)
     {

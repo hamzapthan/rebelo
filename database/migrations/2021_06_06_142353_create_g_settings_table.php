@@ -15,12 +15,10 @@ class CreateGSettingsTable extends Migration
     {
         Schema::create('g_settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('pageName');
-            $table->string('sectorName');
+            $table->string('section');
             $table->string('content');
-            $table->string('status');
+            $table->integer('status');
             $table->timestamps();
         });
     }
