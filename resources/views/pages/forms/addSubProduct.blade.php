@@ -18,7 +18,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Edit Sub Products</h4>
+        <h4 class="card-title">Edit Products</h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -80,7 +80,7 @@
               @endif
         </div>
             <div class="form-group">
-          <label>Select Product</label>
+          <label>Select Sub Category</label>
           <select class="js-example-basic-single w-100" name="pro_id">
             <?php $product = App\Models\Product::producton();
 
@@ -127,7 +127,7 @@
   <div class="col-lg-8 grid-margin stretch-card align center">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Add Sub Products</h4>
+        <h4 class="card-title">Add Products</h4>
         @if(session()->has('message'))
     <div class="alert alert-success">
         {{ session()->get('message') }}
@@ -186,7 +186,7 @@
               @endif
         </div>
             <div class="form-group">
-          <label>Select Product</label>
+          <label>Select Sub Category</label>
           <select class="js-example-basic-single w-100" name="pro_id">
             <?php $product = App\Models\Product::producton();
 

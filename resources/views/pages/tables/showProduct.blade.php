@@ -13,14 +13,14 @@
 <div class="row">
 @can('product-create')
      <a href="{{ route('create.pro')}}">
-      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Product</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Sub Category</button></a>
       @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
      
        <div>
-        <h6 class="card-title">Product </h6>
+        <h6 class="card-title">Sub Categories </h6>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
@@ -30,7 +30,7 @@
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
-                <th>Sub Products</th>
+                <th>Products</th>
                 <th>Status</th>
                 @can('product-edit')
                   <th>Options</th>
@@ -57,7 +57,7 @@
                         $pro_id = $products->id;
                          $catPro = App\Models\Product::find($pro_id)->proproduct;
                           ?>
-                <td><a href="{{ route('pro.subpro',$products->id)}}">Sub Products</a>(<?php  echo count($catPro);  ?>)</td>
+                <td><a href="{{ route('pro.subpro',$products->id)}}">Product</a>(<?php  echo count($catPro);  ?>)</td>
                 <td>
                 <div id="status_div_{{$products->id}}">
                  @if($products->status ==1 )

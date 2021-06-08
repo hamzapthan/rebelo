@@ -14,14 +14,14 @@
 <div class="row">
 @can('subProduct-create')
      <a href="{{ route('create.subPro')}}">
-      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Sub Products</button></a>
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Products</button></a>
       @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
 
        <div>
-        <h6 class="card-title">SuProducts </h6>
+        <h6 class="card-title"> Products </h6>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
@@ -30,7 +30,7 @@
                 <th>No</th>
                 <th>Name</th>
                 <th>Brand</th>
-                <th>Prodcuct</th>
+                <th>Sub Category</th>
                 <th>Storage</th>
                 <th>FullView</th>
                 <th>Images</th>

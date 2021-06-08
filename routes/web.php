@@ -295,11 +295,11 @@ Route::group(['prefix' => 'error'], function ()
     });
 });
 
-Route::get('/clear-cache', function ()
-{
-    Artisan::call('cache:clear');
-    return "Cache is cleared";
-});
+// Route::get('/clear-cache', function ()
+// {
+//     Artisan::call('cache:clear');
+//     return "Cache is cleared";
+// });
 
 Route::get('admin/form', function ()
 {
@@ -546,7 +546,7 @@ Route::group(['middleware' => ['auth']], function ()
     });
 });
 
-Auth::routes();
+ Auth::routes();
 Route::get('admin/dashboard', [HomeController::class , 'index'])
     ->name('admin.dashboard')
     ->middleware('auth');
@@ -560,7 +560,7 @@ Route::post('sample/update', 'App\Http\Controllers\Admin\MainController@update')
     ->name('sample.update');
 Route::get('sample/destroy/{id}', 'App\Http\Controllers\Admin\MainController@destroy');
 
-/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 Route::get('/adminUser', [UsersController::class , 'index'])
     ->name('admin.user.index');
 Route::get('/delete/user/{user_id}', [UsersController::class , 'destroy'])
