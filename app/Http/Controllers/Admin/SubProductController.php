@@ -38,7 +38,7 @@ class SubProductController extends Controller
     public function create()
     {
         return view('pages.forms.addSubProduct');
-    
+
     }
 
     /**
@@ -48,41 +48,41 @@ class SubProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
-        
-        
-        $validated = $request->validate([
+    {
+         $validated = $request->validate([
             'subName' => 'required',
             'subBrnad' => 'required',
             'subColour' => 'required',
-         'subImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'subImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'subDetail' => 'required',
             'subMetaTitle' => 'required',
             'subMetaDesc' => 'required',
             'subMetaKeyword' => 'required',
-            
-        ]);
-        
+
+             ]);
+
          if(!$validated){
-            return Redirect::back()->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
 
          }else{
 
-        foreach($request->file('subImage') as $image)
-        {
+            foreach($request->file('subImage') as $image)
+            {
             $imageName=$image->getClientOriginalName();
             $file_name = time().rand(100,999).$imageName;
-            $image->move(public_path().'/project/', $file_name); 
-            $subproImage = url('project/'.$file_name);   
-              
-            $fileNames[] = $subproImage; 
-        }
-          $images = json_encode($fileNames);
-         
-          $user_id =   Auth::user()->id;
-          $pro_id = $request->pro_id;
-          $addCategory = SubProduct::updateOrCreate(['id'=>$request->id],[
-           'subName' => $request->subName,
+            $image->move(public_path().'/project/', $file_name);
+            $subproImage = url('project/'.$file_name);
+
+            $fileNames[] = $subproImage;
+            }
+            $images = json_encode($fileNames);
+
+
+
+            $user_id =   Auth::user()->id;
+            $pro_id = $request->pro_id;
+            $addCategory = SubProduct::updateOrCreate(['id'=>$request->id],[
+            'subName' => $request->subName,
             'subBrnad'  => $request->subBrnad,
             'subColour'  => $request->subColour,
             'subImage' => $images,
@@ -92,17 +92,19 @@ class SubProductController extends Controller
             'subMetaDesc'    => $request->subMetaDesc,
             'subMetaKeyword'  => $request->subMetaKeyword,
            ]);
-         
-           $users = User::find($user_id); 
+
+           $users = User::find($user_id);
            $addCategory->user()->associate($users);
-      
+
          $product = Product::find($pro_id);
          $addCategory->backproproduct()->associate($product);
-         
+
          $addCategory->save();
          return redirect()->back()->with('message','Data inserted Successfully');
-          }
- }
+
+        }
+    }
+
 
     /**
      * Display the specified resource.
@@ -139,58 +141,74 @@ class SubProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // i am using the store method to update tit
-    //  $updateSubPro = SubProduct::find($id);
-    //     $user = User::find($request->get('user_id'));
-    //     $updateSubPro->user()->associate($user);
-    //     $product = Product::find($request->get('pro_id'));
-    //     $updateSubPro->backproproduct()->associate($product);
-    //     $updateSubPro->subName = $request->subName;
-    //     $updateSubPro->subBrnad = $request->subBrnad;
-    //     $updateSubPro->subDetail = $request->subDetail;
-    //     $updateSubPro->subColour = $request->subColour;
-    //     $updateSubPro->subImage = $request->subImage;
-    //     $updateSubPro->subMetaTitle = $request->subMetaTitle;
-    //     $updateSubPro->subMetaDesc = $request->subMetaDesc;
-    //     $updateSubPro->subMetaKeyword = $request->subMetaKeyword;
-    //     $updateSubPro->status = 1;
-      
-    //     $updateSubPro->save();
-    //     return response($updateSubPro);
-    // 
+
+
+       if($request->has('subImage')){
+        foreach($request->file('subImage') as $image)
+            {
+            $imageName=$image->getClientOriginalName();
+            $file_name = time().rand(100,999).$imageName;
+            $image->move(public_path().'/project/', $file_name);
+            $subproImage = url('project/'.$file_name);
+
+            $fileNames[] = $subproImage;
+            }
+            $images = json_encode($fileNames);
+       }else{
+             $update = SubProduct::find($id);
+             $images =  $update->subImage;
+       }
+         $updateSubPro = SubProduct::find($id);
+         $user = User::find($request->get('user_id'));
+         $updateSubPro->user()->associate($user);
+         $product = Product::find($request->get('pro_id'));
+         $updateSubPro->backproproduct()->associate($product);
+         $updateSubPro->subName = $request->subName;
+         $updateSubPro->subBrnad = $request->subBrnad;
+         $updateSubPro->subDetail = $request->subDetail;
+         $updateSubPro->subColour = $request->subColour;
+         $updateSubPro->subImage = $images;
+         $updateSubPro->subMetaTitle = $request->subMetaTitle;
+         $updateSubPro->subMetaDesc = $request->subMetaDesc;
+         $updateSubPro->subMetaKeyword = $request->subMetaKeyword;
+         $updateSubPro->status = 1;
+         $updateSubPro->save();
+
+       return redirect()->back()->with('message', 'Data Updated Successfully!');
+    //
 }
 
      public function destroy($id)
-    { 
+    {
         $subProDelete = SubProduct::find($id);
         $subProDelete->delete();
         return response()->json(['success'=>'deletes']);
     }
 
     public function silent($id){
-     
+
         $silentPro = SubProduct::where('id',$id)->update(array('status'=>'0'));
         return response()->json(['success'=>'Post Deleted successfully']);
    }
 
    public function subproStatusOn($id){
-    
+
     $silentPro = SubProduct::where('id',$id)->update(array('status'=>'1'));
     return response()->json(['success'=>'Post Deleted successfully']);
 }
    public function image($id){
-       
+
     $subProImage = SubProduct::find($id);
 return view('pages.forms.subProImage',compact('subProImage'));
-     
+
    }
-   
+
    public function deleteimage($subpro_id,$image){
-      
+
        $post = SubProduct::find($subpro_id);
-      
-       $subproImage = url('project/'.$image);      
-    
+
+       $subproImage = url('project/'.$image);
+
        File::delete($image);
        $images=json_decode($post->subImage);
        $_image=[];
@@ -199,15 +217,15 @@ return view('pages.forms.subProImage',compact('subProImage'));
        $post->save();
        return response()->json(['code'=>'200','message'=>'data is deleted']);
 
-     
+
    }
-   
+
    public function subProStorage($id){
-       
+
     $subStorage = SubProduct::find($id)->subprooductstorage;
-  
+
    return view('pages.tables.showSubStorage',compact('subStorage','id'));
-     
+
    }
 
 }

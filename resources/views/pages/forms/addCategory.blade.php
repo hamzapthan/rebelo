@@ -4,13 +4,13 @@
 <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
-  
+
 @endpush
 
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-   
+
   </ol>
 </nav>
 @if(isset($editCategory))
@@ -41,9 +41,9 @@
               <div class="alert alert-danger">{{ $errors->first('catDetail') }}</div>
               @endif
             </div>
-            
+
             <div>
-            <img src="{{ asset($editCategory->image) }}" style="height:60px; width:80px;border-radius:0"> 
+            <img src="{{ asset($editCategory->image) }}" style="height:60px; width:80px;border-radius:0">
             </div>
 
             <div class="form-group">
@@ -54,14 +54,14 @@
               <span class="input-group-append">
                 <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
               </span>
-             
+
             </div>
             @if($errors->has('image'))
               <div class="alert alert-danger">{{ $errors->first('image') }}</div>
               @endif
           </div>
-       
-       
+
+
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
         </form>
@@ -99,9 +99,9 @@
               <div class="alert alert-danger">{{ $errors->first('catDetail') }}</div>
               @endif
             </div>
-            
-            
-           
+
+
+
             <div class="form-group">
             <label>File upload</label>
             <input type="file" name="image" class="file-upload-default">
@@ -110,14 +110,14 @@
               <span class="input-group-append">
                 <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
               </span>
-             
+
             </div>
             @if($errors->has('image'))
               <div class="alert alert-danger">{{ $errors->first('image') }}</div>
               @endif
           </div>
-       
-       
+
+
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
         </form>
@@ -132,7 +132,7 @@
   <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
- 
+
 @endpush
 
 @push('custom-scripts')
@@ -140,5 +140,5 @@
   <script src="{{ asset('assets/js/typeahead.js') }}"></script>
   <script src="{{ asset('assets/js/tags-input.js') }}"></script>
   <script src="{{ asset('assets/js/file-upload.js') }}"></script>
-  
+
 @endpush

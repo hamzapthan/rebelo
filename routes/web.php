@@ -344,7 +344,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('show.catPro'); // show ssingle product
             Route::get('/showCat/{id}', [CategoryController::class , 'show'])
                 ->name('show.cat'); // show ssingle product
-            
+
         });
 
         //  Routes for Product
@@ -369,11 +369,11 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('delete.pro'); // show all pro
             Route::get('/showSubPro/{pro_id}', [ProductController::class , 'showProSubProducts'])
                 ->name('pro.subpro'); // show ssingle product
-            
+
 
             Route::get('/showPro/{id}', [ProductController::class , 'show'])
                 ->name('show.pro'); // show ssingle pro
-            
+
         });
         //  Routes for SubProduct
         Route::group(['prefix' => 'products'], function ()
@@ -401,9 +401,9 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('show.subPro'); // show ssingle pro
             Route::get('/subProStorage/{id}', [SubProductController::class , 'subProStorage'])
                 ->name('subpro.storage'); // show ssingle pro
-            Route::post('/updateSubPro/{id}', [SubProductController::class , 'update'])
+            Route::get('/updateSubPro/{id}', [SubProductController::class , 'update'])
                 ->name('update.subPro'); // show ssingle pro
-            
+
         });
 
         //Route for Users
@@ -421,7 +421,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('user.destroy'); // show all pro
             Route::get('/user/{id}/edit', [UserController::class , 'edit'])
                 ->name('user.edit'); // show ssingle product
-            
+
         });
 
         //routes for role
@@ -442,7 +442,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('update.role'); // show all pro
             Route::get('/deleteRole/{id}', [RoleController::class , 'destroy'])
                 ->name('delete.role'); // show all pro
-            
+
         });
 
         //Routes for storage
@@ -461,13 +461,13 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('delete.storage'); // show all pro
             Route::post('/updateStorage/{id}', [StorageController::class , 'update'])
                 ->name('update.storage'); // show ssingle pro
-            
+
 
             Route::get('/showStorage', [StorageController::class , 'index'])
                 ->name('show.storage'); // show all pro
             Route::get('/storage/{id}/edit', [StorageController::class , 'edit'])
                 ->name('edit.storage'); // show all pro
-            
+
         });
         //Price against Products
         Route::group(['prefix' => 'prices'], function ()
@@ -477,7 +477,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('price.edit'); // show all pro
             Route::post('/updateProPrice/{id}', [ProPriceController::class , 'update'])
                 ->name('update.price'); // Insert data
-            
+
         });
         //Route::post('/insertProPrice',[ProPriceController::class,'store'])->name('insert.proprice');  // Insert data
         //routes for orderd
@@ -500,7 +500,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('order.deliver'); // show all pro
             Route::get('orderitemdeliver/{id}', [OrderController::class , 'deliver'])
                 ->name('order.deliver.item'); // show all pro
-            
+
         });
         // Routes for products come to sell
         Route::group(['prefix' => 'sell'], function ()
@@ -514,7 +514,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('sell.pro'); // show all pro
             Route::get('/sellingView/{id}', [SellingProController::class , 'show'])
                 ->name('sell.pro.view'); // show all pro
-            
+
         });
 
         Route::group(['prefix' => 'slider'], function ()
@@ -524,7 +524,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('general.index'); // show all pro
             Route::post('/plugin', [GeneralSettingController::class , 'sliderStore'])
                 ->name('slider.store'); // show all pro
-            
+
         });
 
         Route::group(['prefix' => 'generalSetting'], function ()
@@ -540,7 +540,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('admin.generalSetting.slider_status_inactive');
             Route::get('/slider_status_active', [GeneralSettingController::class , 'slider_status_active'])
                 ->name('admin.generalSetting.slider_status_active');
-            
+
         });
 
     });

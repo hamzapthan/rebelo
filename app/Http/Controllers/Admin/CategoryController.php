@@ -43,7 +43,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
+    {
 
         $validated = $request->validate([
             'catName' => 'required|unique:categories|max:25',
@@ -58,21 +58,21 @@ class CategoryController extends Controller
         $user_id = Auth::user()->id;
         $imageName=$request->file('image')->getClientOriginalName();
         $file_name = time().rand(100,999).$imageName;
-        $request->file('image')->move(public_path().'/project/', $file_name);  
-        $catImage = url('project/'.$file_name);   
-       
+        $request->file('image')->move(public_path().'/project/', $file_name);
+        $catImage = url('project/'.$file_name);
+
         $catInsert = new Category();
         $catInsert->catName = $request->catName;
         $catInsert->catDetail = $request->catDetail;
-        $catInsert->image = $catImage; 
+        $catInsert->image = $catImage;
         $catInsert->status = 1;
         $post = User::find($user_id);
         $catInsert->users()->associate($post);
         $catInsert->save();
-      
+
         return redirect()->back()->with('message', 'Data Inserted Successfully!');
-       
-         }   
+
+         }
     }
 
     /**
@@ -95,7 +95,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-       
+
         $editCategory = Category::find($id);
         return view('pages.forms.addCategory',compact('editCategory'));
     }
@@ -109,35 +109,41 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $validated = $request->validate([
-            'catName' => 'required',
-            'catDetail' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-         if(!$validated){
-            return Redirect::back()->withErrors($validated);
 
-         }else{
+           $updateCat = Category::find($id);
+        if($request->has('image')){
+            $imageName=$request->file('image')->getClientOriginalName();
+            $file_name = time().rand(100,999).$imageName;
+            $request->file('image')->move(public_path().'/project/', $file_name);
+            $catImage = url('project/'.$file_name);
+        }else{
+            $updateCat = Category::find($id);
+            $catImage = $updateCat->image;
+        }
 
 
-        $imageName=$request->file('image')->getClientOriginalName();
-        $file_name = time().rand(100,999).$imageName;
-        $request->file('image')->move(public_path().'/project/', $file_name);  
-        $catImage = url('project/'.$file_name);   
-       
-        $user_id = Auth::user()->id;
+
+          $user_id = Auth::user()->id;
           $updateCat = Category::find($id);
           $updateCat->catName = $request->catName;
           $updateCat->catDetail = $request->catDetail;
-          $updateCat->image = $catImage; 
+          $updateCat->image = $catImage;
           $updateCat->status = 1;
           $post = User::find($user_id);
           $updateCat->users()->associate($post);
           $updateCat->update();
-      
-      return redirect()->back()->with('message', 'Data Updated Successfully!');
-         }
+
+          return redirect()->back()->with('message', 'Data Updated Successfully!');
+        // $validated = $request->validate([
+        //     'catName' => 'required',
+        //     'catDetail' => 'required',
+        //     // 'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        // ]);
+        //  if(!$validated){
+        //     return Redirect::back()->withErrors($validated);
+
+        //  }else{
+      //  }
     }
 
     /**
@@ -147,7 +153,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($cat_id)
-    { 
+    {
          $delete_id = Category::find($cat_id);
         $delete_id->delete();
         return response()->json(['success'=>'data deleted successsfully']);
@@ -160,15 +166,15 @@ class CategoryController extends Controller
     }
     public function showCatPro($cat_id){
         $catName = Category::find($cat_id);
-     
+
         $catProduct = Category::find($cat_id)->catproducts;
         return view('pages.tables.showAllProducts',compact('catProduct','catName'));
     }
-    
+
     public function catStatusOn($cat_id)
     {
         $update = Category::where('id',$cat_id)->update(array('status'=>'1'));
        return response()->json(['success'=>'Post Deleted successfully']);
     }
-    
+
 }

@@ -4,13 +4,13 @@
 <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
-  
+
 @endpush
 
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    
+
   </ol>
 </nav>
 @if(isset($subproUpdate))
@@ -24,12 +24,13 @@
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.subPro')}}" enctype="multipart/form-data">
-        @csrf
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('update.subPro',$subproUpdate->id)}}" enctype="multipart/form-data">
+     @method('GET')
+            @csrf
           <fieldset>
             <div class="form-group">
               <label for="name">Name</label>
-              <input id="name" class="form-control" name="subName" type="text" 
+              <input id="name" class="form-control" name="subName" type="text"
               value="{{old('subName', $subproUpdate->subName)}}"
              >
               @if($errors->has('subName'))
@@ -81,8 +82,8 @@
             <div class="form-group">
           <label>Select Product</label>
           <select class="js-example-basic-single w-100" name="pro_id">
-            <?php $product = App\Models\Product::producton();     
-           
+            <?php $product = App\Models\Product::producton();
+
            ?>
            @if(count($product))
             @foreach($product as $products)
@@ -111,8 +112,8 @@
               <div class="alert alert-danger">{{ $errors->first('subImage') }}</div>
               @endif
           </div>
-        
-         <input type="hidden" name="id" value="{{ $subproUpdate->id }}">
+          {{-- <input type="hidden" name="image" value={{ $subproUpdate->subImage }}> --}}
+          <input type="hidden" name="id" value="{{ $subproUpdate->id }}">
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
         </form>
@@ -187,8 +188,8 @@
             <div class="form-group">
           <label>Select Product</label>
           <select class="js-example-basic-single w-100" name="pro_id">
-            <?php $product = App\Models\Product::producton();     
-           
+            <?php $product = App\Models\Product::producton();
+
            ?>
            @if(count($product))
             @foreach($product as $products)
@@ -212,8 +213,8 @@
               <div class="alert alert-danger">{{ $errors->first('subImage') }}</div>
               @endif
           </div>
-        
-       
+
+
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
         </form>
@@ -228,7 +229,7 @@
   <script src="{{ asset('assets/plugins/select2/select2.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
- 
+
 @endpush
 
 @push('custom-scripts')
@@ -236,6 +237,6 @@
   <script src="{{ asset('assets/js/typeahead.js') }}"></script>
   <script src="{{ asset('assets/js/tags-input.js') }}"></script>
   <script src="{{ asset('assets/js/file-upload.js') }}"></script>
-  
-  
+
+
 @endpush
