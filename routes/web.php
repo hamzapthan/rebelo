@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\SellingProController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GeneralSettingController;
-
+use Auth;
 use App\Http\Controllers\UsersController;
 
 /*
