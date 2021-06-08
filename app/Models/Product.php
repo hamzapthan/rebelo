@@ -16,6 +16,8 @@ class Product extends Model
         'status',
     ];
 
+    protected $with = array('categories');
+
     public function user()
     {
         return $this->belongsTo(User::class,'user_id','id');
@@ -26,14 +28,14 @@ class Product extends Model
         return $this->belongsTo(Category::class,'cat_id','id');
     }
    
-    public function scopestatusproduct(){
+    public function statusproduct(){
     
-        return $this->orderBy('status', 'DESC')->get();
+        return $this->orderBy('status', 'DESC');
     }
     
     public function scopeproducton(){
     
-        return $this->where('status', '1')->get();
+        return $this->where('status', '1');
     }
     
 
@@ -44,7 +46,14 @@ class Product extends Model
     public function subproduct(){
         return $this->hasMany(SubProduct::class,'pro_id','id')->orderBy('status','DESC');
     }
-
+    public function categories(){
+        return $this->hasOne(Category::class,'id','cat_id');
+    }
+    
+    public function product(){
+        return $this->hasMany(SubProduct::class,'pro_id','id');
+    }
+    
    
     
    

@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\SellingProController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GeneralSettingController;
-use Auth;
+
 use App\Http\Controllers\UsersController;
 
 /*
@@ -355,25 +355,27 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('create.pro'); // create page show
             Route::post('/insertPro', [ProductController::class , 'store'])
                 ->name('insert.pro'); // Insert data
-            Route::get('/showPro', [ProductController::class , 'index'])
-                ->name('show.pro.all'); // show all pro
+            // Route::get('/showPro', [ProductController::class , 'index'])
+            //     ->name('show.pro.all'); // show all pro
             Route::get('/product/{id}/edit', [ProductController::class , 'edit'])
                 ->name('pro.edit'); // show all pro
             Route::post('/updatePro/{id}', [ProductController::class , 'update'])
                 ->name('update.pro'); // show ssingle pro
-            Route::get('/proStatusSilent/{pro_id}', [ProductController::class , 'silent'])
-                ->name('pro.silent'); // show ssingle product
-            Route::get('/proStatusOn/{pro_id}', [ProductController::class , 'proStatusOn'])
-                ->name('pro.status'); // show ssingle product
-            Route::Delete('/deletePro/{pro_id}', [ProductController::class , 'destroy'])
+           
+            Route::get('/proStatusSilent', [ProductController::class , 'silent'])
+                ->name('pro.status.silent'); // show ssingle product
+           
+            Route::get('/proStatusOn', [ProductController::class , 'proStatusOn'])
+                ->name('pro.status.on'); // show ssingle product
+            Route::get('/deletePro', [ProductController::class , 'destroy'])
                 ->name('delete.pro'); // show all pro
             Route::get('/showSubPro/{pro_id}', [ProductController::class , 'showProSubProducts'])
                 ->name('pro.subpro'); // show ssingle product
-
-
             Route::get('/showPro/{id}', [ProductController::class , 'show'])
                 ->name('show.pro'); // show ssingle pro
-
+            Route::get('/showPro', [ProductController::class , 'index'])
+                ->name('show.pro.all'); // show all pro
+            
         });
         //  Routes for SubProduct
         Route::group(['prefix' => 'products'], function ()
@@ -561,6 +563,7 @@ Route::post('sample/update', 'App\Http\Controllers\Admin\MainController@update')
 Route::get('sample/destroy/{id}', 'App\Http\Controllers\Admin\MainController@destroy');
 
 //////////////////////////////////////////////////////////////////////////
+
 Route::get('/adminUser', [UsersController::class , 'index'])
     ->name('admin.user.index');
 Route::get('/delete/user/{user_id}', [UsersController::class , 'destroy'])

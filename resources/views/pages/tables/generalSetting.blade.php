@@ -98,17 +98,20 @@
                 <td>{{ $generalAll->section }}</td>
               <td>
                 @if($generalAll->status == 1)
-                    <label class="switch">
+                  <div id="switch_{{ $generalAll->id }}"> 
+                <label class="switch">
                         <input type="checkbox" checked onchange="change_status_inactive({{ $generalAll->id }})">
                         <span class="slider round"></span>
                     </label>
+ 
                 @else
                     <label class="switch">
                         <input type="checkbox" onchange="change_status_active({{ $generalAll->id }})">
                         <span class="slider round"></span>
                     </label>  
                 @endif
-              </td>
+            </div>  
+            </td>
                
                 {{-- <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Edit</button></td> --}}
             <td><button class="btn btn-primary" onclick="DataModel({{ $generalAll->id }})">Edit</button></td>   
@@ -218,9 +221,12 @@
             id: id
             },
             success:function(response){
+                var sts = "switch_"+id;
+                $('#'+sts).html(' <label class="switch"><input type="checkbox"  onchange="change_status_active('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
                 setInterval(function(){ 
                     $('#message').html('');
+                   
                 }, 2000);
             }
         });
@@ -236,6 +242,8 @@
             id: id
             },
             success:function(response){
+                var sts = "switch_"+id;
+                $('#'+sts).html(' <label class="switch"><input type="checkbox" checked onchange="change_status_inactive('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
                 setInterval(function(){ 
                     $('#message').html('');

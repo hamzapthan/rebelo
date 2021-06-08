@@ -10,7 +10,8 @@ use App\Models\SubProduct;
 use Auth;
 use DataTables;
 use Validator;
-
+use Yajra\DataTables\DataTables as DataTablesDataTables;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class UsersController extends Controller
 {
@@ -48,23 +49,45 @@ class UsersController extends Controller
       
             if($request->ajax())
             {
-                $data = Product::all();
-                // foreach($datas as $data){
-                //     $pro_id = $data->id;
-                //     $getdatas = Product::find($pro_id)->backcatproduct;
-                // }
+                $data = Product::with('proproduct')->orderBy('status', 'DESC')->get();
+                
             return DataTables::of($data)
-                    ->addColumn('actions', function($data){
-                        $actions = '<a href="/user/edit/'. $data->id .'"><button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button></a>';
+                    ->addColumn('action1', function($data){
+                        return $data->proName;
+                    })
+                    ->addColumn('action2', function($data){
+                        return $data->proBrnad;
+                    })
+                    ->addColumn('action3', function($data){
+                        return $data->categories->catName;
+                    })
+                    ->addColumn('action4', function($data){
+                      if($data->status == 1){
+                        $actionbtn =  '<div id="switch_'.$data->id.'"><label class="switch">
+                        <input type="checkbox" checked onchange="change_status_inactive('.$data->id.')">
+                        <span class="slider round"></span>
+                    </label></div>';
+                         return $actionbtn;
+                      }else{
+                        $actionbtn =  '<div id="switch_'.$data->id.'"><label class="switch">
+                        <input type="checkbox"  onchange="change_status_active( '.$data->id.' )">
+                        <span class="slider round"></span>
+                    </label></div>';
+                        return  $actionbtn;
+                     
+                    }
+
+                    })
+                    ->addColumn('action5', function($data){
+                        $actions = '<a href="'. route('pro.subpro',$data->id) .'">Product('. count($data->product) .') </a>';
                        return $actions;
                     })
-
-                    ->editColumn('action', function($data){
+                    ->editColumn('action6', function($data){
                         $actions = '<a href="/user/edit/'. $data->id .'"><button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button></a>';
                        return $actions;
                     })
                     
-                    ->rawColumns(['action','actions'])
+                    ->rawColumns(['action1','action2','action3','action4','action5','action6'])
                     ->make(true);
             }
 

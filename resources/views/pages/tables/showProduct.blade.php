@@ -26,7 +26,7 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                <th>No</th>
+              
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
@@ -38,26 +38,15 @@
               </tr>
             </thead>
             <tbody>
-            <?php $i=1; ?>
+           
              @foreach($product as $products) 
             
               <tr id="row_{{$products->id}}">
-              <td>{{ $i++ }}</td>
+             
                 <td>{{ $products->proName}}</td>
                 <td>{{ $products->proBrnad}}</td>
-                <?php   $id = $products->id;    
-                       $catName =  App\Models\Product::find($id)->backcatproduct;
-                       
-                     
-                  ?>
-
-                <td>{{ $catName->catName}}</td>
-                  
-                <?php
-                        $pro_id = $products->id;
-                         $catPro = App\Models\Product::find($pro_id)->proproduct;
-                          ?>
-                <td><a href="{{ route('pro.subpro',$products->id)}}">Product</a>(<?php  echo count($catPro);  ?>)</td>
+                <td>{{ $products->categories->catName}}</td>
+                <td><a href="{{ route('pro.subpro',$products->id)}}">Product</a>(<?php  echo count($products->proproduct);  ?>)</td>
                 <td>
                 <div id="status_div_{{$products->id}}">
                  @if($products->status ==1 )

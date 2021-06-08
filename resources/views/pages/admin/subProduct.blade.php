@@ -6,25 +6,86 @@
 @endpush
 
 @section('content')
+<style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    
+    .switch input { 
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    
+    input:checked + .slider {
+      background-color: #2196F3;
+    }
+    
+    input:focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+    
+    input:checked + .slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+    
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+    
+    .slider.round:before {
+      border-radius: 50%;
+    }
+    </style>
+
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Tables</a></li>
     <li class="breadcrumb-item active" aria-current="page">Data Table</li>
   </ol>
 </nav>
-
+<div id="message"></div>
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <h6 class="card-title">Data Table</h6>
         <div class="table-responsive">
-        <table id="user_table" class="table table-bordered table-striped">
+        <table id="sub_category" class="table table-bordered table-striped">
         <thead>
               <tr>
-                 <th>Name</th>
-               
-                <th>Brand</th>
+               <th>Name</th>
+               <th>Brand</th>
                <th>Category</th>
                <th>Product</th>
                <th>Status</th>
@@ -70,32 +131,43 @@
 <script>
 $(document).ready(function(){
 
- $('#user_table').DataTable({
+ $('#sub_category').DataTable({
   processing: true,
   serverSide: true,
   ajax: {
-   url: "{{ route('show.hamza') }}",
+   url: "{{ route('show.pro.all') }}",
   },
   columns: [
     
    {
-    data: 'proName',
-    name: 'proName'
+    data: 'action1',
+    name: 'action1'
    },
    {
-    data: 'proBrnad',
-    name: 'proBrnad'
+    data: 'action2',
+    name: 'action2'
    },
    {
-    data: 'actions',
-    name: 'actions',
+    data: 'action3',
+    name: 'action3',
     orderable: true
    },
    {
-    data: 'action',
-    name: 'action',
+    data: 'action4',
+    name: 'action4',
+    orderable: true
+   },
+   {
+    data: 'action5',
+    name: 'action5',
+    orderable: true
+   },
+   {
+    data: 'action6',
+    name: 'action6',
     orderable: true
    }
+
 
    
   ]
@@ -104,39 +176,94 @@ $(document).ready(function(){
 
 
 //delete method
-var user_id;
-$(document).on('click', '.delete', function(){
- user_id = $(this).attr('id');
- $('#confirmModal').modal('show');
+// var user_id;
+// $(document).on('click', '.delete', function(){
+//  id = $(this).attr('id');
+//  $('#confirmModal').modal('show');
+// });
+
+
+// $('#ok_button').click(function(){
+//   $.ajax({
+//    url:"delete/user/"+user_id,
+//    beforeSend:function(){
+//     $('#ok_button').text('Deleting...');
+//    },
+//    success:function(data)
+//    {
+//     setTimeout(function(){
+//      $('#confirmModal').modal('hide');
+//      $('#user_table').DataTable().ajax.reload();
+//      alert('Data Deleted');
+//     }, 2000);
+//    }
+//   })
+//  });
 });
 
+function change_status_active(id){
+        let _url = '{{ route('pro.status.on') }}';
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type:'get',
+            url:_url,
+            data:{
+            _token:_token,
+            id: id
+            },
+            success:function(response){
+                var sts = "switch_"+id;
+                $('#'+sts).html(' <label class="switch"><input type="checkbox" checked onchange="change_status_inactive('+id+')"><span class="slider round"></span></label>')
+                $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
+                setInterval(function(){ 
+                    $('#message').html('');
+                }, 2000);
+            }
+        });
+    }
 
-$('#ok_button').click(function(){
-  $.ajax({
-   url:"delete/user/"+user_id,
-   beforeSend:function(){
-    $('#ok_button').text('Deleting...');
-   },
-   success:function(data)
-   {
-    setTimeout(function(){
-     $('#confirmModal').modal('hide');
-     $('#user_table').DataTable().ajax.reload();
-     alert('Data Deleted');
-    }, 2000);
+    function change_status_inactive(id){
+        let _url = '{{ route('pro.status.silent') }}';
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type:'get',
+            url:_url,
+            data:{
+            _token:_token,
+            id: id
+            },
+            success:function(response){
+                var sts = "switch_"+id;
+                $('#'+sts).html(' <label class="switch"><input type="checkbox"  onchange="change_status_active('+id+')"><span class="slider round"></span></label>')
+                $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
+                setInterval(function(){ 
+                    $('#message').html('');
+                   
+                }, 2000);
+            }
+        });
+    }
+   
+   function delete_pro(id){
+
+console.log(id)
+  let _token   = $('meta[name="csrf-token"]').attr('content');
+  let _url = '{{ route('delete.pro') }}';
+$.ajax({
+   type:'GET',
+   url:_url,
+   data:{
+   _token:_token,
+   id:id
+  },
+  success:function(response){
+    $('#delete_row').closest("tr").remove();
+    
+
    }
-  })
- });
-
-
-
-
-
-
-
-
-
 });
+   }
+
  </script>
 
 @push('plugin-scripts')

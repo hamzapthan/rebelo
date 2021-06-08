@@ -27,7 +27,7 @@ class GeneralSettingController extends Controller
         $setting = GSetting::find($request->id);
         $content = json_decode($setting->content);
                
-        $image=$content->image;
+        $image= $content->image;
         if($request->has('image')){
             $imageName=$request->file('image')->getClientOriginalName();
             $file_name = time().rand(100,999).$imageName;
