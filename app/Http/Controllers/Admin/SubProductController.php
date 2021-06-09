@@ -8,7 +8,12 @@ use App\Models\SubProduct;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use File;
+use Yajra\Datatables\Datatables;
+use Yajra\DataTables\DataTables as DataTablesDataTables;
+use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
+
 
 use Illuminate\Support\Facades\Validator;
 class SubProductController extends Controller
@@ -27,6 +32,7 @@ class SubProductController extends Controller
     public function index()
     {
         $subProduct = SubProduct::subProStatus();
+
         return view('pages.tables.showSubProduct',compact('subProduct'));
     }
 

@@ -11,14 +11,14 @@
 </nav>
 
 <div class="row">
-@can('product-create')
+     @can('product-create')
      <a href="{{ route('create.pro')}}">
       <button type="button" class="btn btn-primary ml-3 mb-3">Add New Sub Category</button></a>
       @endcan
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-     
+
        <div>
         <h6 class="card-title">Sub Categories </h6>
         </div>
@@ -26,7 +26,7 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-              
+
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Category</th>
@@ -38,11 +38,11 @@
               </tr>
             </thead>
             <tbody>
-           
-             @foreach($product as $products) 
-            
+
+             @foreach($product as $products)
+
               <tr id="row_{{$products->id}}">
-             
+
                 <td>{{ $products->proName}}</td>
                 <td>{{ $products->proBrnad}}</td>
                 <td>{{ $products->categories->catName}}</td>
@@ -52,13 +52,13 @@
                  @if($products->status ==1 )
                 <span class="badge badge-success">On</span>
                 @else
-                <span class="badge badge-danger">Off</span> 
+                <span class="badge badge-danger">Off</span>
                 @endif
                 </div>
                 </td>
                 @can('product-edit')
                 <td>
-               
+
                 <div class="btn-group">
  <a href="{{ route('pro.edit',$products->id) }}"> <button type="button" class="btn btn-primary">Edit</button></a>
   <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,8 +75,8 @@
     @endcan
 </div></td>
 @endcan
-               
-                
+
+
               </tr>
               @endforeach
             </tbody>
@@ -91,16 +91,16 @@
     success: function(response) {
         if(response) {
           alert("data is modifiertwetweed");
-          var sts = "status_div_"+pro_id; 
+          var sts = "status_div_"+pro_id;
            $('#'+sts).html("<span class='badge badge-danger'>Off</span>");
           }
        }
      });
   }
- 
+
   function statusProOn(event) {
         var pro_id  = $(event).data("id");
-        
+
     let _url = `/proStatusOn/${pro_id}`;
      $.ajax({
        url: _url,
@@ -109,7 +109,7 @@
         if(response) {
           alert("data is modifiertwetweed");
           // window.location.reload();
-   
+
           }
        }
      });
@@ -131,7 +131,7 @@ $.ajax({
   success:function(response){
      alert('Data Is deleted');
     //  window.location.reload();
-    
+
 
    }
 });

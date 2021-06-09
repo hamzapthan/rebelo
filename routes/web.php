@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SubProductController;
@@ -12,7 +13,6 @@ use App\Http\Controllers\Admin\SellingProController;
 use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\GeneralSettingController;
-
 use App\Http\Controllers\UsersController;
 
 /*

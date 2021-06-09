@@ -5,10 +5,13 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
-use Auth;
-use DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Contracts\Role;
+use Yajra\Datatables\Datatables;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
 use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
+
 
 class ProductController extends Controller
 {
@@ -46,8 +49,11 @@ class ProductController extends Controller
                 ->addColumn('action3', function($data){
                     return $data->categories->catName;
                 })
+
+
                 ->addColumn('action4', function($data){
-                  if($data->status == 1){
+
+                    if($data->status == 1){
                     $actionbtn =  '<div id="switch_'.$data->id.'"><label class="switch">
                     <input type="checkbox" checked onchange="change_status_inactive('.$data->id.')">
                     <span class="slider round"></span>
@@ -63,16 +69,20 @@ class ProductController extends Controller
                 }
 
                 })
+
                 ->addColumn('action5', function($data){
                     $actions = '<a href="'. route('pro.subpro',$data->id) .'">Product('. count($data->product) .') </a>';
                    return $actions;
                 })
+
                 ->editColumn('action6', function($data){
+                    // if(Auth::user()->hasRole('subCat-delete')){
                     $route = route("delete.pro",$data->id);
                     $actionssbtn = '<a href="'.route('pro.edit',$data->id) .'"><button   type="button"  class="edit btn btn-primary btn-sm">Edit</button></a> ';
                     $actionssbtn .= '<button type="button" id="delete_row"  class="edit btn btn-primary btn-sm" onclick="delete_pro('.$data->id.',this)">Delete</button></div>';
 
                     return $actionssbtn;
+                    // }
                 })
 
                 ->rawColumns(['action1','action2','action3','action4','action5','action6'])
@@ -108,7 +118,7 @@ class ProductController extends Controller
             'cat_id' => 'required',
         ]);
          if(!$validated){
-            return Redirect::back()->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
 
          }else{
         $user_id =   Auth::user()->id;
@@ -166,7 +176,7 @@ class ProductController extends Controller
             'cat_id' => 'required',
         ]);
          if(!$validated){
-            return Redirect::back()->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
 
          }else{
         $user_id =   Auth::user()->id;

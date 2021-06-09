@@ -92,7 +92,7 @@
                <th>Product</th>
                <th>Status</th>
               @can('subCat-edit')
-               <th>Option</th>
+               <th>EditOptions</th>
                @endcan
               </tr>
             </thead>
@@ -166,11 +166,13 @@ $(document).ready(function(){
     name: 'action5',
     orderable: true
    },
+   @can('subCat-edit')
    {
     data: 'action6',
     name: 'action6',
     orderable: true
    }
+   @endcan
 
 
 

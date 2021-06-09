@@ -79,7 +79,7 @@
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{ route('admin.insert.user') }}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.user') }}">
         @csrf
           <fieldset>
             <div class="form-group">
