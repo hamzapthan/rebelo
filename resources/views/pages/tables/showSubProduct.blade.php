@@ -27,7 +27,7 @@
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                <th>No</th>
+
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Sub Category</th>
@@ -41,11 +41,11 @@
               </tr>
             </thead>
             <tbody>
-            <?php $i=1; ?>
+
              @foreach($subProduct as $subProducts)
 
-              <tr id="row_{{$subProducts->id}}">
-              <td>{{ $i++ }}</td>
+
+
                 <td>{{ $subProducts->subName}}</td>
                 <td>{{ $subProducts->subBrnad}}</td>
               <?php   $id = $subProducts->id;

@@ -91,7 +91,9 @@
                <th>Category</th>
                <th>Product</th>
                <th>Status</th>
+              @can('subCat-edit')
                <th>Option</th>
+               @endcan
               </tr>
             </thead>
             <tbody>
