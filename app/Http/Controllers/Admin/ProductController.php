@@ -25,17 +25,17 @@ class ProductController extends Controller
      }
     // public function index()
     // {
-       
+
     //     $product = Product::with('proproduct')->orderBy('status', 'DESC')->get();
-      
+
     //     return view('pages.tables.showProduct',compact('product'));
     // }
     public function index(Request $request){
-      
+
         if($request->ajax())
         {
             $data = Product::with('proproduct')->orderBy('status', 'DESC')->get();
-            
+
         return DataTables::of($data)
                 ->addColumn('action1', function($data){
                     return $data->proName;
@@ -59,7 +59,7 @@ class ProductController extends Controller
                     <span class="slider round"></span>
                 </label></div>';
                     return  $actionbtn;
-                 
+
                 }
 
                 })
@@ -69,19 +69,19 @@ class ProductController extends Controller
                 })
                 ->editColumn('action6', function($data){
                     $route = route("delete.pro",$data->id);
-                    $actionssbtn = '<a href="'.route('pro.edit',$data->id) .'"><button   type="button"  class="edit btn btn-primary btn-sm">Edit</button></a> ';  
+                    $actionssbtn = '<a href="'.route('pro.edit',$data->id) .'"><button   type="button"  class="edit btn btn-primary btn-sm">Edit</button></a> ';
                     $actionssbtn .= '<button type="button" id="delete_row"  class="edit btn btn-primary btn-sm" onclick="delete_pro('.$data->id.',this)">Delete</button></div>';
-                   
+
                     return $actionssbtn;
                 })
-                
+
                 ->rawColumns(['action1','action2','action3','action4','action5','action6'])
                 ->make(true);
         }
 
 
      return view('pages.admin.subProduct');
-        
+
    }
 
     /**
@@ -113,12 +113,12 @@ class ProductController extends Controller
          }else{
         $user_id =   Auth::user()->id;
        $cat_id = $request->cat_id;
-     
+
         $proInsert = new Product();
         $proInsert->proName = $request->proName;
         $proInsert->proBrnad = $request->proBrnad;
         $proInsert->status = 1;
-        $users = User::find($user_id); 
+        $users = User::find($user_id);
         $proInsert->user()->associate($users);
         $category = Category::find($cat_id);
         $proInsert->backcatproduct()->associate($category);
@@ -171,18 +171,18 @@ class ProductController extends Controller
          }else{
         $user_id =   Auth::user()->id;
        $cat_id = $request->cat_id;
-     
+
         $proInsert = Product::find($id);
         $proInsert->proName = $request->proName;
         $proInsert->proBrnad = $request->proBrnad;
         $proInsert->status = 1;
-        $users = User::find($user_id); 
+        $users = User::find($user_id);
         $proInsert->user()->associate($users);
         $category = Category::find($cat_id);
         $proInsert->backcatproduct()->associate($category);
         $proInsert->save();
         return redirect()->back()->with('message', 'Data Updated Successfully!');
-         
+
     }
     }
 
@@ -214,7 +214,7 @@ class ProductController extends Controller
 
 public function showProSubProducts($pro_id){
     $proName = Product::find($pro_id);
- 
+
     $subProduct = Product::find($pro_id)->subproduct;
     return view('pages.tables.showAllProducts',compact('subProduct','proName'));
 }

@@ -13,13 +13,13 @@
       width: 60px;
       height: 34px;
     }
-    
-    .switch input { 
+
+    .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
-    
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -31,7 +31,7 @@
       -webkit-transition: .4s;
       transition: .4s;
     }
-    
+
     .slider:before {
       position: absolute;
       content: "";
@@ -43,26 +43,26 @@
       -webkit-transition: .4s;
       transition: .4s;
     }
-    
+
     input:checked + .slider {
       background-color: #2196F3;
     }
-    
+
     input:focus + .slider {
       box-shadow: 0 0 1px #2196F3;
     }
-    
+
     input:checked + .slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
     }
-    
+
     /* Rounded sliders */
     .slider.round {
       border-radius: 34px;
     }
-    
+
     .slider.round:before {
       border-radius: 50%;
     }
@@ -70,18 +70,20 @@
 
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Tables</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data Table</li>
   </ol>
 </nav>
 <div id="message"></div>
+@can('subCat-create')
+     <a href="{{ route('create.pro')}}">
+      <button type="button" class="btn btn-primary ml-3 mb-3">Add New Sub Category</button></a>
+      @endcan
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Data Table</h6>
+        <h6 class="card-title">Sub Category</h6>
         <div class="table-responsive">
-        <table id="sub_category" class="table table-bordered table-striped">
+        <table id="sub_category" class="table ">
         <thead>
               <tr>
                <th>Name</th>
@@ -125,7 +127,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
   <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 <script>
@@ -138,7 +140,7 @@ $(document).ready(function(){
    url: "{{ route('show.pro.all') }}",
   },
   columns: [
-    
+
    {
     data: 'action1',
     name: 'action1'
@@ -169,7 +171,7 @@ $(document).ready(function(){
    }
 
 
-   
+
   ]
  });
 
@@ -215,7 +217,7 @@ function change_status_active(id){
                 var sts = "switch_"+id;
                 $('#'+sts).html(' <label class="switch"><input type="checkbox" checked onchange="change_status_inactive('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
-                setInterval(function(){ 
+                setInterval(function(){
                     $('#message').html('');
                 }, 2000);
             }
@@ -236,17 +238,17 @@ function change_status_active(id){
                 var sts = "switch_"+id;
                 $('#'+sts).html(' <label class="switch"><input type="checkbox"  onchange="change_status_active('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
-                setInterval(function(){ 
+                setInterval(function(){
                     $('#message').html('');
-                   
+
                 }, 2000);
             }
         });
     }
-   
+
    function delete_pro(id){
 
-console.log(id)
+
   let _token   = $('meta[name="csrf-token"]').attr('content');
   let _url = '{{ route('delete.pro') }}';
 $.ajax({
@@ -258,7 +260,7 @@ $.ajax({
   },
   success:function(response){
     $('#delete_row').closest("tr").remove();
-    
+
 
    }
 });

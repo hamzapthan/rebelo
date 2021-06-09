@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SubProduct;
 use App\Models\User;
 use App\Models\Product;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use File;
 
 use Illuminate\Support\Facades\Validator;
@@ -37,7 +37,8 @@ class SubProductController extends Controller
      */
     public function create()
     {
-        return view('pages.forms.addSubProduct');
+        $products = Product::productons();
+        return view('pages.forms.addSubProduct',compact('products'));
 
     }
 
@@ -49,36 +50,31 @@ class SubProductController extends Controller
      */
     public function store(Request $request)
     {
+
          $validated = $request->validate([
             'subName' => 'required',
             'subBrnad' => 'required',
             'subColour' => 'required',
-            'subImage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'subImage' => 'required',
+            'subImage.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'subDetail' => 'required',
             'subMetaTitle' => 'required',
             'subMetaDesc' => 'required',
             'subMetaKeyword' => 'required',
-
              ]);
 
          if(!$validated){
             return redirect()->back()->withErrors($validated);
-
          }else{
-
             foreach($request->file('subImage') as $image)
             {
             $imageName=$image->getClientOriginalName();
             $file_name = time().rand(100,999).$imageName;
             $image->move(public_path().'/project/', $file_name);
             $subproImage = url('project/'.$file_name);
-
             $fileNames[] = $subproImage;
             }
             $images = json_encode($fileNames);
-
-
-
             $user_id =   Auth::user()->id;
             $pro_id = $request->pro_id;
             $addCategory = SubProduct::updateOrCreate(['id'=>$request->id],[
@@ -195,11 +191,11 @@ class SubProductController extends Controller
 
     $silentPro = SubProduct::where('id',$id)->update(array('status'=>'1'));
     return response()->json(['success'=>'Post Deleted successfully']);
-}
+   }
    public function image($id){
 
     $subProImage = SubProduct::find($id);
-return view('pages.forms.subProImage',compact('subProImage'));
+    return view('pages.forms.subProImage',compact('subProImage'));
 
    }
 

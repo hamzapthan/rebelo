@@ -15,14 +15,14 @@ class Category extends Model
         'image',
         'status',
     ];
-   
+
     public function users()
     {
         return $this->belongsTo(User::class,'user_id','id');
     }
-    
-   
-    
+
+
+
 
     public function comments()
     {
@@ -34,7 +34,7 @@ class Category extends Model
     }
     public function catproducts()
     {
-        return $this->hasMany(Product::class,'cat_id','id')->orderBy('status', 'DESC');
+        return $this->hasMany(Product::class,'cat_id','id');
     }
 
 

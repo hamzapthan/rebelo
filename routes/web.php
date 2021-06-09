@@ -334,11 +334,11 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('cat.edit'); // show ssingle product
             Route::post('/updateCat/{id}', [CategoryController::class , 'update'])
                 ->name('update.cat'); // show ssingle product
-            Route::get('/catStatusSilent/{cat_id}', [CategoryController::class , 'silent'])
+            Route::get('/catStatusSilent', [CategoryController::class , 'silent'])
                 ->name('cat.silent'); // show ssingle product
-            Route::get('/catStatusOn/{cat_id}', [CategoryController::class , 'catStatusOn'])
-                ->name('cat.silent'); // show ssingle product
-            Route::Delete('/deleteCat/{cat_id}', [CategoryController::class , 'destroy'])
+            Route::get('/catStatusOn', [CategoryController::class , 'catStatusOn'])
+                ->name('cat.silent.on'); // show ssingle product
+            Route::get('/deleteCat/', [CategoryController::class , 'destroy'])
                 ->name('delete.cat'); // show all category
             Route::get('/showCatPro/{cat_id}', [CategoryController::class , 'showCatPro'])
                 ->name('show.catPro'); // show ssingle product
@@ -361,10 +361,8 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('pro.edit'); // show all pro
             Route::post('/updatePro/{id}', [ProductController::class , 'update'])
                 ->name('update.pro'); // show ssingle pro
-           
             Route::get('/proStatusSilent', [ProductController::class , 'silent'])
                 ->name('pro.status.silent'); // show ssingle product
-           
             Route::get('/proStatusOn', [ProductController::class , 'proStatusOn'])
                 ->name('pro.status.on'); // show ssingle product
             Route::get('/deletePro', [ProductController::class , 'destroy'])
@@ -375,7 +373,7 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('show.pro'); // show ssingle pro
             Route::get('/showPro', [ProductController::class , 'index'])
                 ->name('show.pro.all'); // show all pro
-            
+
         });
         //  Routes for SubProduct
         Route::group(['prefix' => 'products'], function ()

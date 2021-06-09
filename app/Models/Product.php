@@ -22,22 +22,22 @@ class Product extends Model
     {
         return $this->belongsTo(User::class,'user_id','id');
     }
-    
-    public function backcatproduct()
-    {
+
+    public function backcatproduct(){
         return $this->belongsTo(Category::class,'cat_id','id');
     }
-   
+
     public function statusproduct(){
-    
         return $this->orderBy('status', 'DESC');
     }
-    
+
     public function scopeproducton(){
-    
-        return $this->where('status', '1');
+        return $this->where('status', '1')->get();
     }
-    
+    public function scopeproductons(){
+        return $this->where('status',1)->get();
+    }
+
 
     public function proproduct(){
         return $this->hasMany(SubProduct::class,'pro_id','id');
@@ -49,12 +49,12 @@ class Product extends Model
     public function categories(){
         return $this->hasOne(Category::class,'id','cat_id');
     }
-    
+
     public function product(){
         return $this->hasMany(SubProduct::class,'pro_id','id');
     }
-    
-   
-    
-   
+
+
+
+
 }

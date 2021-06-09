@@ -12,13 +12,13 @@
       width: 60px;
       height: 34px;
     }
-    
-    .switch input { 
+
+    .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
-    
+
     .slider {
       position: absolute;
       cursor: pointer;
@@ -30,7 +30,7 @@
       -webkit-transition: .4s;
       transition: .4s;
     }
-    
+
     .slider:before {
       position: absolute;
       content: "";
@@ -42,31 +42,31 @@
       -webkit-transition: .4s;
       transition: .4s;
     }
-    
+
     input:checked + .slider {
       background-color: #2196F3;
     }
-    
+
     input:focus + .slider {
       box-shadow: 0 0 1px #2196F3;
     }
-    
+
     input:checked + .slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
     }
-    
+
     /* Rounded sliders */
     .slider.round {
       border-radius: 34px;
     }
-    
+
     .slider.round:before {
       border-radius: 50%;
     }
     </style>
-    
+
 <!-- <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Tables</a></li>
@@ -98,23 +98,23 @@
                 <td>{{ $generalAll->section }}</td>
               <td>
                 @if($generalAll->status == 1)
-                  <div id="switch_{{ $generalAll->id }}"> 
+                  <div id="switch_{{ $generalAll->id }}">
                 <label class="switch">
                         <input type="checkbox" checked onchange="change_status_inactive({{ $generalAll->id }})">
                         <span class="slider round"></span>
                     </label>
- 
+
                 @else
                     <label class="switch">
                         <input type="checkbox" onchange="change_status_active({{ $generalAll->id }})">
                         <span class="slider round"></span>
-                    </label>  
+                    </label>
                 @endif
-            </div>  
+            </div>
             </td>
-               
+
                 {{-- <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" >Edit</button></td> --}}
-            <td><button class="btn btn-primary" onclick="DataModel({{ $generalAll->id }})">Edit</button></td>   
+            <td><button class="btn btn-primary" onclick="DataModel({{ $generalAll->id }})">Edit</button></td>
             </tr>
               @endforeach
 
@@ -156,8 +156,8 @@
                 <td><input class="form-control" name="image" type="file"></td>
                 <td>
                     <input type="text" class="form-control" name="button_title" placeholder="Enter Button title"><br>
-                    <input type="text" class="form-control" name="button_link" placeholder="Enter Button link"> 
-                    <input type="hidden" class="form-control" name="id" id="id"  > 
+                    <input type="text" class="form-control" name="button_link" placeholder="Enter Button link">
+                    <input type="hidden" class="form-control" name="id" id="id"  >
                 </td>
                 </tr>
             </tbody>
@@ -209,7 +209,7 @@
         $('#id').val(id);
         $('#home_slider').modal('show');
 
-    } 
+    }
     function change_status_inactive(id){
         let _url = '{{ route('admin.generalSetting.slider_status_inactive') }}';
         let _token   = $('meta[name="csrf-token"]').attr('content');
@@ -224,9 +224,9 @@
                 var sts = "switch_"+id;
                 $('#'+sts).html(' <label class="switch"><input type="checkbox"  onchange="change_status_active('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
-                setInterval(function(){ 
+                setInterval(function(){
                     $('#message').html('');
-                   
+
                 }, 2000);
             }
         });
@@ -245,7 +245,7 @@
                 var sts = "switch_"+id;
                 $('#'+sts).html(' <label class="switch"><input type="checkbox" checked onchange="change_status_inactive('+id+')"><span class="slider round"></span></label>')
                 $('#message').html('<div class="alert alert-success">'+response.message+'</div>');
-                setInterval(function(){ 
+                setInterval(function(){
                     $('#message').html('');
                 }, 2000);
             }

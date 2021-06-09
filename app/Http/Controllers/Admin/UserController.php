@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
-use DB;
-use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 
 class UserController extends Controller
@@ -23,20 +23,20 @@ class UserController extends Controller
         $this->middleware('permission:user-create', ['only' => ['create','store']]);
         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
-       
+
      }
     public function index()
-    { 
+    {
         $id = Auth::user()->id;
-       
+
         $userAll = User::showUser($id);
-        return view('pages.tables.showUser',compact('userAll'));   
+        return view('pages.tables.showUser',compact('userAll'));
     }
     public function frontUser()
-    { 
+    {
         $frontendUser = User::showFrontUser();
-       
-        return view('pages.tables.showUser',compact('frontendUser'));   
+
+        return view('pages.tables.showUser',compact('frontendUser'));
     }
 
     /**
@@ -58,16 +58,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users|max:255',
             'password' => 'required|min:8',
             'adminroles' => 'required',
-            
+
         ]);
          if(!$validated){
-            return Redirect::back()->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
 
          }else{
              $id = $request->id;
@@ -80,7 +80,7 @@ class UserController extends Controller
             DB::table('model_has_roles')->where('model_id',$id)->delete();
             $user->assignRole($request->adminroles);
 
-            return redirect()->back()->with('message','data inserted successfully');
+            return redirect()->back()->with('message','Data Inserted Successfully');
              }
     }
 
@@ -104,9 +104,16 @@ class UserController extends Controller
     public function edit($id)
     {
         $userEdit = User::find($id);
-        
-        return view('pages.forms.addUser',compact('userEdit'));   
-    
+        $allRoles =Role::all();
+        $assignRole  = User::datainsert($userEdit->id);
+            foreach($assignRole as $roleName){
+                $assignRoleId = $roleName->id;
+            }
+
+
+
+        return view('pages.forms.addUser',compact('userEdit','assignRoleId','allRoles'));
+
     }
 
     /**
@@ -127,11 +134,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy(Request $request)
+    {   $id = $request->id;
         $delete_id = User::find($id);
         $delete_id->delete();
         return response()->json(['success'=>'data deleted successsfully']);
-   
+
     }
 }

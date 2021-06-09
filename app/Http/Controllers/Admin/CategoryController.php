@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Auth;
+
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 class CategoryController extends Controller
 {
@@ -22,7 +23,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $category = Category::status();
+        $category = Category::with('catproducts')->orderBy('status', 'Desc')->get();
         return view('pages.tables.showCategory',compact('category'));
     }
 
@@ -51,7 +52,7 @@ class CategoryController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
          if(!$validated){
-            return Redirect::back()->withErrors($validated);
+            return redirect()->back()->withErrors($validated);
 
          }else{
 
@@ -152,29 +153,31 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($cat_id)
+    public function destroy(Request $request)
     {
-         $delete_id = Category::find($cat_id);
+        $cat_id = $request->id;
+        $delete_id = Category::find($cat_id);
         $delete_id->delete();
         return response()->json(['success'=>'data deleted successsfully']);
     }
 
-    public function silent($cat_id)
+    public function silent(Request $request)
     {
+        $cat_id = $request->id;
         $update = Category::where('id',$cat_id)->update(array('status'=>'0'));
-       return response()->json(['success'=>'Post Deleted successfully']);
+       return response()->json(['message'=>'Category Deactivated successfully']);
     }
     public function showCatPro($cat_id){
         $catName = Category::find($cat_id);
-
         $catProduct = Category::find($cat_id)->catproducts;
         return view('pages.tables.showAllProducts',compact('catProduct','catName'));
     }
 
-    public function catStatusOn($cat_id)
-    {
+    public function catStatusOn(Request $request)
+    { $cat_id = $request->id;
+
         $update = Category::where('id',$cat_id)->update(array('status'=>'1'));
-       return response()->json(['success'=>'Post Deleted successfully']);
+       return response()->json(['message'=>'Category Activated successfully']);
     }
 
 }

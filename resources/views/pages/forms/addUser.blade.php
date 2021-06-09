@@ -4,13 +4,13 @@
 <link href="{{ asset('assets/plugins/select2/select2.min.css') }}" rel="stylesheet" />
   <link href="{{ asset('assets/plugins/jquery-tags-input/jquery.tagsinput.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
-  
+
 @endpush
 
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    
+
   </ol>
 </nav>
 @if(isset($userEdit))
@@ -25,7 +25,7 @@
         {{ session()->get('message') }}
     </div>
         @endif
-        <form class="cmxform" id="signupForm" method="post" action="{{ route('admin.insert.user') }}">
+        <form class="cmxform" id="signupForm" method="post" action="{{ route('insert.user') }}">
         @csrf
           <fieldset>
             <div class="form-group">
@@ -51,24 +51,14 @@
             </div>
             <div class="form-group">
           <label>Select</label>
-          <?php
-           $cat_id = $userEdit->id;
-          $datas   =   App\Models\User::datainsert($cat_id);
-          foreach($datas as $name){
-             $cats_id = $name->id;
-              }
-              $countries = Spatie\Permission\Models\Role::all();
-               
-                ?>
-         
           <select class="js-example-basic-single w-100" name="adminroles" >
-          @foreach($countries as $role)
-            <option value="{{ $role->id }}" {{ $cats_id == $role->id ? 'selected="selected"' : '' }}>{{ $role->name }}</option>    
-    @endforeach
+           @foreach($allRoles as $role)
+            <option value="{{ $role->id }}"  {{ $assignRoleId == $role->id ? 'selected="selected"' : '' }} >{{ $role->name }}</option>
+            @endforeach
           </select>
-         
+
         </div>
-           
+
             <input type="hidden" value="{{ $userEdit->id }}" name="id">
             <input class="btn btn-primary" type="submit" value="Submit">
           </fieldset>
@@ -133,10 +123,10 @@
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js') }}"></script>
- 
+
 @endpush
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/typeahead.js') }}"></script>
-  
+
 @endpush

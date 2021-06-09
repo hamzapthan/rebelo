@@ -121,7 +121,6 @@
     </div>
   </div>
 </div>
-
 @else
 <div class="row">
   <div class="col-lg-8 grid-margin stretch-card align center">
@@ -188,16 +187,14 @@
             <div class="form-group">
           <label>Select Sub Category</label>
           <select class="js-example-basic-single w-100" name="pro_id">
-            <?php $product = App\Models\Product::producton();
 
-           ?>
-           @if(count($product))
-            @foreach($product as $products)
-            <option value="{{ $products->id}}">{{$products->proName}}</option>
+
+            @foreach($products as $product)
+            <option value="{{ $product->id}}">{{$product->proName}} </option>
             @endforeach
-            @else
-            <option >No data</option>
-            @endif
+
+            {{-- <option >No data</option>
+            @endif --}}
           </select>
         </div>
         <div class="form-group">

@@ -44,7 +44,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function category(){
         return $this->hasMany(Category::class,'user_id','id');
     }
@@ -55,7 +55,7 @@ class User extends Authenticatable
     public function userproduct(){
         return $this->hasMany(Product::class,'user_id','id');
     }
-    
+
     public function usersubproduct(){
         return $this->hasMany(SubProduct::class,'user_id','id');
     }
@@ -64,21 +64,21 @@ class User extends Authenticatable
     }
 
 
-     public function scopedatainsert($query,$id){
+    public function scopedatainsert($query,$id){
         return $query->join('model_has_roles','model_has_roles.model_id','=','users.id')
         ->join('roles','roles.id','=','model_has_roles.role_id')
         ->where('model_has_roles.model_id',$id)
         ->select('roles.*')
         ->get();
-        
-     }
+
+    }
 
     public function scopeshowUser($query,$id){
         return $query->whereNotIn('id',[$id])
-        ->where('role',1)  
+        ->where('role',1)
         ->get();
     }
-    
+
 
 
     public function scopeshowFrontUser($query){
