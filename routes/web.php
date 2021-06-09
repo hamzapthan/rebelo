@@ -295,11 +295,13 @@ Route::group(['prefix' => 'error'], function ()
     });
 });
 
-// Route::get('/clear-cache', function ()
-// {
-//     Artisan::call('cache:clear');
-//     return "Cache is cleared";
-// });
+Route::get('/clear', function ()
+{
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    return "Cache is cleared";
+});
 
 Route::get('admin/form', function ()
 {

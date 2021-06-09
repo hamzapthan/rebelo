@@ -33,7 +33,7 @@
 <div class="row">
   <div class="col-12 col-xl-12 stretch-card">
     <div class="row flex-grow">
-     @can('user-list') 
+     @can('user-list')
       <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
@@ -56,11 +56,11 @@
               <div class="col-6 col-md-12 col-xl-5">
                 <h3 class="mb-2">{{ $countAdminCustomer}}</h3>
                 <div class="d-flex align-items-baseline">
-                  
+
                 </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart1" class="mt-md-3 mt-xl-0"></div>
+                <div id="admin_graph" class="mt-md-3 mt-xl-0"></div>
               </div>
             </div>
           </div>
@@ -91,13 +91,13 @@
                 <h3 class="mb-2">{{ $countFrontendCustomer}}</h3>
                 <div class="d-flex align-items-baseline">
                   <p class="text-danger">
-                 
+
                     <i data-feather="arrow-down" class="icon-sm mb-1"></i>
                   </p>
                 </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart2" class="mt-md-3 mt-xl-0"></div>
+                <div id="users_graph" class="mt-md-3 mt-xl-0"></div>
               </div>
             </div>
           </div>
@@ -128,7 +128,7 @@
                 <h3 class="mb-2">{{ $subProduct }}</h3>
                 <div class="d-flex align-items-baseline">
                   <p class="text-success">
-                   
+
                    </p>
                 </div>
               </div>
@@ -170,7 +170,7 @@
               <div class="col-6 col-md-12 col-xl-5">
                 <h3 class="mb-2">{{ $pendingOrders }}</h3>
                 <div class="d-flex align-items-baseline">
-                  
+
                 </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
@@ -204,7 +204,7 @@
               <div class="col-6 col-md-12 col-xl-5">
                 <h3 class="mb-2">{{ $deliveredOrders }}</h3>
                 <div class="d-flex align-items-baseline">
-                  
+
                   </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
@@ -239,7 +239,7 @@
                 <h3 class="mb-2">{{ $countIncome}}</h3>
                 <div class="d-flex align-items-baseline">
                   <p class="text-success">
-                   
+
                    </p>
                 </div>
               </div>
@@ -281,7 +281,7 @@
                 <h3 class="mb-2">{{ $receivedSellPro  }}</h3>
                 <div class="d-flex align-items-baseline">
                 <p class="text-danger">
-                   
+
                     <i data-feather="arrow-up" class="icon-sm mb-1"></i>
                 </div>
               </div>
@@ -327,7 +327,7 @@
           </div>
         </div>
       </div>
-     
+
     </div>
   </div>
 </div> <!-- row -->
@@ -398,7 +398,7 @@
         <div class="monthly-sales-chart-wrapper">
           <canvas id="monthly-sales-chart"></canvas>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   <div class="col-lg-5 col-xl-4 grid-margin stretch-card">
@@ -564,16 +564,16 @@
                 <td>{{ $orderAlls->order_number}}</td>
                 <td>{{ $orderAlls->first_name}}  {{ $orderAlls->last_name}}</td>
                 <td>{{ $orderAlls->grand_total}}</td>
-                
+
                 <td>{{ $orderAlls->created_at}}</td>
-                
+
                 <td><a href="{{ route('order.show.single',$orderAlls->id)}}">View</a> </td>
             </tr>
-              @endforeach 
+              @endforeach
             </tbody>
           </table>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
   @endcan
@@ -588,6 +588,105 @@
   <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/progressbar-js/progressbar.min.js') }}"></script>
+  <script>
+      
+    // Apex chart1 start
+    if ($('#users_graph').length) {
+        var options1 = {
+            chart: {
+                type: "line",
+                height: 60,
+                sparkline: {
+                    enabled: !0
+                }
+            },
+            series: [{
+                data: [
+                    @foreach($frontendUsers as $user)
+                        {{ $user->count() }},
+                    @endforeach
+                ]
+            }],
+            stroke: {
+                width: 2,
+                curve: "smooth"
+            },
+            markers: {
+                size: 0
+            },
+            colors: ["#727cf5"],
+            tooltip: {
+                fixed: {
+                    enabled: !1
+                },
+                x: {
+                    show: !1
+                },
+                y: {
+                    title: {
+                        formatter: function(e) {
+                            return ""
+                        }
+                    }
+                },
+                marker: {
+                    show: !1
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#users_graph"), options1).render();
+    }
+    // Apex chart1 end
+    if ($('#admin_graph').length) {
+        var options2 = {
+            chart: {
+                type: "bar",
+                height: 60,
+                sparkline: {
+                    enabled: !0
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: "60%"
+                }
+            },
+            colors: ["#727cf5"],
+            series: [{
+                data: [
+                    @foreach($frontendUsers as $user)
+                        {{ $user->count() }},
+                    @endforeach
+                ]
+            }],
+            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            xaxis: {
+                crosshairs: {
+                    width: 1
+                }
+            },
+            tooltip: {
+                fixed: {
+                    enabled: !1
+                },
+                x: {
+                    show: !1
+                },
+                y: {
+                    title: {
+                        formatter: function(e) {
+                            return ""
+                        }
+                    }
+                },
+                marker: {
+                    show: !1
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#admin_graph"), options2).render();
+    }
+  </script>
 @endpush
 
 @push('custom-scripts')
