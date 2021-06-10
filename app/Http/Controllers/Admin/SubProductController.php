@@ -42,7 +42,7 @@ class SubProductController extends Controller
                     return $data->subBrnad;
                 })
                 ->addColumn('action3', function($data){
-                    return $data->subBrnad;
+                    return $data->backproproduct->proName;
                 })
                 ->addColumn('action4', function($data){
                     $hyper = '<a href="'.route('show.subPro',$data->id) .'">View</a>';
