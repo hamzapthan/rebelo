@@ -21,18 +21,26 @@ class GeneralSettingController extends Controller
         $generalAlls = GSetting::all();
         return view('pages.tables.generalSetting',compact('generalAlls'));
     }
-    
+    public function edit(Request $request){
+        $id = $request->id;
+        $data = GSetting::find($id);
+        $datas = $data->content;
+       return response()->json(
+           ['message'=>$datas]
+        );
+    }
+
     public function home_slider1(Request $request){
-       
+
         $setting = GSetting::find($request->id);
         $content = json_decode($setting->content);
-               
+
         $image= $content->image;
         if($request->has('image')){
             $imageName=$request->file('image')->getClientOriginalName();
             $file_name = time().rand(100,999).$imageName;
-            $request->file('image')->move(public_path().'/setting/home_slider', $file_name);  
-            $image = url('/setting/home_slider'.$file_name);   
+            $request->file('image')->move(public_path().'/setting/home_slider', $file_name);
+            $image = url('/setting/home_slider'.$file_name);
         }
         $array = array(
             'title'=>$request->title,
@@ -40,13 +48,14 @@ class GeneralSettingController extends Controller
             'button_title'=>$request->button_title,
             'button_link'=>$request->button_link,
             'image'=>$image,
-           
+
         );
         $json = json_encode($array);
         $setting->content = $json;
         $setting->update();
         return redirect()->back()->with('success','Data is updated');
     }
+
     public function slider_status_inactive(Request $request)
     {
         $id = $_GET['id'];
@@ -64,7 +73,7 @@ class GeneralSettingController extends Controller
         return response()->json([
             'success' => 'true',
             'message' => 'Slider has been Activated',
-            
+
         ],200);
     }
 

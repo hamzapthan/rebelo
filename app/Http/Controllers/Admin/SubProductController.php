@@ -5,10 +5,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\SubProduct;
-use App\Models\User;
-use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+use App\Models\User;
 use File;
 use Yajra\Datatables\Datatables;
 use Yajra\DataTables\DataTables as DataTablesDataTables;
@@ -29,11 +28,67 @@ class SubProductController extends Controller
         $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:product-delete', ['only' => ['destroy']]);
      }
-    public function index()
+    public function index(Request $request)
     {
-        $subProduct = SubProduct::subProStatus();
+        if($request->ajax())
+        {
+            $data = SubProduct::with('subprooductstorage')->orderBy('status', 'DESC')->get();
 
-        return view('pages.tables.showSubProduct',compact('subProduct'));
+        return DataTables::of($data)
+                ->addColumn('action1', function($data){
+                    return $data->subName;
+                })
+                ->addColumn('action2', function($data){
+                    return $data->subBrnad;
+                })
+                ->addColumn('action3', function($data){
+                    return $data->subBrnad;
+                })
+                ->addColumn('action4', function($data){
+                    $hyper = '<a href="'.route('show.subPro',$data->id) .'">View</a>';
+                    return $hyper;
+
+                })
+                ->addColumn('action5', function($data){
+
+                    if($data->status == 1){
+                    $actionbtn =  '<div id="switch_'.$data->id.'"><label class="switch">
+                    <input type="checkbox" checked onchange="change_status_inactive('.$data->id.')">
+                    <span class="slider round"></span>
+                </label></div>';
+                     return $actionbtn;
+                  }else{
+                    $actionbtn =  '<div id="switch_'.$data->id.'"><label class="switch">
+                    <input type="checkbox"  onchange="change_status_active( '.$data->id.' )">
+                    <span class="slider round"></span>
+                </label></div>';
+                    return  $actionbtn;
+               }
+                })
+               ->addColumn('action6', function($data){
+                    $actions = '<a href="'. route('subpro.storage',$data->id) .'">Storage('.count($data->subprooductstorage).') </a>';
+                   return $actions;
+                })
+
+                ->editColumn('action7', function($data){
+
+                    $route = route("delete.subPro",$data->id);
+                    $actionssbtn = '<a href="'.route('subpro.edit',$data->id) .'"><button   type="button"  class="edit btn btn-primary btn-sm">Edit</button></a> ';
+                    $actionssbtn .= '<button type="button" id="delete_row"  class="edit btn btn-primary btn-sm" onclick="delete_pro('.$data->id.',this)">Delete</button></div>';
+
+                    return $actionssbtn;
+
+                })
+
+                ->rawColumns(['action1','action2','action3','action4','action5','action6','action7'])
+                ->make(true);
+        }
+
+
+     return view('pages.tables.showSubProduct');
+
+
+        // return view('pages.tables.showSubProduct',compact('subProduct'));
     }
 
     /**
@@ -180,23 +235,23 @@ class SubProductController extends Controller
     //
 }
 
-     public function destroy($id)
-    {
+     public function destroy(Request $request)
+    {     $id = $request->id;
         $subProDelete = SubProduct::find($id);
         $subProDelete->delete();
-        return response()->json(['success'=>'deletes']);
+        return response()->json(['message'=>'Data Deleted Successfully']);
     }
 
-    public function silent($id){
-
+    public function silent(Request $request){
+        $id = $request->id;
         $silentPro = SubProduct::where('id',$id)->update(array('status'=>'0'));
-        return response()->json(['success'=>'Post Deleted successfully']);
+        return response()->json(['message'=>'Product Deactivated successfully']);
    }
 
-   public function subproStatusOn($id){
-
+   public function subproStatusOn(Request $request){
+        $id = $request->id;
     $silentPro = SubProduct::where('id',$id)->update(array('status'=>'1'));
-    return response()->json(['success'=>'Post Deleted successfully']);
+    return response()->json(['message'=>'Product Activated successfully']);
    }
    public function image($id){
 

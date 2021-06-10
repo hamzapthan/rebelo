@@ -92,7 +92,7 @@
                <th>Product</th>
                <th>Status</th>
               @can('subCat-edit')
-               <th>EditOptions</th>
+               <th>Options</th>
                @endcan
               </tr>
             </thead>

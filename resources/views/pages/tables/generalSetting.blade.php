@@ -125,6 +125,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade bd-example-modal-xl" id="home_slider" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
 
@@ -146,17 +147,17 @@
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
                 <th scope="col">Button</th>
-                <th scope="col">Status</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                <td><input type="text" class="form-control" name="title" placeholder="Title"> </td>
-                <td><textarea  name="description"></textarea></td>
+                <td><input type="text" class="form-control" name="title"  id="title"> </td>
+                <td><textarea  name="description" id="description"></textarea></td>
                 <td><input class="form-control" name="image" type="file"></td>
                 <td>
-                    <input type="text" class="form-control" name="button_title" placeholder="Enter Button title"><br>
-                    <input type="text" class="form-control" name="button_link" placeholder="Enter Button link">
+                    <input type="text" class="form-control" name="button_title" placeholder="Enter Button title" id="button_title"><br>
+                    <input type="text" class="form-control" name="button_link" placeholder="Enter Button link" id="button_link">
                     <input type="hidden" class="form-control" name="id" id="id"  >
                 </td>
                 </tr>
@@ -206,8 +207,32 @@
 <script>
 
     function DataModel(id){
-        $('#id').val(id);
-        $('#home_slider').modal('show');
+           $('#id').val(id);
+
+        _url = '{{ route('admin.generalSetting.edit') }}';
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+        $.ajax({
+            type:'GET',
+            url:_url,
+            data:{
+            _token:_token,
+            id:id
+            },
+            success:function(response){
+             if(response){
+
+                 $('#title').val(response.message.title);
+                 $('#description').val(response.message.description);
+                 $('#button_link').val(response.message.button_link);
+                 $('#button_title').val(response.message.button_title);
+
+                 $('#home_slider').modal('show');
+             }
+            }
+        });
+
+
+
 
     }
     function change_status_inactive(id){

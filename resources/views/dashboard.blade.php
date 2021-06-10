@@ -30,120 +30,7 @@
 </div>
 
 
-<div class="row">
-  <div class="col-12 col-xl-12 stretch-card">
-    <div class="row flex-grow">
-     @can('user-list')
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Admin Users</h6>
-              <div class="dropdown mb-2">
-                <button class="btn p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{ $countAdminCustomer}}</h3>
-                <div class="d-flex align-items-baseline">
-
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="admin_graph" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endcan
-      @can('user-list')
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Frontend User</h6>
-              <div class="dropdown mb-2">
-                <button class="btn p-0" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{ $countFrontendCustomer}}</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-danger">
-
-                    <i data-feather="arrow-down" class="icon-sm mb-1"></i>
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="users_graph" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      @endcan
-
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Sub Products</h6>
-              <div class="dropdown mb-2">
-                <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{ $subProduct }}</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-
-                   </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart3" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> <!-- row -->
-
-
+<!-- row -->
 <div class="row">
   <div class="col-12 col-xl-12 stretch-card">
     <div class="row flex-grow">
@@ -174,7 +61,7 @@
                 </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart1" class="mt-md-3 mt-xl-0"></div>
+                <div id="pending_order_graph" class="mt-md-3 mt-xl-0"></div>
               </div>
             </div>
           </div>
@@ -208,7 +95,7 @@
                   </div>
               </div>
               <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart2" class="mt-md-3 mt-xl-0"></div>
+                <div id="deliver_order_graph" class="mt-md-3 mt-xl-0"></div>
               </div>
             </div>
           </div>
@@ -220,7 +107,7 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Amount</h6>
+              <h6 class="card-title mb-0">Sales</h6>
               <div class="dropdown mb-2">
                 <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -235,18 +122,18 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">{{ $countIncome}}</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
+                <div class="col-6 col-md-12 col-xl-5">
+                  <h3 class="mb-2">{{ $countIncome  }}</h3>
+                  <div class="d-flex align-items-baseline">
+                  <p class="text-danger">
 
-                   </p>
+                      <i data-feather="arrow-up" class="icon-sm mb-1"></i>
+                  </div>
+                </div>
+                <div class="col-6 col-md-12 col-xl-7">
+                  <div id="sales_graph" class="mt-md-3 mt-xl-0"></div>
                 </div>
               </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="apexChart3" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -332,7 +219,118 @@
   </div>
 </div> <!-- row -->
 @endcan
+<div class="row">
+    <div class="col-12 col-xl-12 stretch-card">
+      <div class="row flex-grow">
+       @can('user-list')
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h6 class="card-title mb-0">Admin Users</h6>
+                <div class="dropdown mb-2">
+                  <button class="btn p-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-12 col-xl-5">
+                  <h3 class="mb-2">{{ $countAdminCustomer}}</h3>
+                  <div class="d-flex align-items-baseline">
 
+                  </div>
+                </div>
+                <div class="col-6 col-md-12 col-xl-7">
+                  <div id="admin_graph" class="mt-md-3 mt-xl-0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endcan
+        @can('user-list')
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h6 class="card-title mb-0">Frontend User</h6>
+                <div class="dropdown mb-2">
+                  <button class="btn p-0" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-12 col-xl-5">
+                  <h3 class="mb-2">{{ $countFrontendCustomer}}</h3>
+                  <div class="d-flex align-items-baseline">
+                    <p class="text-danger">
+
+                      <i data-feather="arrow-down" class="icon-sm mb-1"></i>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-6 col-md-12 col-xl-7">
+                  <div id="users_graph" class="mt-md-3 mt-xl-0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endcan
+
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-baseline">
+                <h6 class="card-title mb-0">Products</h6>
+                <div class="dropdown mb-2">
+                  <button class="btn p-0" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="eye" class="icon-sm mr-2"></i> <span class="">View</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="edit-2" class="icon-sm mr-2"></i> <span class="">Edit</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="trash" class="icon-sm mr-2"></i> <span class="">Delete</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="printer" class="icon-sm mr-2"></i> <span class="">Print</span></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#"><i data-feather="download" class="icon-sm mr-2"></i> <span class="">Download</span></a>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 col-md-12 col-xl-5">
+                  <h3 class="mb-2">{{ $subProduct }}</h3>
+                  <div class="d-flex align-items-baseline">
+                    <p class="text-success">
+
+                     </p>
+                  </div>
+                </div>
+                <div class="col-6 col-md-12 col-xl-7">
+                  <div id="product_graph" class="mt-md-3 mt-xl-0"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @can('show-admin')
 <div class="row">
   <div class="col-12 col-xl-12 grid-margin stretch-card">
@@ -589,8 +587,149 @@
   <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/progressbar-js/progressbar.min.js') }}"></script>
   <script>
-      
+
     // Apex chart1 start
+
+    if ($('#pending_order_graph').length) {
+        var options1 = {
+            chart: {
+                type: "line",
+                height: 60,
+                sparkline: {
+                    enabled: !0
+                }
+            },
+            series: [{
+                data: [
+                    @foreach($orderPendingGraph as $user)
+                        {{ $user->count() }},
+                    @endforeach
+                ]
+            }],
+            stroke: {
+                width: 2,
+                curve: "smooth"
+            },
+            markers: {
+                size: 0
+            },
+            colors: ["#727cf5"],
+            tooltip: {
+                fixed: {
+                    enabled: !1
+                },
+                x: {
+                    show: !1
+                },
+                y: {
+                    title: {
+                        formatter: function(e) {
+                            return ""
+                        }
+                    }
+                },
+                marker: {
+                    show: !1
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#pending_order_graph"), options1).render();
+    }
+    if ($('#deliver_order_graph').length) {
+        var options1 = {
+            chart: {
+                type: "line",
+                height: 60,
+                sparkline: {
+                    enabled: !0
+                }
+            },
+            series: [{
+                data: [
+                    @foreach($orderDeliverGraph as $order)
+                        {{ $order->count() }},
+                    @endforeach
+                ]
+            }],
+            stroke: {
+                width: 2,
+                curve: "smooth"
+            },
+            markers: {
+                size: 0
+            },
+            colors: ["#727cf5"],
+            tooltip: {
+                fixed: {
+                    enabled: !1
+                },
+                x: {
+                    show: !1
+                },
+                y: {
+                    title: {
+                        formatter: function(e) {
+                            return ""
+                        }
+                    }
+                },
+                marker: {
+                    show: !1
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#deliver_order_graph"), options1).render();
+    }
+    if ($('#sales_graph').length) {
+        var options2 = {
+            chart: {
+                type: "bar",
+                height: 60,
+                sparkline: {
+                    enabled: !0
+                }
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: "60%"
+                }
+            },
+            colors: ["#727cf5"],
+            series: [{
+                data: [
+                    @foreach($orderSalesGraph as $user)
+                        {{ $user->count() }},
+                    @endforeach
+                ]
+            }],
+            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            xaxis: {
+                crosshairs: {
+                    width: 1
+                }
+            },
+            tooltip: {
+                fixed: {
+                    enabled: !1
+                },
+                x: {
+                    show: !1
+                },
+                y: {
+                    title: {
+                        formatter: function(e) {
+                            return ""
+                        }
+                    }
+                },
+                marker: {
+                    show: !1
+                }
+            }
+        };
+        new ApexCharts(document.querySelector("#sales_graph"), options2).render();
+    }
+    
     if ($('#users_graph').length) {
         var options1 = {
             chart: {

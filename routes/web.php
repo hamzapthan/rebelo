@@ -387,12 +387,12 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('insert.subPro'); // Insert data
             Route::get('/showSubProall', [SubProductController::class , 'index'])
                 ->name('show.subPro.all'); // show all pro
-            Route::Delete('/deleteSubPro/{id}', [SubProductController::class , 'destroy'])
+            Route::get('/deleteSubPro/', [SubProductController::class , 'destroy'])
                 ->name('delete.subPro'); // show all pro
-            Route::get('/subproStatusSilent/{id}', [SubProductController::class , 'silent'])
+            Route::get('/subproStatusSilent/', [SubProductController::class , 'silent'])
                 ->name('subpro.silent'); // show ssingle product
-            Route::get('/subproStatusOn/{id}', [SubProductController::class , 'subproStatusOn'])
-                ->name('subpro.status'); // show ssingle product
+            Route::get('/subproStatusOn/', [SubProductController::class , 'subproStatusOn'])
+                ->name('subpro.status.on'); // show ssingle product
             Route::get('/subproduct/{id}/edit', [SubProductController::class , 'edit'])
                 ->name('subpro.edit'); // show ssingle product
             Route::get('/subproImage/{id}', [SubProductController::class , 'image'])
@@ -536,7 +536,9 @@ Route::group(['middleware' => ['auth']], function ()
                 ->name('admin.generalSetting.show'); // show all pro
             Route::post('/home_slider1', [GeneralSettingController::class , 'home_slider1'])
                 ->name('admin.generalSetting.home_slider1'); // show all pro
-            Route::post('/plugin', [GeneralSettingController::class , 'sliderStore'])
+            Route::get('/generalEdit/', [GeneralSettingController::class , 'edit'])
+                ->name('admin.generalSetting.edit'); // show all pro
+           Route::post('/plugin', [GeneralSettingController::class , 'sliderStore'])
                 ->name('slider.store'); // show all pro
             Route::get('/slider_status_inactive', [GeneralSettingController::class , 'slider_status_inactive'])
                 ->name('admin.generalSetting.slider_status_inactive');

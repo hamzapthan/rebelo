@@ -9,7 +9,7 @@ class SubProduct extends Model
 {
     use HasFactory;
     protected $fillable = [
-        
+
         'pro_id',
         'user_id',
         'subName',
@@ -20,10 +20,10 @@ class SubProduct extends Model
         'subMetaTitle',
         'subMetaDesc',
         'subMetaKeyword',
-        'status', 
+        'status',
 
     ];
-
+    protected $with = array('backproproduct');
 
      public function scopesubProStatus(){
          return $this->orderBy('status','DESC')->get();
@@ -31,7 +31,7 @@ class SubProduct extends Model
      public function user(){
           return $this->belongsTo(User::class,'user_id','id');
       }
-      
+
       public function backproproduct(){
           return $this->belongsTo(Product::class,'pro_id','id');
     }
@@ -51,4 +51,5 @@ class SubProduct extends Model
     public function scopecountsubProducts($query){
         return $query->count();
     }
+
 }

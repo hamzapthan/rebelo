@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Carbon\Carbon;
 use Spatie\Permission\Traits\HasRoles;
 
 
@@ -96,6 +96,25 @@ class User extends Authenticatable
     public function scopecountAdminCustomer($query){
         return $query->where('role',1)->count();
     }
+
+
+
+       public function scopefrontendUserGraph($query){
+        $date = Carbon::now();
+        $to =$date->toDateString();
+        $lastWeek = Carbon::now()->subHours(168);
+        $from =$lastWeek->toDateString();
+        return $query->whereBetween('created_at', [$from, $to])
+        ->where('role',0)
+        ->orderBy('created_at','Desc')
+        ->get()
+        ->groupBy(function($date) {
+             return Carbon::parse($date->created_at)->format('Y-m-d'); // grouping by years
+         });
+    }
+
+
+
 
 }
 

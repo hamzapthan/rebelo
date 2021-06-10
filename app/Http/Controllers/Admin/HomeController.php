@@ -29,7 +29,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   //  echo  Auth::user()->id; 
+    {   //  echo  Auth::user()->id;
        $countFrontendCustomer = User::countFrontendCustomer();
        $countAdminCustomer = User::countAdminCustomer();
        $deliveredOrders = Order::deliveredOrders();
@@ -39,27 +39,17 @@ class HomeController extends Controller
        $pendingSellPro = SellProduct::pendingSellPro();
        $receivedSellPro = SellProduct::receivedSellPro();
        $orderAll = Order::pendings();
-    
-       $date = Carbon::now();
-       $to =$date->toDateString();
-       $lastWeek = Carbon::now()->subHours(168);
-       $from =$lastWeek->toDateString();
-    
-       $frontendUsers = USER::whereBetween('created_at', [$from, $to])
-       ->where('role',0)
-       ->orderBy('created_at','Desc')    
-       ->get()
-       ->groupBy(function($date) {
-            return Carbon::parse($date->created_at)->format('Y-m-d'); // grouping by years
-        });
-         return view('dashboard',compact('countAdminCustomer','countFrontendCustomer','pendingOrders','deliveredOrders',
-     'subProduct','countIncome','pendingSellPro','receivedSellPro','orderAll','frontendUsers'));
-       // if(Auth::user()->role == 0){
-       //  return view('/dashboard'); 
-       // }else{
-       //  echo "role is not defined";
-       // }
+      //Graph data
+       $frontendUsers = USER::frontendUserGraph();
+       $orderDeliverGraph = Order::orderDeliverGraph();
+       $orderPendingGraph = Order::orderPendingGraph();
+       $orderSalesGraph = Order::ordersales();
 
-       
+       return view('dashboard',compact('countAdminCustomer','countFrontendCustomer','pendingOrders','deliveredOrders',
+           'subProduct','countIncome','pendingSellPro','receivedSellPro','orderAll','frontendUsers','orderDeliverGraph',
+        'orderPendingGraph','orderSalesGraph'));
+
+
+
     }
 }
